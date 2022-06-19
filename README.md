@@ -22,6 +22,10 @@ if you know what all of that stuff means, then this set of config files is proba
 
 clone this repository and symlink duomacs-early-init.el and duomacs-init.el into your .emacs.d directory as early-init.el and init.el respectively
 
+### The other easy eay
+
+clone this repository and add `(load-file "<path/to/duomacs/duomacs-init.el>")` somewhere to your existing init file
+
 ### The hard way
 
 copy whatever you want from the various source files into your own init file.  go nuts!
