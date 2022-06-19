@@ -56,12 +56,6 @@
   (selectrum-mode t)
   (selectrum-prescient-mode t)
   (prescient-persist-mode t))
-(use-package use-ttf
-  :straight t)
-(use-package vs-dark-theme
-  :straight t)
-(use-package vs-light-theme
-  :straight t)
 
 (provide 'duomacs-pkg-mgmt)
 ;;; duomacs-pkg-mgmt.el ends here

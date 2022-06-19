@@ -23,10 +23,12 @@
   (file-truename
    (or load-file-name
        (buffer-file-name)))))
-
-(add-to-list 'load-path duomacs-root)
-
-(setq custom-file (concat duomacs-root "duomacs-custom.el"))
+(setq
+ custom-file
+ (concat (if user-init-file
+	     (file-name-directory user-init-file)
+	   "~/")
+	 "duomacs-custom.el"))
 
 ;; try real hard to use UTF-8 everywhere all the time
 ;; (some of this might be unnecessary and/or deprecated)
@@ -39,15 +41,27 @@
 (prefer-coding-system 'utf-8)
 (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 
-;; load our other packages
+(defgroup duomacs nil
+  "Group containing options to customize duomacs directly."
+  :prefix "duomacs-")
+
+;; first, tell emacs where to find our other packages
+(add-to-list 'load-path duomacs-root)
+
+;; now, load them
 (require 'duomacs-pkg-mgmt)
 
 (require 'duomacs-keys)
 (require 'duomacs-menu)
 (require 'duomacs-themes)
 (require 'duomacs-modes)
+(require 'duomacs-fonts)
+(require 'duomacs-modeline)
 
-(require 'duomacs-custom)
+;; load user preferences if they exist, or fall back to our own defaults when they don't
+(if (file-exists-p custom-file)
+    (load-file custom-file)
+  (require 'duomacs-custom))
 
 (provide 'duomacs-init)
 ;; duomacs-init.el ends here
