@@ -27,5 +27,4 @@
 	     (funcall val)))))
 
 (provide 'duomacs-themes)
-
 ;;; duomacs-themes.el ends here

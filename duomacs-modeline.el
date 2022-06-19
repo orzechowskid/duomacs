@@ -21,11 +21,11 @@
   (list
    (cond
     (buffer-read-only
-     "RO")
+     "X")
     ((and (buffer-modified-p)
 	  (buffer-file-name))
-     " ●")
-    (t "  "))
+     "●")
+    (t "-"))
    " "
    (propertize "%b" 'face 'mode-line-buffer-id)
    " "
@@ -40,7 +40,7 @@
 	       (format "%s%s"
 		       (char-to-string 57504)
 		       (format-mode-line '(vc-mode vc-mode))))
-     ":(")))
+     "")))
 
 (setq-default
  mode-line-format
