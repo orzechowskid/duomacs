@@ -39,6 +39,10 @@
 (prefer-coding-system 'utf-8)
 (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 
+(defgroup duomacs nil
+  "Group containing options to customize duomacs directly."
+  :prefix "duomacs-")
+
 ;; load our other packages
 (require 'duomacs-pkg-mgmt)
 
@@ -46,6 +50,7 @@
 (require 'duomacs-menu)
 (require 'duomacs-themes)
 (require 'duomacs-modes)
+(require 'duomacs-fonts)
 
 (require 'duomacs-custom)
 

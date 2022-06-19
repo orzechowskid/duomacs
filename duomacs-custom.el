@@ -3,26 +3,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(defgroup duomacs nil
-  "Group containing options to customize duomacs directly."
-  :prefix "duomacs-")
-
-(defcustom duomacs-theme
-  'vs-dark-theme
-  "Selected theme."
-  :group 'duomacs
-  :type '(choice (const :tag "VS Light" vs-light-theme)
-		 (const :tag "VS Dark" vs-dark-theme))
-  :set (lambda (sym val)
-	 (if (boundp sym)
-	     (let ((old-val duomacs-theme))
-	       (set-default-toplevel-value sym val)
-	       (when (not (equal old-val val))
-		 (funcall val)))
-	   (progn
-	     (set-default-toplevel-value sym val)
-	     (funcall val)))))
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -34,6 +14,7 @@
  '(create-lockfiles nil)
  '(cua-mode t)
  '(dirtrack-mode nil)
+ '(duomacs-theme 'vs-dark-theme)
  '(fill-column 99)
  '(fringe-mode 0 nil (fringe))
  '(inhibit-startup-echo-area-message (user-login-name))
@@ -47,12 +28,12 @@
  '(tooltip-mode nil)
  '(use-dialog-box nil))
 
-(provide 'duomacs-custom)
-
-;;; duomacs-custom.el ends here
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(provide 'duomacs-custom)
+;;; duomacs-custom.el ends here

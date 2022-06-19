@@ -10,6 +10,22 @@
   vs-light-theme
   :straight t)
 
+(defcustom duomacs-theme
+  'vs-dark-theme
+  "Selected theme."
+  :group 'duomacs
+  :type '(choice (const :tag "VS Light" vs-light-theme)
+		 (const :tag "VS Dark" vs-dark-theme))
+  :set (lambda (sym val)
+	 (if (boundp sym)
+	     (let ((old-val duomacs-theme))
+	       (set-default-toplevel-value sym val)
+	       (when (not (equal old-val val))
+		 (funcall val)))
+	   (progn
+	     (set-default-toplevel-value sym val)
+	     (funcall val)))))
+
 (provide 'duomacs-themes)
 
 ;;; duomacs-themes.el ends here

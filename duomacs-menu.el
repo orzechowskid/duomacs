@@ -193,6 +193,10 @@
       describe-keymap [describe-face]
       '(menu-item "Describe a font-face..." describe-face))
     (define-key-after
+      describe-keymap [describe-char]
+      '(menu-item "Describe character at point..." describe-char
+		  :keys "C-u C-x ="))
+    (define-key-after
       describe-keymap [describe-mode]
       '(menu-item "Describe current buffer modes..." describe-mode))
 
