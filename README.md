@@ -20,7 +20,7 @@ if you know what all of that stuff means, then this set of config files is proba
 
 ### The easy way
 
-clone this repository and symlink duomacs-early-init.el and duomacs-init.el into your .emacs.d directory as early-init.el and init.el respectively
+clone this repository and symlink `duomacs-early-init.el` and `duomacs-init.el` into your `~/.emacs.d` directory as `early-init.el` and `init.el` respectively
 
 ### The other easy eay
 
