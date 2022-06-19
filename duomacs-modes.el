@@ -6,6 +6,7 @@
 (defun duomacs/prog-mode-hook ()
   "Internal function.  Configure some things common to all programming modes."
   (company-mode t)
+  (linum-mode t)
   (display-fill-column-indicator-mode t))
 
 (add-hook

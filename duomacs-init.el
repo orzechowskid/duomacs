@@ -51,6 +51,7 @@
 (require 'duomacs-themes)
 (require 'duomacs-modes)
 (require 'duomacs-fonts)
+(require 'duomacs-modeline)
 
 (require 'duomacs-custom)
 

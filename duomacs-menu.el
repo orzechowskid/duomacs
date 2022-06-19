@@ -94,9 +94,9 @@
       goto-keymap [forward-char]
       '(menu-item "Next character" forward-char))
     (define-key-after
-      goto-keymap [previous-char]
-      '(menu-item "Previous character" (lambda () (interactive) (forward-char -1))
-		  :keys "C-u -1 C-f"
+      goto-keymap [backward-char]
+      '(menu-item "Previous character" backward-char
+		  :keys "C-b"
 		  :enable (not (bobp))))
     (define-key-after
       goto-keymap [forward-word]
@@ -108,12 +108,25 @@
 		  :keys "C-u -1 M-f"
 		  :enable (not (bobp))))
     (define-key-after
+      goto-keymap [next-line]
+      '(menu-item "Next line" next-line
+		  :keys "C-n"))
+    (define-key-after
+      goto-keymap [previous-line]
+      '(menu-item "Previous line" previous-line
+		  :keys "C-p"
+		  :enable (> (line-number-at-pos) 1)))
+    (define-key-after
+      goto-keymap [actions-goto-sep-1]
+      '(menu-item "--"))
+    (define-key-after
       goto-keymap [beginning-of-line]
       '(menu-item "Beginning of line" beginning-of-line
 		  :enable (not (bolp))))
     (define-key-after
       goto-keymap [end-of-line]
       '(menu-item "End of line" end-of-line
+		  :keys "C-e"
 		  :enable (not (eolp))))
     (define-key-after
       goto-keymap [beginning-of-buffer]
@@ -143,7 +156,7 @@
     (define-key-after
       search-keymap [isearch-backward-regexp]
       '(menu-item "Regexp search backward..." isearch-backward-regexp
-		  :keys "C-M-s"))
+		  :keys "C-M-r"))
     (define-key-after
       search-keymap [query-replace-regexp]
       '(menu-item "Regexp search/replace..." query-replace-regexp
@@ -172,6 +185,26 @@
     (define-key-after
       keymap [keyboard-quit]
       '(menu-item "Cancel current command" keyboard-quit))
+    keymap))
+
+
+(defun duomacs/options-menu ()
+  "Internal function.  Creates the Options menu."
+  ;; TODO
+  (let ((keymap (make-sparse-keymap)))
+
+    (define-key-after
+      keymap [customize-variable]
+      '(menu-item "Customize a variable..." customize-variable))
+    (define-key-after
+      keymap [customize-face]
+      '(menu-item "Customize a font-face..." customize-face))
+    (define-key-after
+      keymap [customize-group]
+      '(menu-item "Custonize a group of options..." customize-group))
+    (define-key-after
+      keymap [customize-mode]
+      '(menu-item "Customize options for this major mode..." customize-mode))
     keymap))
 
 
@@ -232,6 +265,9 @@
   (define-key-after
     menu-bar-keymap [actions]
     (cons "Actions" (duomacs/actions-menu)))
+  (define-key-after
+    menu-bar-keymap [options]
+    (cons "Options" (duomacs/options-menu)))
   (define-key-after
     menu-bar-keymap [help]
     (cons "Help" (duomacs/help-menu))))
