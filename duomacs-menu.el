@@ -204,7 +204,7 @@
       '(menu-item "Custonize a group of options..." customize-group))
     (define-key-after
       keymap [customize-mode]
-      '(menu-item "Customize options for this major mode..." customize-mode))
+      '(menu-item "Customize options for current mode..." customize-mode))
     keymap))
 
 
