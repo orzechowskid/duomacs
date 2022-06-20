@@ -35,12 +35,15 @@
 (defun duomacs/build-modeline-right-half ()
   "Internal function.  Constructs the right side of the modeline."
   (list
-   (if (stringp vc-mode)
-       (format "%s"
-	       (format "%s%s"
-		       (char-to-string 57504)
-		       (format-mode-line '(vc-mode vc-mode))))
-     "")))
+   (cond
+    ((eq major-mode 'help-mode)
+     "Type 'q' to dismiss this window")
+    ((stringp vc-mode)
+     (format "%s"
+	     (format "%s%s"
+		     (char-to-string 57504)
+		     (format-mode-line '(vc-mode vc-mode)))))
+    (t ""))))
 
 (setq-default
  mode-line-format
