@@ -18,10 +18,12 @@
 		 (const :tag "VS Dark" vs-dark-theme))
   :set (lambda (sym val)
 	 (if (boundp sym)
+	     ;; changing value
 	     (let ((old-val duomacs-theme))
 	       (set-default-toplevel-value sym val)
 	       (when (not (equal old-val val))
 		 (funcall val)))
+	   ;; setting initial value when emacs starts
 	   (progn
 	     (set-default-toplevel-value sym val)
 	     (funcall val)))))
