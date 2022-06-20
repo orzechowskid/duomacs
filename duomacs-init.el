@@ -29,6 +29,7 @@
 	     (file-name-directory user-init-file)
 	   "~/")
 	 "duomacs-custom.el"))
+(add-to-list 'load-path (concat duomacs-root "language-modes/"))
 
 ;; try real hard to use UTF-8 everywhere all the time
 ;; (some of this might be unnecessary and/or deprecated)

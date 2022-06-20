@@ -15,7 +15,7 @@
  '(cua-mode t)
  '(dirtrack-mode nil)
  '(duomacs-theme 'vs-dark-theme)
- '(fill-column 99)
+ '(fill-column 80)
  '(fringe-mode 0)
  '(inhibit-startup-echo-area-message (user-login-name))
  '(inhibit-startup-screen t)

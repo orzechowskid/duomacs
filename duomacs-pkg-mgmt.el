@@ -32,7 +32,9 @@
      (subword-mode nil "subword"))))
 (use-package company
   :delight
-  :straight t)
+  :straight t
+  :bind
+  ("M-/" . company-complete))
 (use-package consult
   :straight t)
 (use-package eldoc

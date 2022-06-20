@@ -36,6 +36,7 @@
       '(menu-item "Close file" kill-current-buffer
                   :enable (current-buffer)
 		  :keys "C-x k"))
+    ;; NB: `recentf' looks for the menu item named "--" and places its menu item directly before it
     (define-key-after
       keymap [file-sep-2]
       '(menu-item "--"))
@@ -115,6 +116,10 @@
     (define-key-after
       keymap [split-window-right]
       '(menu-item "Split window right" split-window-right))
+    (define-key-after
+      keymap [delete-window]
+      '(menu-item "Delete this window" delete-window
+		  :enable (> (length (window-list)) 1)))
     (define-key-after
       keymap [delete-other-windows]
       '(menu-item "Delete other windows" delete-other-windows

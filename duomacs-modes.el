@@ -8,6 +8,7 @@
   (company-mode t)
   (linum-mode t)
   (show-paren-mode t)
+  (subword-mode t)
   (display-fill-column-indicator-mode t))
 
 (add-hook
