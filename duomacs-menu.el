@@ -9,6 +9,11 @@
   (message "Enter a numeric value followed by a keystroke or other command...")
   (universal-argument))
 
+(defun duomacs/previous-window ()
+  "Internal function.  `previous-window' as an interactive command."
+  (interactive)
+  (other-window -1))
+
 (defun duomacs/file-menu ()
   "Internal function.  Creates the File menu."
   (let ((keymap (make-sparse-keymap)))
@@ -81,6 +86,39 @@
       keymap [select-all]
       '(menu-item "Select all" mark-whole-buffer
                   :enable (> (- (point-max) (point-min) 0))))
+    keymap))
+
+
+(defun duomacs/view-menu ()
+  "Internal function.  Creates the View menu."
+  (let ((keymap (make-sparse-keymap)))
+    (define-key-after
+      keymap [next-buffer]
+      '(menu-item "Next buffer" next-buffer))
+    (define-key-after
+      keymap [previous-buffer]
+      '(menu-item "Previous buffer" previous-buffer))
+    (define-key-after
+      keymap [other-window]
+      '(menu-item "Next window" other-window
+		  :enable (> (length (window-list)) 1)))
+    (define-key-after
+      keymap [previous-window]
+      '(menu-item "Previous window" duomacs/previous-window
+		  :enable (> (length (window-list)) 1)))
+    (define-key-after
+      keymap [view-sep-1]
+      '(menu-item "--"))
+    (define-key-after
+      keymap [split-window-below]
+      '(menu-item "Split window below" split-window-below))
+    (define-key-after
+      keymap [split-window-right]
+      '(menu-item "Split window right" split-window-right))
+    (define-key-after
+      keymap [delete-other-windows]
+      '(menu-item "Delete other windows" delete-other-windows
+		  :enable (> (length (window-list)) 1)))
     keymap))
 
 
@@ -262,6 +300,9 @@
   (define-key-after
     menu-bar-keymap [edit]
     (cons "Edit" (duomacs/edit-menu)))
+  (define-key-after
+    menu-bar-keymap [view]
+    (cons "View" (duomacs/view-menu)))
   (define-key-after
     menu-bar-keymap [actions]
     (cons "Actions" (duomacs/actions-menu)))
