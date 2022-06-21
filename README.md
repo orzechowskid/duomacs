@@ -1,6 +1,8 @@
 # duomacs
 dan's usability-oriented Emacs config files
 
+![](https://repository-images.githubusercontent.com/505004456/7184cf38-0cf0-4cf3-bb65-aaeae37d526e)
+
 ## What is it
 
 it's emacs for people new to emacs.  a set of config files which aim to bring extra consistency, familiarity, and discoverability to the stock emacs experience.
