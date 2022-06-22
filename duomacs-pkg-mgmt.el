@@ -46,7 +46,15 @@
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
 (use-package magit
-  :straight t)
+  :straight t
+  :config
+  ;; poke vc-mode after we do some magit things
+  (advice-add 'magit-checkout :after
+              (lambda (&rest ignored)
+                (vc-refresh-state)))
+  (advice-add 'magit-branch-and-checkout :after
+              (lambda (&rest ignored)
+                (vc-refresh-state))))
 (use-package marginalia
   :straight t)
 (use-package prescient

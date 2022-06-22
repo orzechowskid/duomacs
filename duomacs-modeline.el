@@ -36,7 +36,9 @@
   "Internal function.  Constructs the right side of the modeline."
   (list
    (cond
-    ((eq major-mode 'help-mode)
+    ((or
+      (eq major-mode 'help-mode)
+      (eq major-mode 'Custom-mode))
      "Type 'q' to dismiss this window")
     ((stringp vc-mode)
      (format "%s"
