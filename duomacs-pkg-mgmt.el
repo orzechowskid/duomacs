@@ -39,12 +39,21 @@
   :straight t)
 (use-package eldoc
   :delight
-  :straight t)
+  :straight t
+  :config
+  (advice-add
+   'eldoc-message :around
+   (lambda (oldfn doc-msg)
+     (let ((echo-help-string (help-at-pt-string)))
+       (if echo-help-string
+           (display-local-help)
+         (funcall oldfn doc-msg))))))
 (use-package exec-path-from-shell
   :straight t
   :config
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize)))
+  (exec-path-from-shell-initialize))
+(use-package flycheck
+  :straight t)
 (use-package magit
   :straight t
   :config

@@ -157,7 +157,6 @@
     (define-key-after
       goto-keymap [previous-line]
       '(menu-item "Previous line" previous-line
-		  :keys "C-p"
 		  :enable (> (line-number-at-pos) 1)))
     (define-key-after
       goto-keymap [actions-goto-sep-1]
