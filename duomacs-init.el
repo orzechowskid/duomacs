@@ -64,5 +64,7 @@
     (load-file custom-file)
   (require 'duomacs-custom))
 
+(assoc-delete-all 'continuation fringe-indicator-alist)
+
 (provide 'duomacs-init)
 ;; duomacs-init.el ends here
