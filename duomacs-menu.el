@@ -24,6 +24,10 @@
       keymap [visit-directory]
       '(menu-item "Visit existing/new directory..." dired))
     (define-key-after
+      keymap [consult-recent-file]
+      '(menu-item "Open recent file..." consult-recent-file
+		  :keys "C-x b"))
+    (define-key-after
       keymap [file-sep-1]
       '(menu-item "--"))
     (define-key-after
@@ -36,7 +40,6 @@
       '(menu-item "Close file" kill-current-buffer
                   :enable (current-buffer)
 		  :keys "C-x k"))
-    ;; NB: `recentf' looks for the menu item named "--" and places its menu item directly before it
     (define-key-after
       keymap [file-sep-2]
       '(menu-item "--"))
@@ -101,7 +104,8 @@
       '(menu-item "Previous buffer" previous-buffer))
     (define-key-after
       keymap [switch-to-buffer]
-      '(menu-item "Switch to buffer..." switch-to-buffer))
+      '(menu-item "Switch to buffer..." consult-buffer
+		  :keys "C-x b"))
     (define-key-after
       keymap [other-window]
       '(menu-item "Next window" other-window
