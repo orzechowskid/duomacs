@@ -5,7 +5,7 @@ dan's usability-oriented Emacs config files
 
 ## What is it
 
-it's emacs for people new to emacs.  a set of config files which aim to bring extra consistency, familiarity, and discoverability to the stock emacs experience.
+it's emacs for people new to emacs.  an opinionated set of config files which aim to bring extra consistency, familiarity, and discoverability to the stock emacs experience.
 
 ### What is it really
 
