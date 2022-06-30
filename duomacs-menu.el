@@ -100,6 +100,9 @@
       keymap [previous-buffer]
       '(menu-item "Previous buffer" previous-buffer))
     (define-key-after
+      keymap [switch-to-buffer]
+      '(menu-item "Switch to buffer..." switch-to-buffer))
+    (define-key-after
       keymap [other-window]
       '(menu-item "Next window" other-window
 		  :enable (> (length (window-list)) 1)))

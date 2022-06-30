@@ -11,6 +11,7 @@
  '(auto-compression-mode nil)
  '(auto-encryption-mode nil)
  '(blink-cursor-mode nil)
+ '(consult-buffer-sources '(consult--source-hidden-buffer consult--source-buffer))
  '(create-lockfiles nil)
  '(cua-mode t)
  '(dirtrack-mode nil)

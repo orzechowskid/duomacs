@@ -4,8 +4,35 @@
 ;;; Code:
 
 (use-package
+    eldoc
+  :straight t
+  :config
+  ;; prefer help-at-point over eldoc message if both are present
+  ;; TODO: `eldoc-message' is deprecated
+  (advice-add
+   'eldoc-message
+   :around
+   (lambda (oldfn doc-msg)
+     (if (help-at-pt-string)
+	 (display-local-help)
+       (funcall oldfn doc-msg)))))
+
+(use-package
+  flymake
+  :delight)
+
+(use-package
+  lsp-mode
+  :delight
+  :straight t)
+
+(use-package
   tree-sitter
   :delight
+  :straight t)
+
+(use-package
+  yasnippet
   :straight t)
 
 (use-package

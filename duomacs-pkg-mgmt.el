@@ -20,6 +20,19 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+(defun duomacs/annotate-get-package-recipe (candidate)
+  "Annotate straight.el completing-read candidates with some package-registry info."
+  (let* ((recipe (straight-recipes-retrieve (intern candidate)))
+         (repo-index (cl-position :repo recipe))
+         (flavor-index (cl-position :flavor recipe))
+	 (text
+	  (cond
+	   ;; ensure any symbols are turned into strings
+	   (flavor-index (format "%s" (nth (1+ flavor-index) recipe)))
+	   (repo-index (format "%s" (nth (1+ repo-index) recipe)))
+	   (t "??"))))
+    (marginalia--documentation text)))
+
 (straight-use-package 'use-package)
 (use-package straight
   :custom (straight-use-package-by-default t))
@@ -36,7 +49,9 @@
   :bind
   ("M-/" . company-complete))
 (use-package consult
-  :straight t)
+  :straight t
+  :bind
+  ("C-x b" . consult-buffer))
 (use-package eldoc
   :delight
   :straight t
@@ -65,7 +80,13 @@
               (lambda (&rest ignored)
                 (vc-refresh-state))))
 (use-package marginalia
-  :straight t)
+  :straight t
+  :config
+  (add-to-list 'marginalia-prompt-categories
+	       '("\\<Which recipe?\\>" . straight-recipe))
+  (add-to-list 'marginalia-annotator-registry
+	       '(straight-recipe duomacs/annotate-get-package-recipe none)))
+
 (use-package prescient
   :straight t)
 (use-package projectile
