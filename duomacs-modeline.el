@@ -21,11 +21,11 @@
   (list
    (cond
     (buffer-read-only
-     "X")
+     "-")
     ((and (buffer-modified-p)
 	  (buffer-file-name))
      "●")
-    (t "-"))
+    (t " "))
    " "
    (propertize "%b" 'face 'mode-line-buffer-id)
    " "
