@@ -10,8 +10,12 @@
  ;; If there is more than one, they won't work right.
  '(auto-compression-mode nil)
  '(auto-encryption-mode nil)
+ '(backup-directory-alist (list (cons ".*" (expand-file-name "~/.emacs.d/backup/"))))
  '(blink-cursor-mode nil)
  '(consult-buffer-sources '(consult--source-hidden-buffer consult--source-buffer))
+ '(coverlay:mark-tested-lines nil)
+ '(coverlay:tested-line-background-color "#e1ffe1")
+ '(coverlay:untested-line-background-color "LavenderBlush")
  '(create-lockfiles nil)
  '(cua-mode t)
  '(dirtrack-mode nil)

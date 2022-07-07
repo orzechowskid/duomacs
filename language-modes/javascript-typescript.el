@@ -4,6 +4,11 @@
 ;;; Code:
 
 (use-package
+  coverlay
+  :delight
+  :straight t)
+
+(use-package
     eldoc
   :straight t
   :config
