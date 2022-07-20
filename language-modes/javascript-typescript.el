@@ -5,8 +5,8 @@
 
 (use-package
   coverlay
-  :straight t
-  :delight)
+  :delight
+  :straight t)
 
 (use-package
   eldoc
