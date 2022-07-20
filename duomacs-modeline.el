@@ -39,6 +39,7 @@
     ((or
       (eq major-mode 'help-mode)
       (eq major-mode 'special-mode)
+      (eq major-mode 'xref--xref-buffer-mode)
       (eq major-mode 'Custom-mode))
      "Type 'q' to dismiss this window")
     ((stringp vc-mode)

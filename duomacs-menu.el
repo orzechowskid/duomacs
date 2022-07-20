@@ -149,6 +149,11 @@
 		  :keys "C-b"
 		  :enable (not (bobp))))
     (define-key-after
+      goto-keymap [goto-char]
+      '(menu-item "Character position..." goto-char
+		  :keys "M-g c"
+		  :enable (> (length (buffer-string)) 0)))
+    (define-key-after
       goto-keymap [forward-word]
       '(menu-item "Next word" forward-word
 		  :enable (not (eobp))))

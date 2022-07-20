@@ -4,7 +4,12 @@
 ;;; Code:
 
 (use-package
-    eldoc
+  coverlay
+  :straight t
+  :delight)
+
+(use-package
+  eldoc
   :straight t
   :config
   ;; prefer help-at-point over eldoc message if both are present
@@ -19,6 +24,10 @@
 
 (use-package
   flymake
+  :delight)
+
+(use-package
+  flycheck
   :delight)
 
 (use-package
