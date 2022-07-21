@@ -36,6 +36,11 @@
   :straight t)
 
 (use-package
+  origami
+  :delight
+  :straight t)
+
+(use-package
   tree-sitter
   :delight
   :straight t)
