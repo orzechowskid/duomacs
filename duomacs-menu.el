@@ -265,26 +265,29 @@
 (defun duomacs/help-menu ()
   "Internal function.  Creates the Help menu."
   (let ((keymap (make-sparse-keymap "duomacs/help-keymap"))
-	(describe-keymap (make-sparse-keymap)))
+	(describe-submenu-keymap (make-sparse-keymap)))
    
     (define-key-after
-      describe-keymap [describe-function]
+      describe-submenu-keymap [describe-function]
       '(menu-item "Describe a function..." describe-function))
     (define-key-after
-      describe-keymap [describe-variable]
+      describe-submenu-keymap [describe-variable]
       '(menu-item "Describe a variable..." describe-variable))
     (define-key-after
-      describe-keymap [describe-key]
+      describe-submenu-keymap [describe-key]
       '(menu-item "Describe a keybinding..." describe-key))
     (define-key-after
-      describe-keymap [describe-face]
+      describe-submenu-keymap [describe-keymap]
+      '(menu-item "Describe a keymap layer..." describe-keymap))
+    (define-key-after
+      describe-submenu-keymap [describe-face]
       '(menu-item "Describe a font-face..." describe-face))
     (define-key-after
-      describe-keymap [describe-char]
+      describe-submenu-keymap [describe-char]
       '(menu-item "Describe character at point..." describe-char
 		  :keys "C-u C-x ="))
     (define-key-after
-      describe-keymap [describe-mode]
+      describe-submenu-keymap [describe-mode]
       '(menu-item "Describe current buffer modes..." describe-mode))
 
     (define-key-after
@@ -292,7 +295,7 @@
       '(menu-item "Emacs Tutorial" help-with-tutorial-spec-language))
     (define-key-after
       keymap [describe-menu-item]
-      (cons "Describe" describe-keymap))
+      (cons "Describe" describe-submenu-keymap))
     (define-key-after
       keymap [help-sep-1]
       '(menu-item "--"))
