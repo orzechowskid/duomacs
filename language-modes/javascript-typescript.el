@@ -35,10 +35,13 @@
   :delight
   :straight t)
 
-(use-package
-  origami
-  :delight
-  :straight t)
+;; origami depends on some now-deprecated cl functions and there's not much we
+;; can do about that
+(let ((byte-compile-warnings '((not cl-functions))))
+  (use-package
+    origami
+    :delight
+    :straight t))
 
 (use-package
   tree-sitter
