@@ -5,7 +5,7 @@
 
 (use-package
   coverlay
-  :delight
+  :delight coverlay-minor-mode
   :straight t)
 
 (use-package
