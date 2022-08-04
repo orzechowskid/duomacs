@@ -6,9 +6,20 @@
 (use-package
   vs-dark-theme
   :straight t)
+
 (use-package
   vs-light-theme
   :straight t)
+
+(advice-add 'vs-light-theme :after
+            (lambda (&rest ignored)
+              (setq coverlay:tested-line-background-color "#f1f1ff"
+                    coverlay:untested-line-background-color "LavenderBlush")))
+(advice-add 'vs-dark-theme :after
+            (lambda (&rest ignored)
+              (setq coverlay:tested-line-background-color "green"
+                    coverlay:untested-line-background-color "tomato")))
+
 
 (defcustom duomacs-theme
   'vs-dark-theme
