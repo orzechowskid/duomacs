@@ -43,10 +43,20 @@
     :delight
     :straight t))
 
+;; custom recipe until PR gets merged upstream
+;; https://github.com/emacs-tree-sitter/tree-sitter-langs/pull/96
+(use-package
+  tree-sitter-langs
+  :straight '(tree-sitter-langs :type git :protocol ssh :host github :repo "orzechowskid/tree-sitter-langs"))
+
 (use-package
   tree-sitter
   :delight
   :straight t)
+
+;; (use-package
+;;   tree-sitter-css-in-js
+;;   :straight '(tree-sitter-css-in-js :type git :protocol ssh :host github :repo "orzechowskid/tree-sitter-css-in-js"))
 
 (use-package
   yasnippet
@@ -58,7 +68,7 @@
 
 (use-package
   tsx-mode
-  :straight '(tsx-mode :type git :protocol ssh :host github :repo "orzechowskid/tsx-mode.el")
+  :straight '(tsx-mode :type git :protocol ssh :host github :repo "orzechowskid/tsx-mode.el" :branch "next")
   :mode ("\\.[jt]s[x]?\\'" . tsx-mode))
 
 (use-package
