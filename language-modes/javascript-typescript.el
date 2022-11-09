@@ -33,7 +33,9 @@
 (use-package
   lsp-mode
   :delight
-  :straight t)
+  :straight t
+  :config
+  (setq lsp-file-watch-threshold 16384))
 
 ;; origami depends on some now-deprecated cl functions and there's not much we
 ;; can do about that
@@ -65,6 +67,10 @@
 (use-package
   tsi
   :straight '(tsi :type git :protocol ssh :host github :repo "orzechowskid/tsi.el"))
+
+(use-package
+  tree-sitter-langs
+  :straight t)
 
 (use-package
   tsx-mode

@@ -6,7 +6,7 @@
 (defun duomacs/universal-argument ()
   "Internal function.  `universal-argument' with some help text."
   (interactive)
-  (message "Enter a numeric value followed by a keystroke or other command...")
+  (message "Enter a context value followed by a keystroke or other command...")
   (universal-argument))
 
 (defun duomacs/previous-window ()
@@ -231,7 +231,7 @@
       '(menu-item "--"))
     (define-key-after
       keymap [universal-argument]
-      '(menu-item "Repeat a command..." duomacs/universal-argument
+      '(menu-item "Prefix a command..." duomacs/universal-argument
 		  :keys "C-u"))
     (define-key-after
       keymap [actions-sep-2]

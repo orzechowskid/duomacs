@@ -4,7 +4,7 @@
 ;;; Code:
 
 (defun duomacs/render-modeline (left-content right-content)
-  "Internal function.  Renders modeline."
+  "Internal function.  Renders modeline from LEFT-CONTENT and RIGHT-CONTENT."
   (let* ((left-str (format-mode-line left-content))
 	 (right-str (format-mode-line right-content))
 	 (mid-spacing (- (window-total-width)
@@ -40,6 +40,7 @@
       (eq major-mode 'help-mode)
       (eq major-mode 'special-mode)
       (eq major-mode 'xref--xref-buffer-mode)
+      (eq major-mode 'apropos-mode)
       (eq major-mode 'Custom-mode))
      "Type 'q' to dismiss this window")
     ((stringp vc-mode)

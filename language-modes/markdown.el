@@ -9,4 +9,4 @@
   :straight t)
 
 (provide 'duomacs-markdown)
-;; duomacs-markdown.el ends here
+;;; duomacs-markdown.el ends here

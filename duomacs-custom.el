@@ -26,6 +26,7 @@
  '(marginalia-mode t)
  '(markdown-header-scaling t)
  '(markdown-header-scaling-values '(1.7 1.5 1.3 1.1 1.0 1.0))
+ '(mouse-wheel-progressive-speed nil)
  '(projectile-show-menu nil)
  '(recentf-menu-path nil)
  '(recentf-menu-title nil)
@@ -42,7 +43,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(fringe ((t (:background nil))))
- '(markdown-code-face ((t (:inherit nil :extend t :background "burlywood" :foreground "#222222"))))
+ '(markdown-code-face ((t (:inherit nil :extend t :background "cornsilk" :foreground "#222222"))))
  '(mode-line ((t (:background "grey75" :foreground "#1e1e1e"))))
  '(mode-line-inactive ((t (:inherit mode-line :background "grey30" :foreground "grey80" :weight light)))))
 

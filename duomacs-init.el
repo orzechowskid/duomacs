@@ -8,7 +8,7 @@
 
 ;; memory management: perform no GC during startup, then raise the limit from the
 ;; default value to something more suitable for modern machines
-(defvar duomacs/gc-cons-threshold (* 1024 1024 20))
+(defvar duomacs/gc-cons-threshold (* 1024 1024 32))
 
 (setq gc-cons-threshold most-positive-fixnum)
 
