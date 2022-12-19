@@ -1,4 +1,4 @@
-;;; duomacs-yaml.el --- duomacs setup for Javascript & Typescript -*- lexical-binding: t; -*-
+;;; duomacs-yaml.el --- duomacs setup for YAML files -*- lexical-binding: t; -*-
 ;;; Summary:
 ;;; Commentary:
 ;;; Code:

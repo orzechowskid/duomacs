@@ -43,26 +43,25 @@
   (delight
    '((auto-revert-mode nil "autorevert")
      (subword-mode nil "subword"))))
-(use-package company
+(use-package corfu
   :delight
   :straight t
-  :bind
-  ("M-/" . company-complete))
+  :load-path "straight/build/corfu/extensions"
+  :init
+  (require 'corfu-popupinfo)
+  :hook
+  ((prog-mode . corfu-mode)
+   (corfu-mode . corfu-popupinfo-mode))
+  :custom
+  (corfu-auto t)
+  (corfu-popupinfo-delay 0.2))
 (use-package consult
   :straight t
   :bind
   ("C-x b" . consult-buffer))
 (use-package eldoc
   :delight
-  :straight t
-  :config
-  (advice-add
-   'eldoc-message :around
-   (lambda (oldfn doc-msg)
-     (let ((echo-help-string (help-at-pt-string)))
-       (if echo-help-string
-           (display-local-help)
-         (funcall oldfn doc-msg))))))
+  :straight t)
 (use-package exec-path-from-shell
   :straight t
   :config
@@ -92,15 +91,10 @@
 (use-package projectile
   :delight
   :straight t)
-(use-package selectrum
-  :straight t)
-(use-package selectrum-prescient
+(use-package vertico
   :straight t
-  :after (selectrum prescient)
   :config
-  (selectrum-mode t)
-  (selectrum-prescient-mode t)
-  (prescient-persist-mode t))
+  (vertico-mode t))
 
 (provide 'duomacs-pkg-mgmt)
 ;;; duomacs-pkg-mgmt.el ends here

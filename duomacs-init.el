@@ -10,6 +10,10 @@
 ;; default value to something more suitable for modern machines
 (defvar duomacs/gc-cons-threshold (* 1024 1024 32))
 
+;; speedier handling of large LSP messages
+(when (functionp 'json-serialize)
+  (setq read-process-output-max (* 1024 1024 8)))
+
 (setq gc-cons-threshold most-positive-fixnum)
 
 (add-hook
@@ -24,12 +28,16 @@
    (or load-file-name
        (buffer-file-name)))))
 (setq
- custom-file
- (concat (if user-init-file
-	     (file-name-directory user-init-file)
-	   "~/")
-	 "duomacs-custom.el"))
+ custom-safe-themes t
+ custom-file (concat (if user-init-file
+	                 (file-name-directory user-init-file)
+	               "~/")
+	             "duomacs-custom.el"))
 (add-to-list 'load-path (concat duomacs-root "language-modes/"))
+
+(setq
+ treesit-extra-load-path
+ '("/usr/local/lib/tree-sitter/"))
 
 ;; try real hard to use UTF-8 everywhere all the time
 ;; (some of this might be unnecessary and/or deprecated)

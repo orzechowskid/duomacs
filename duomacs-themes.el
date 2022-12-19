@@ -11,33 +11,61 @@
   vs-light-theme
   :straight t)
 
-(advice-add 'vs-light-theme :after
-            (lambda (&rest ignored)
-              (setq coverlay:tested-line-background-color "#f1f1ff"
-                    coverlay:untested-line-background-color "LavenderBlush")))
-(advice-add 'vs-dark-theme :after
-            (lambda (&rest ignored)
-              (setq coverlay:tested-line-background-color "green"
-                    coverlay:untested-line-background-color "tomato")))
+(use-package
+  nord-theme
+  :straight t)
+
+(defun duomacs/theme-change (new-theme)
+  "Function run when the value of `duomacs-theme' is customized.
+Fills some gaps in our themes until upstream repos get patched."
+  (cond
+   ((eq new-theme 'vs-light)
+    (custom-theme-set-faces
+     'vs-light
+     `(custom-button ((nil (:background "white")))))
+    (setq coverlay:tested-line-background-color "#f1f1ff"
+          coverlay:untested-line-background-color "LavenderBlush"))
+   ((eq new-theme 'vs-dark)
+    (set-face-attribute
+     'line-number nil
+     :background 'unspecified
+     :foreground "#616e88")
+    (setq coverlay:tested-line-background-color "green"
+          coverlay:untested-line-background-color "tomato"))
+   ((eq new-theme 'nord)
+    (set-face-attribute
+     'line-number nil
+     :background 'unspecified
+     :foreground (nord-theme--brightened-comment-color 25))
+    (custom-theme-set-faces
+     'nord
+     `(line-number ((,class (:foreground "tomato"))))))))
 
 
 (defcustom duomacs-theme
-  'vs-dark-theme
+  'vs-dark
   "Selected theme."
   :group 'duomacs
-  :type '(choice (const :tag "VS Light" vs-light-theme)
-		 (const :tag "VS Dark" vs-dark-theme))
+  :type '(choice (const :tag "VS Light" vs-light)
+		 (const :tag "VS Dark" vs-dark)
+		 (const :tag "Nord" nord))
   :set (lambda (sym val)
 	 (if (boundp sym)
 	     ;; changing value
 	     (let ((old-val duomacs-theme))
 	       (set-default-toplevel-value sym val)
 	       (when (not (equal old-val val))
-		 (funcall val)))
+                 (if (functionp val)
+		     (funcall val)
+                   (load-theme val))
+                 (duomacs/theme-change val)))
 	   ;; setting initial value when emacs starts
 	   (progn
 	     (set-default-toplevel-value sym val)
-	     (funcall val)))))
+	     (if (functionp val)
+                 (funcall val)
+               (load-theme val))
+             (duomacs/theme-change val)))))
 
 (provide 'duomacs-themes)
 ;;; duomacs-themes.el ends here

@@ -21,7 +21,7 @@
   (list
    (cond
     (buffer-read-only
-     "-")
+     "%")
     ((and (buffer-modified-p)
 	  (buffer-file-name))
      "●")
@@ -47,7 +47,7 @@
      (format "%s"
 	     (format "%s%s"
 		     (char-to-string 57504)
-		     (format-mode-line '(vc-mode vc-mode)))))
+		     (format-mode-line '(vc-mode vc-mode) t))))
     (t ""))))
 
 (setq-default
