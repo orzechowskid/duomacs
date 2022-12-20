@@ -47,7 +47,7 @@
      (format "%s"
 	     (format "%s%s"
 		     (char-to-string 57504)
-		     (format-mode-line '(vc-mode vc-mode)))))
+          (format-mode-line '(vc-mode vc-mode) t))))
     (t ""))))
 
 (setq-default

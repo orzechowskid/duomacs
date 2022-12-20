@@ -12,11 +12,11 @@ it's emacs for people new to emacs.  an opinionated set of config files which ai
 it's emacs, but with:
 - use-package and straight.el for package management
 - cua-mode for keybindings which make sense to the rest of the world
-- consult, selectrum, prescient, and marginalia for completing read, incremental narrowing, list sorting, etc
+- consult, corfu, and marginalia for completing read, incremental narrowing, list sorting, etc
 - a custom menu bar, disabled tool-bar, and heavily delight'd modeline for getting rarely-used junk out of the user's face
 - vscode-like light and dark themes for a look and feel that doesn't party like it's 1989
 
-if you know what all of that stuff means, then this set of config files is probably not for you!  you probably already know how to configure emacs to your liking.
+if you know what all of that stuff means, then this set of config files is probably not for you!  you likely already know how to configure emacs to your liking.
 
 ## Installation
 

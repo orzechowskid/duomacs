@@ -42,6 +42,11 @@
 (prefer-coding-system 'utf-8)
 (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 
+;; many LSP payloads are larger than the default of 4KB
+(setq read-process-output-max (* 1024 1024 5))
+
+(setq treesit-extra-load-path '("/usr/local/lib/tree-sitter/"))
+
 (defgroup duomacs nil
   "Group containing options to customize duomacs directly."
   :prefix "duomacs-")

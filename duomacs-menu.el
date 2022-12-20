@@ -297,6 +297,9 @@
       keymap [describe-menu-item]
       (cons "Describe" describe-submenu-keymap))
     (define-key-after
+      keymap [apropos]
+      '(menu-item "Search all defined symbols..." apropos))
+    (define-key-after
       keymap [help-sep-1]
       '(menu-item "--"))
     (define-key-after

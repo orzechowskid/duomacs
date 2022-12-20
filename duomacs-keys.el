@@ -4,7 +4,7 @@
 ;;; Code:
 
 (defun duomacs/delete-word (arg)
-  "Delete a word (instead of placing it on the kill ring)."
+  "Forward-delete a word (instead of placing it on the kill ring)."
   (interactive "p")
   (delete-region
    (point)
@@ -13,7 +13,7 @@
      (point))))
 
 (defun duomacs/delete-word-backward (arg)
-  "Forward-delete a word (instead of placing it on the kill ring)."
+  "Delete a word (instead of placing it on the kill ring)."
   (interactive "p")
   (duomacs/delete-word (- arg)))
 
@@ -45,9 +45,10 @@
  'duomacs/delete-word)
 
 ;; remove keybinding for suspend-frame since it's too easy to fat-finger
-(global-set-key
- (kbd "C-x C-z")
- nil)
+(when window-system
+  (global-set-key
+   (kbd "C-x C-z")
+   nil))
 
 (provide 'duomacs-keys)
 ;; duomacs-keys.el ends here

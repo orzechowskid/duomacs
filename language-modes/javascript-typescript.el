@@ -3,10 +3,34 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun duomacs/tsx-mode-hook ()
+  "Internal hook function."
+  ;; do some things after eglot has finished setting up
+  (add-hook
+   'eglot-managed-mode-hook
+   (lambda ()
+     (setq-local
+      eldoc-documentation-strategy
+      'eldoc-documentation-compose)
+     ;; (setq-local flymake-eslint-project-root
+     ;;             (locate-dominating-file
+     ;;              (buffer-file-name
+     ;;               (current-buffer))
+     ;;              "package.json"))
+     ;; (when (executable-find "eslint_d")
+     ;;   (setq-local flymake-eslint-executable-name "eslint_d"))
+     ;; (flymake-eslint-enable))))
+     )))
+
 (use-package
   coverlay
   :delight coverlay-minor-mode
   :straight t)
+
+(unless (featurep 'eglot)
+  (use-package
+    eglot
+    :straight t))
 
 (use-package
   eldoc
@@ -23,19 +47,9 @@
        (funcall oldfn doc-msg)))))
 
 (use-package
-  flymake
-  :delight)
-
-(use-package
-  flycheck
-  :delight)
-
-(use-package
-  lsp-mode
-  :delight
+  flymake-eslint
   :straight t
-  :config
-  (setq lsp-file-watch-threshold 16384))
+  :delight)
 
 ;; origami depends on some now-deprecated cl functions and there's not much we
 ;; can do about that
@@ -74,8 +88,19 @@
 
 (use-package
   tsx-mode
-  :straight '(tsx-mode :type git :protocol ssh :host github :repo "orzechowskid/tsx-mode.el" :branch "next")
-  :mode ("\\.[jt]s[x]?\\'" . tsx-mode))
+  :straight '(tsx-mode :type git :protocol ssh :host github :repo "orzechowskid/tsx-mode.el" :branch "feature/eglot")
+  :mode (("\\.[jt]s[x]?\\'" . tsx-mode)
+         ("\\.cjs?\\'" . tsx-mode))
+  :bind
+  (:map tsx-mode-map
+        ("M-/" . #'completion-at-point))
+  :hook
+  (tsx-mode . duomacs/tsx-mode-hook)
+  :config
+  (add-to-list
+   'apheleia-mode-alist
+   '(tsx-mode . prettier-typescript)))
+
 
 (use-package
   projectile

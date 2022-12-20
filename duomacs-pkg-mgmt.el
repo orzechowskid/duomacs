@@ -38,20 +38,44 @@
   :custom (straight-use-package-by-default t))
 
 ;; install dependencies unrelated to any particular major mode
+
 (use-package delight
   :config
   (delight
    '((auto-revert-mode nil "autorevert")
      (subword-mode nil "subword"))))
-(use-package company
+
+;; format buffers on save
+(use-package apheleia
   :delight
-  :straight t
-  :bind
-  ("M-/" . company-complete))
+  :straight t)
+
+;; a better buffer-switching experience
 (use-package consult
   :straight t
   :bind
   ("C-x b" . consult-buffer))
+
+;; a better completion-at-point experience
+(use-package corfu
+  :straight t
+  :hook
+  ((prog-mode . corfu-mode)
+   (corfu-mode . (lambda ()
+                   (require 'corfu-popupinfo)
+                   (corfu-popupinfo-mode))))
+  :config
+  ;; make corfu extensions available to us - on ELPA they're at the top level of
+  ;; the package but in git they're in a subdirectory
+  (add-to-list
+   'load-path
+   (file-name-concat (file-name-directory (symbol-file 'corfu)) "extensions"))
+  (setq
+   corfu-auto t
+   corfu-auto-delay 0.2
+   corfu-auto-prefix 2))
+
+;; documentation and error-message display
 (use-package eldoc
   :delight
   :straight t
@@ -63,12 +87,15 @@
        (if echo-help-string
            (display-local-help)
          (funcall oldfn doc-msg))))))
+
+;; sync emacs' path string with your shell's $PATH
 (use-package exec-path-from-shell
   :straight t
   :config
+  (setq exec-path-from-shell-arguments '("-l"))
   (exec-path-from-shell-initialize))
-(use-package flycheck
-  :straight t)
+
+;; git source control client
 (use-package magit
   :straight t
   :config
@@ -79,6 +106,8 @@
   (advice-add 'magit-branch-and-checkout :after
               (lambda (&rest ignored)
                 (vc-refresh-state))))
+
+;; general-purpose annotation mechanism
 (use-package marginalia
   :straight t
   :config
@@ -87,20 +116,20 @@
   (add-to-list 'marginalia-annotator-registry
 	       '(straight-recipe duomacs/annotate-get-package-recipe none)))
 
-(use-package prescient
-  :straight t)
+(use-package orderless
+  :straight t
+  :custom
+  (completion-styles '(orderless partial-completion basic)))
+
 (use-package projectile
   :delight
   :straight t)
-(use-package selectrum
-  :straight t)
-(use-package selectrum-prescient
+
+;; a better candidate-completion experience
+(use-package vertico
   :straight t
-  :after (selectrum prescient)
-  :config
-  (selectrum-mode t)
-  (selectrum-prescient-mode t)
-  (prescient-persist-mode t))
+  :init
+  (vertico-mode))
 
 (provide 'duomacs-pkg-mgmt)
 ;;; duomacs-pkg-mgmt.el ends here

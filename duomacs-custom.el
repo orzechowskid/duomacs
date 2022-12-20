@@ -16,8 +16,10 @@
  '(coverlay:mark-tested-lines nil)
  '(create-lockfiles nil)
  '(cua-mode t)
+ '(custom-safe-themes t)
  '(dirtrack-mode nil)
- '(duomacs-theme 'vs-dark-theme)
+ '(file-name-shadow-properties
+   '(invisible t intangible t face file-name-shadow field shadow))
  '(fill-column 80)
  '(fringe-mode '(24 . 0) nil (fringe))
  '(indent-tabs-mode nil)
@@ -34,6 +36,7 @@
  '(scroll-bar-mode nil)
  '(selectrum-mode t)
  '(show-paren-mode nil)
+ '(tab-width 2)
  '(tooltip-mode nil)
  '(use-dialog-box nil))
 
@@ -42,8 +45,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(fringe ((t (:background nil))))
- '(markdown-code-face ((t (:inherit nil :extend t :background "cornsilk" :foreground "#222222"))))
+ '(fringe ((t (:background unspecified))))
+ '(markdown-code-face ((t (:inherit nil :extend t :background "burlywood" :foreground "#222222"))))
  '(mode-line ((t (:background "grey75" :foreground "#1e1e1e"))))
  '(mode-line-inactive ((t (:inherit mode-line :background "grey30" :foreground "grey80" :weight light)))))
 
