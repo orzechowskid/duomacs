@@ -15,8 +15,16 @@
 (defun duomacs/tsx-mode-hook ()
   "Enables some minor modes when `tsx-ts-mode' is enabled."
   (css-in-js-mode t)
-  (add-hook eglot-managed-mode-hook #'flymake-eslint-enable)
+  (add-hook 'eglot-managed-mode-hook #'flymake-eslint-enable)
   (eglot-ensure))
+
+(use-package
+  apheleia
+  :straight t
+  :config
+  (add-to-list
+   'apheleia-mode-alist
+   '(tsx-ts-mode . prettier-typescript)))
 
 (use-package
   coverlay
@@ -42,4 +50,4 @@
                    ((require 'css-in-js-mode) (css-in-js-mode-fetch-shared-library t))))
 
 (provide 'duomacs-javascript-typescript)
-;; duomacs-javascript-typescript.el ends here
+;;; duomacs-javascript-typescript.el ends here
