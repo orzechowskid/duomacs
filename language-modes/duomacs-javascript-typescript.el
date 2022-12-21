@@ -8,6 +8,10 @@
 (require 'treesit)
 (require 'typescript-ts-mode)
 
+(add-hook
+ 'tsx-ts-mode-hook
+ #'duomacs/tsx-mode-hook)
+
 (defun duomacs/tsx-mode-hook ()
   "Enables some minor modes when `tsx-ts-mode' is enabled."
   (css-in-js-mode t)
@@ -35,8 +39,7 @@
   css-in-js-mode
   :straight
   '(css-in-js-mode :type git :host github :repo "orzechowskid/tree-sitter-css-in-js" :branch "main" :post-build
-                   ((require 'css-in-js-mode) (css-in-js-mode-fetch-shared-library t)))
-  :hook '(tsx-ts-mode . #'duomacs/tsx-mode-hook))
+                   ((require 'css-in-js-mode) (css-in-js-mode-fetch-shared-library t))))
 
 (provide 'duomacs-javascript-typescript)
 ;; duomacs-javascript-typescript.el ends here
