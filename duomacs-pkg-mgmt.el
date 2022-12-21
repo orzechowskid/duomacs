@@ -44,6 +44,7 @@
   :config
   (delight
    '((auto-revert-mode nil "autorevert")
+     (eldoc-mode nil "eldoc")
      (subword-mode nil "subword"))))
 
 ;; a better frontend for in-buffer code-completion
