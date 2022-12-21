@@ -3,6 +3,27 @@
 ;;; Commentary:
 ;;; Code:
 
+;; use flycheck's fringe bitmap for flymake, which looks nicer on hidpi screens
+(define-fringe-bitmap
+  'flymake-big-indicator
+  (vector #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0111000111000000
+          #b0011100011100000
+          #b0001110001110000
+          #b0000111000111000
+          #b0000011100011100
+          #b0000011100011100
+          #b0000111000111000
+          #b0001110001110000
+          #b0011100011100000
+          #b0111000111000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000)
+  16 16 'center)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -20,6 +41,8 @@
  '(dirtrack-mode nil)
  '(duomacs-theme 'nord)
  '(fill-column 80)
+ '(flymake-error-bitmap '(flymake-big-indicator compilation-error))
+ '(flymake-warning-bitmap '(flymake-big-indicator compilation-warning))
  '(fringe-mode '(24 . 0) nil (fringe))
  '(indent-tabs-mode nil)
  '(inhibit-startup-echo-area-message (user-login-name))
