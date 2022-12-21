@@ -67,6 +67,13 @@
 (require 'duomacs-fonts)
 (require 'duomacs-modeline)
 
+(require 'duomacs-dockerfile)
+(require 'duomacs-elisp)
+(require 'duomacs-javascript-typescript)
+(require 'duomacs-markdown)
+(require 'duomacs-python)
+(require 'duomacs-yaml)
+
 ;; load user preferences if they exist, or fall back to our own defaults when they don't
 (if (file-exists-p custom-file)
     (load-file custom-file)

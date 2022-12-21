@@ -4,7 +4,8 @@
 ;;; Code:
 
 (defun duomacs/delete-word (arg)
-  "Delete a word (instead of placing it on the kill ring)."
+  "Delete a word (instead of placing it on the kill ring).
+If a numerical ARG is given, do it that many times."
   (interactive "p")
   (delete-region
    (point)
@@ -13,7 +14,8 @@
      (point))))
 
 (defun duomacs/delete-word-backward (arg)
-  "Forward-delete a word (instead of placing it on the kill ring)."
+  "Forward-delete a word (instead of placing it on the kill ring).
+If a numerical ARG is given, do it that many times."
   (interactive "p")
   (duomacs/delete-word (- arg)))
 
@@ -50,4 +52,4 @@
  nil)
 
 (provide 'duomacs-keys)
-;; duomacs-keys.el ends here
+;;; duomacs-keys.el ends here
