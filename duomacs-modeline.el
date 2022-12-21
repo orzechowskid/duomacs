@@ -42,7 +42,8 @@
       (eq major-mode 'xref--xref-buffer-mode)
       (eq major-mode 'apropos-mode)
       (eq major-mode 'magit-status-mode)
-      (eq major-mode 'Custom-mode))
+      (eq major-mode 'Custom-mode)
+      (eq (buffer-name) "*About GNU Emacs*"))
      "Type 'q' to dismiss this window")
     ((stringp vc-mode)
      (format "%s"

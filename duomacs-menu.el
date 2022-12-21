@@ -142,7 +142,9 @@
 
     (define-key-after
       goto-keymap [forward-char]
-      '(menu-item "Next character" forward-char))
+      '(menu-item "Next character" forward-char
+                  :keys "C-f"
+                  :enable (not (eobp))))
     (define-key-after
       goto-keymap [backward-char]
       '(menu-item "Previous character" backward-char
@@ -165,7 +167,8 @@
     (define-key-after
       goto-keymap [next-line]
       '(menu-item "Next line" next-line
-		  :keys "C-n"))
+		  :keys "C-n"
+                  :enable (> (count-lines (point) (point-max)) 0)))
     (define-key-after
       goto-keymap [previous-line]
       '(menu-item "Previous line" previous-line
@@ -231,7 +234,7 @@
       '(menu-item "--"))
     (define-key-after
       keymap [universal-argument]
-      '(menu-item "Prefix a command..." duomacs/universal-argument
+      '(menu-item "Run command with context prefix..." duomacs/universal-argument
 		  :keys "C-u"))
     (define-key-after
       keymap [actions-sep-2]

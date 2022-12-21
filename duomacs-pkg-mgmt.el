@@ -38,11 +38,15 @@
   :custom (straight-use-package-by-default t))
 
 ;; install dependencies unrelated to any particular major mode
+
+;; mode-line cleaner upper
 (use-package delight
   :config
   (delight
    '((auto-revert-mode nil "autorevert")
      (subword-mode nil "subword"))))
+
+;; a better frontend for in-buffer code-completion
 (use-package corfu
   :delight
   :straight t
@@ -55,19 +59,20 @@
   :custom
   (corfu-auto t)
   (corfu-popupinfo-delay 0.2))
+
+;; some helpful enhancements to built-in emacs commands
 (use-package consult
   :straight t
   :bind
   ("C-x b" . consult-buffer))
-(use-package eldoc
-  :delight
-  :straight t)
+
+;; synchronize emacs' `exec-path' with your shell's
 (use-package exec-path-from-shell
   :straight t
   :config
   (exec-path-from-shell-initialize))
-(use-package flycheck
-  :straight t)
+
+;; git source-control client
 (use-package magit
   :straight t
   :config
@@ -78,6 +83,8 @@
   (advice-add 'magit-branch-and-checkout :after
               (lambda (&rest ignored)
                 (vc-refresh-state))))
+
+;; helpful annotations on minibuffer completion candidates
 (use-package marginalia
   :straight t
   :config
@@ -86,11 +93,18 @@
   (add-to-list 'marginalia-annotator-registry
 	       '(straight-recipe duomacs/annotate-get-package-recipe none)))
 
-(use-package prescient
-  :straight t)
+;; a more flexible backend for selecting minibuffer completion candidates
+(use-package orderless
+  :straight t
+  :custom
+  (completion-styles '(orderless basic)))
+
+;; source-code project management
 (use-package projectile
   :delight
   :straight t)
+
+;; a better frontend for selecting minibuffer completion candidates
 (use-package vertico
   :straight t
   :config
