@@ -16,7 +16,7 @@
   :straight t)
 
 (defun duomacs/theme-change (new-theme)
-  "Function run when the value of `duomacs-theme' is customized.
+  "Function run when the value of `duomacs-theme' is set to NEW-THEME.
 Fills some gaps in our themes until upstream repos get patched."
   (cond
    ((eq new-theme 'vs-light)
@@ -34,12 +34,13 @@ Fills some gaps in our themes until upstream repos get patched."
           coverlay:untested-line-background-color "tomato"))
    ((eq new-theme 'nord)
     (set-face-attribute
+     'eglot-diagnostic-tag-unnecessary-face nil
+     :inherit 'unspecified
+     :underline '(:color "#A3BE8C" :style wave))
+    (set-face-attribute
      'line-number nil
      :background 'unspecified
-     :foreground (nord-theme--brightened-comment-color 25))
-    (custom-theme-set-faces
-     'nord
-     `(line-number ((,class (:foreground "tomato"))))))))
+     :foreground (nord-theme--brightened-comment-color 25)))))
 
 
 (defcustom duomacs-theme
