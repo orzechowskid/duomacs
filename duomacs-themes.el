@@ -3,6 +3,8 @@
 ;;; Commentary:
 ;;; Code:
 
+(require 'eglot)
+
 (use-package
   vs-dark-theme
   :straight t)
@@ -35,8 +37,7 @@ Fills some gaps in our themes until upstream repos get patched."
    ((eq new-theme 'nord)
     (set-face-attribute
      'eglot-diagnostic-tag-unnecessary-face nil
-     :inherit 'unspecified
-     :underline '(:color "#A3BE8C" :style wave))
+     :underline '(:color foreground-color :style wave :position nil))
     (set-face-attribute
      'line-number nil
      :background 'unspecified
@@ -44,7 +45,7 @@ Fills some gaps in our themes until upstream repos get patched."
 
 
 (defcustom duomacs-theme
-  'vs-dark
+  'nord
   "Selected theme."
   :group 'duomacs
   :type '(choice (const :tag "VS Light" vs-light)
@@ -67,6 +68,9 @@ Fills some gaps in our themes until upstream repos get patched."
                  (funcall val)
                (load-theme val))
              (duomacs/theme-change val)))))
+
+;; use font glyphs instead of emacs' pixmaps for this
+(assoc-delete-all 'continuation fringe-indicator-alist)
 
 (provide 'duomacs-themes)
 ;;; duomacs-themes.el ends here
