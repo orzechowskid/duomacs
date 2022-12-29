@@ -12,7 +12,7 @@
 
 (add-hook
  'prog-mode-hook
- 'duomacs/prog-mode-hook)
+ #'duomacs/prog-mode-hook)
 
 (provide 'duomacs-modes)
 ;;; duomacs-modes.el ends here
