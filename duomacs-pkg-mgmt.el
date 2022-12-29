@@ -73,6 +73,12 @@
   :config
   (exec-path-from-shell-initialize))
 
+;; icons for corfu's popup-info menu
+(use-package kind-icon
+  :after corfu
+  :config
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+
 ;; git source-control client
 (use-package magit
   :straight t

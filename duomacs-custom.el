@@ -43,6 +43,7 @@
  '(eldoc-documentation-strategy 'eldoc-documentation-compose)
  '(fill-column 80)
  '(flymake-error-bitmap '(flymake-big-indicator compilation-error))
+ '(flymake-note-bitmap '(flymake-big-indicator compilation-info))
  '(flymake-warning-bitmap '(flymake-big-indicator compilation-warning))
  '(fringe-mode '(24 . 0) nil (fringe))
  '(indent-tabs-mode nil)
