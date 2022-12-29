@@ -40,6 +40,7 @@
  '(custom-safe-themes t)
  '(dirtrack-mode nil)
  '(duomacs-theme 'nord)
+ '(eldoc-documentation-strategy 'eldoc-documentation-compose)
  '(fill-column 80)
  '(flymake-error-bitmap '(flymake-big-indicator compilation-error))
  '(flymake-warning-bitmap '(flymake-big-indicator compilation-warning))
@@ -57,8 +58,7 @@
  '(recentf-menu-title nil)
  '(recentf-mode t)
  '(scroll-bar-mode nil)
- '(selectrum-mode t)
- '(show-paren-mode nil)
+ '(show-paren-mode t)
  '(tool-bar-mode nil)
  '(tooltip-mode nil)
  '(use-dialog-box nil))
@@ -68,8 +68,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(fringe ((t (:background nil))))
- '(markdown-code-face ((t (:inherit nil :extend t :background "cornsilk" :foreground "#222222"))))
+ '(fringe ((t (:background unspecified))))
  '(mode-line ((t (:background "grey75" :foreground "#1e1e1e"))))
  '(mode-line-inactive ((t (:inherit mode-line :background "grey30" :foreground "grey80" :weight light)))))
 
