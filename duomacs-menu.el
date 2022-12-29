@@ -3,6 +3,14 @@
 ;;; Commentary:
 ;;; Code:
 
+(require 'flymake)
+
+;; hides some menu-bar items which appear and disappear when various modes
+;; are enabled or disabled
+(easy-menu-define nil minibuffer-mode-map nil (list "Minibuf" :visible nil))
+(easy-menu-define nil flymake-mode-map nil (list "Flymake" :visible nil))
+(easy-menu-define nil emacs-lisp-mode-map nil (list "Emacs-Lisp" :visible nil))
+
 (defun duomacs/universal-argument ()
   "Internal function.  `universal-argument' with some help text."
   (interactive)
@@ -335,5 +343,7 @@
     menu-bar-keymap [help]
     (cons "Help" (duomacs/help-menu))))
 
+
+
 (provide 'duomacs-menu)
-;; duomacs-menu.el ends here
+;;; duomacs-menu.el ends here
