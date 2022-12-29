@@ -10,16 +10,16 @@
 ;; default value to something more suitable for modern machines
 (defvar duomacs/gc-cons-threshold (* 1024 1024 32))
 
-;; speedier handling of large LSP messages
-(when (functionp 'json-serialize)
-  (setq read-process-output-max (* 1024 1024 8)))
-
 (setq gc-cons-threshold most-positive-fixnum)
 
 (add-hook
  'after-init-hook
  (lambda ()
    (setq gc-cons-threshold duomacs/gc-cons-threshold)))
+
+;; speedier handling of large LSP messages
+(when (functionp 'json-serialize)
+  (setq read-process-output-max (* 1024 1024 8)))
 
 (setq
  duomacs-root
@@ -33,11 +33,10 @@
 	                 (file-name-directory user-init-file)
 	               "~/")
 	             "duomacs-custom.el"))
-(add-to-list 'load-path (concat duomacs-root "language-modes/"))
 
-(setq
- treesit-extra-load-path
- '("/usr/local/lib/tree-sitter/"))
+(add-to-list
+ 'treesit-extra-load-path
+ "/usr/local/lib/tree-sitter/")
 
 ;; try real hard to use UTF-8 everywhere all the time
 ;; (some of this might be unnecessary and/or deprecated)
@@ -56,16 +55,17 @@
 
 ;; first, tell emacs where to find our other packages
 (add-to-list 'load-path duomacs-root)
+(add-to-list 'load-path (concat duomacs-root "language-modes/"))
 
 ;; now, load them
 (require 'duomacs-pkg-mgmt)
 
 (require 'duomacs-keys)
 (require 'duomacs-menu)
-(require 'duomacs-themes)
-(require 'duomacs-modes)
-(require 'duomacs-fonts)
-(require 'duomacs-modeline)
+;; (require 'duomacs-themes)
+;; (require 'duomacs-modes)
+;; (require 'duomacs-fonts)
+;; (require 'duomacs-modeline)
 
 (require 'duomacs-dockerfile)
 (require 'duomacs-elisp)
@@ -78,8 +78,6 @@
 (if (file-exists-p custom-file)
     (load-file custom-file)
   (require 'duomacs-custom))
-
-(assoc-delete-all 'continuation fringe-indicator-alist)
 
 (provide 'duomacs-init)
 ;; duomacs-init.el ends here
