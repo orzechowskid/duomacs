@@ -6,6 +6,17 @@
 ;;;
 ;;; Code:
 
+(defgroup duomacs nil
+  "Group containing options to customize duomacs directly."
+  :prefix "duomacs-")
+
+(defconst duomacs-root
+ (file-name-directory
+  (file-truename
+   (or load-file-name
+       (buffer-file-name))))
+ "Absolute path to the root duomacs directory.")
+
 ;; memory management: perform no GC during startup, then raise the limit from the
 ;; default value to something more suitable for modern machines
 (defvar duomacs/gc-cons-threshold (* 1024 1024 32))
@@ -21,12 +32,6 @@
 (when (functionp 'json-serialize)
   (setq read-process-output-max (* 1024 1024 8)))
 
-(setq
- duomacs-root
- (file-name-directory
-  (file-truename
-   (or load-file-name
-       (buffer-file-name)))))
 (setq
  custom-safe-themes t
  custom-file (concat (if user-init-file
@@ -49,10 +54,6 @@
 (prefer-coding-system 'utf-8)
 (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 
-(defgroup duomacs nil
-  "Group containing options to customize duomacs directly."
-  :prefix "duomacs-")
-
 ;; first, tell emacs where to find our other packages
 (add-to-list 'load-path duomacs-root)
 (add-to-list 'load-path (concat duomacs-root "language-modes/"))
@@ -63,7 +64,7 @@
 (require 'duomacs-keys)
 (require 'duomacs-menu)
 ;; (require 'duomacs-themes)
-;; (require 'duomacs-modes)
+(require 'duomacs-modes)
 ;; (require 'duomacs-fonts)
 ;; (require 'duomacs-modeline)
 
