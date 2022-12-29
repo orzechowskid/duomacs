@@ -6,18 +6,18 @@
 (require 'eglot)
 (require 'flymake)
 (require 'treesit)
-(require 'typescript-ts-mode)
 
-(add-hook
- 'tsx-ts-mode-hook
- #'duomacs/tsx-mode-hook)
+;; format on save
+(use-package
+  apheleia
+  :delight
+  :straight t
+  :config
+  (add-to-list
+   'apheleia-mode-alist
+   '(tsx-ts-mode . prettier-typescript)))
 
-(defun duomacs/tsx-mode-hook ()
-  "Enables some minor modes when `tsx-ts-mode' is enabled."
-  (css-in-js-mode t)
-  (add-hook 'eglot-managed-mode-hook #'flymake-eslint-enable)
-  (eglot-ensure))
-
+;; code-coverage overlays
 (use-package
   apheleia
   :straight t
@@ -28,13 +28,20 @@
 
 (use-package
   coverlay
-  :delight coverlay-minor-mode
   :straight t)
 
+;; CSS-in-JS support for tsx-mode
+(use-package
+  css-in-js-mode
+  :straight
+  '(css-in-js-mode :type git :host github :repo "orzechowskid/tree-sitter-css-in-js" :branch "main" :post-build ((require 'css-in-js-mode) (css-in-js-mode-fetch-shared-library t))))
+
+;; linter adapter which doesn't use LSP
 (use-package
   flymake-eslint
   :straight t)
 
+;; code-folding
 ;; origami depends on some now-deprecated cl functions and there's not much we
 ;; can do about that
 (let ((byte-compile-warnings '((not cl-functions))))
@@ -43,11 +50,11 @@
     :delight
     :straight t))
 
+;; major-mode for JS/TS/JSX/TSX
 (use-package
-  css-in-js-mode
-  :straight
-  '(css-in-js-mode :type git :host github :repo "orzechowskid/tree-sitter-css-in-js" :branch "main" :post-build
-                   ((require 'css-in-js-mode) (css-in-js-mode-fetch-shared-library t))))
+  tsx-mode
+  :straight '(tsx-mode :type git :host github :repo "orzechowskid/tsx-mode.el" :branch "emacs29")
+  :mode ("\\.[jt]s[x]?\\'" . tsx-mode))
 
 (provide 'duomacs-javascript-typescript)
 ;;; duomacs-javascript-typescript.el ends here
