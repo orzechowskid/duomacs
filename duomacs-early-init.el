@@ -18,4 +18,4 @@
    (tool-bar-lines . 0)
    (vertical-scroll-bars . nil)))
 
-;; duomacs-early-init.el ends here
+;;; duomacs-early-init.el ends here

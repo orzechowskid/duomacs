@@ -17,7 +17,6 @@
    'apheleia-mode-alist
    '(tsx-ts-mode . prettier-typescript)))
 
-;; code-coverage overlays
 (use-package
   apheleia
   :straight t
@@ -26,13 +25,16 @@
    'apheleia-mode-alist
    '(tsx-ts-mode . prettier-typescript)))
 
+;; code-coverage overlays
 (use-package
   coverlay
+  :delight coverlay-minor-mode
   :straight t)
 
 ;; CSS-in-JS support for tsx-mode
 (use-package
   css-in-js-mode
+  :delight
   :straight
   '(css-in-js-mode :type git :host github :repo "orzechowskid/tree-sitter-css-in-js" :branch "main" :post-build ((require 'css-in-js-mode) (css-in-js-mode-fetch-shared-library t))))
 
