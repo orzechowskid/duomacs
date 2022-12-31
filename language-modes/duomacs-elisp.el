@@ -4,9 +4,14 @@
 ;;; Code:
 
 
+(require 'flymake)
+
 (defun duomacs-elisp-setup ()
+  "Internal function.  Configures elisp major mode."
   (flymake-mode t))
 
+
+(easy-menu-define nil emacs-lisp-mode-map nil (list "Emacs-Lisp" :visible nil))
 
 (add-hook
  'emacs-lisp-mode-hook
@@ -14,4 +19,4 @@
 
 
 (provide 'duomacs-elisp)
-;;; elisp.el ends here
+;;; duomacs-elisp.el ends here
