@@ -49,6 +49,8 @@
  '(indent-tabs-mode nil)
  '(inhibit-startup-echo-area-message (user-login-name))
  '(inhibit-startup-screen t)
+ '(kind-icon-blend-background nil)
+ '(kind-icon-default-face 'corfu-default)
  '(marginalia-mode t)
  '(markdown-header-scaling t)
  '(markdown-header-scaling-values '(1.7 1.5 1.3 1.1 1.0 1.0))
