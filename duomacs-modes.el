@@ -8,7 +8,8 @@
   (display-line-numbers-mode t)
   (show-paren-mode t)
   (subword-mode t)
-  (display-fill-column-indicator-mode t))
+  (display-fill-column-indicator-mode t)
+  (local-set-key (kbd "C-p") #'project-find-file))
 
 (add-hook
  'prog-mode-hook
