@@ -9,7 +9,7 @@
 ;; are enabled or disabled
 (easy-menu-define nil minibuffer-mode-map nil (list "Minibuf" :visible nil))
 (easy-menu-define nil flymake-mode-map nil (list "Flymake" :visible nil))
-(easy-menu-define nil emacs-lisp-mode-map nil (list "Emacs-Lisp" :visible nil))
+(easy-menu-define nil lisp-interaction-mode-map nil (list "Lisp-Interaction" :visible nil))
 
 (defun duomacs/universal-argument ()
   "Internal function.  `universal-argument' with some help text."
@@ -249,7 +249,8 @@
       '(menu-item "--"))
     (define-key-after
       keymap [keyboard-quit]
-      '(menu-item "Cancel current command" keyboard-quit))
+      '(menu-item "Cancel current command" keyboard-quit
+                  :keys "C-g"))
     keymap))
 
 
