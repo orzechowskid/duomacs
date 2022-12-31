@@ -20,6 +20,10 @@
 (defun duomacs/theme-change (new-theme)
   "Function run when the value of `duomacs-theme' is set to NEW-THEME.
 Fills some gaps in our themes until upstream repos get patched."
+  (set-face-attribute
+   'eglot-diagnostic-tag-unnecessary-face nil
+   :inherit nil
+   :underline (face-attribute 'flymake-note :underline))
   (cond
    ((eq new-theme 'vs-light)
     (custom-theme-set-faces
@@ -36,8 +40,8 @@ Fills some gaps in our themes until upstream repos get patched."
           coverlay:untested-line-background-color "tomato"))
    ((eq new-theme 'nord)
     (set-face-attribute
-     'eglot-diagnostic-tag-unnecessary-face nil
-     :underline '(:color foreground-color :style wave :position nil))
+     'corfu-default nil
+     :background "#3B4252") ;; nord1
     (set-face-attribute
      'line-number nil
      :background 'unspecified
