@@ -8,6 +8,7 @@
 
 (defgroup duomacs nil
   "Group containing options to customize duomacs directly."
+  :group 'personalization
   :prefix "duomacs-")
 
 (defconst duomacs-root
@@ -63,10 +64,10 @@
 
 (require 'duomacs-keys)
 (require 'duomacs-menu)
-;; (require 'duomacs-themes)
+(require 'duomacs-themes)
 (require 'duomacs-modes)
-;; (require 'duomacs-fonts)
-;; (require 'duomacs-modeline)
+(require 'duomacs-fonts)
+(require 'duomacs-modeline)
 
 (require 'duomacs-dockerfile)
 (require 'duomacs-elisp)
@@ -81,4 +82,4 @@
   (require 'duomacs-custom))
 
 (provide 'duomacs-init)
-;; duomacs-init.el ends here
+;;; duomacs-init.el ends here
