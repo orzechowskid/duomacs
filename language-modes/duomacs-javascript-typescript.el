@@ -7,6 +7,26 @@
 (require 'flymake)
 (require 'treesit)
 
+(defun duomacs/tsx-mode-hook ()
+  "Internal function.  Hook to be run upon entering `tsx-mode'."
+  (add-hook
+   'eglot-managed-mode-hook
+   (lambda ()
+     (setq-local
+      flymake-eslint-project-root
+      (let* ((package-json
+              (locate-dominating-file (buffer-file-name (current-buffer)) "package.json")))
+        (file-name-directory (expand-file-name package-json)))
+      flymake-eslint-executable-name
+      "eslint_d"
+      eldoc-documentation-strategy
+      'eldoc-documentation-compose)
+     (flymake-eslint-enable))))
+
+;; (put 'eglot-node 'flymake-overlay-control nil)
+;; (put 'eglot-warning 'flymake-overlay-control nil)
+;; (put 'eglot-error 'flymake-overlay-control nil)))
+
 ;; format on save
 (use-package
   apheleia
@@ -36,7 +56,7 @@
   css-in-js-mode
   :delight
   :straight
-  '(css-in-js-mode :type git :host github :repo "orzechowskid/tree-sitter-css-in-js" :branch "main" :post-build ((require 'css-in-js-mode) (css-in-js-mode-fetch-shared-library t))))
+  '(css-in-js-mode :type git :host github :repo "orzechowskid/tree-sitter-css-in-js" :branch "main" :post-build ((require 'css-in-js-mode) (css-in-js-mode-fetch-shared-library))))
 
 ;; linter adapter which doesn't use LSP
 (use-package
@@ -56,7 +76,12 @@
 (use-package
   tsx-mode
   :straight '(tsx-mode :type git :host github :repo "orzechowskid/tsx-mode.el" :branch "emacs29")
-  :mode ("\\.[jt]s[x]?\\'" . tsx-mode))
+  :mode ("\\.[jt]s[x]?\\'" . tsx-mode)
+  :config
+  (add-hook
+   'tsx-mode-hook
+   #'duomacs/tsx-mode-hook))
+ 
 
 (provide 'duomacs-javascript-typescript)
 ;;; duomacs-javascript-typescript.el ends here
