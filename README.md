@@ -35,3 +35,15 @@ clone this repository and add `(load-file "<path/to/duomacs/duomacs-init.el>")` 
 ### The hard way
 
 copy whatever you want from the various source files into your own init file.  go nuts!
+
+## Configuration
+
+the only custom configuration option exposed by duomacs is `duomacs-theme`; all other features are controlled by, and configured via, the packages which provide them.  no layers, no duomacs-specific macros, just plain vanilla emacs.  an exhaustive list of the packages which power duomacs can be found by running `git grep -A 1 use-package` in your favorite shell, but here are some of the important ones:
+
+- [consult](https://github.com/minad/consult)
+- [corfu](https://github.com/minad/corfu)
+- [magit](https://magit.vc/)
+- [orderless](https://github.com/oantolin/orderless)
+- [vertico](https://github.com/minad/vertico)
+
+you can configure these packages (as well as any other built-in or third-party emacs feature) by selecting an item in the Options menu, or by entering `M-x describe-` and choosing one of the items in the resulting list.
