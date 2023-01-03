@@ -308,7 +308,7 @@
 		  :keys "C-h C-a"))
     (define-key-after
       keymap [about-gnu-project]
-      '(menu-item "About GNU..." about-gnu-project
+      '(menu-item "About GNU..." describe-gnu-project
 		  :keys "C-h g"))
     keymap))
     
