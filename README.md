@@ -47,4 +47,4 @@ the only custom configuration option exposed by duomacs is `duomacs-theme`; all 
 - [orderless](https://github.com/oantolin/orderless)
 - [vertico](https://github.com/minad/vertico)
 
-you can configure these packages (as well as any other built-in or third-party emacs feature) by selecting an item in the Options menu, or by entering `M-x describe-` and choosing one of the items in the resulting list.
+you can configure these packages (as well as any other built-in or third-party emacs feature) by selecting an item in the Options menu, or by entering `M-x customize-` and choosing one of the items in the resulting list.
