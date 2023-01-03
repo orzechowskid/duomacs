@@ -255,7 +255,7 @@
       '(menu-item "Customize a font-face..." customize-face))
     (define-key-after
       keymap [customize-group]
-      '(menu-item "Custonize a group of options..." customize-group))
+      '(menu-item "Customize a group of options..." customize-group))
     (define-key-after
       keymap [customize-mode]
       '(menu-item "Customize options for current mode..." customize-mode))
