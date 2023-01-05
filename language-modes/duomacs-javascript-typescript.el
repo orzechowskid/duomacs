@@ -21,7 +21,8 @@
       "eslint_d"
       eldoc-documentation-strategy
       'eldoc-documentation-compose)
-     (flymake-eslint-enable))))
+     (flymake-eslint-enable))
+   nil t))
 
 ;; (put 'eglot-node 'flymake-overlay-control nil)
 ;; (put 'eglot-warning 'flymake-overlay-control nil)
