@@ -43,6 +43,7 @@
       (eq major-mode 'apropos-mode)
       (eq major-mode 'magit-status-mode)
       (eq major-mode 'Custom-mode)
+      (eq major-mode 'debugger-mode)
       (eq (buffer-name) "*About GNU Emacs*"))
      "Type 'q' to dismiss this window")
     ((stringp vc-mode)
@@ -52,6 +53,7 @@
 		     (format-mode-line '(vc-mode vc-mode) t))))
     (t ""))))
 
+
 (setq-default
  mode-line-format
  '((:eval (duomacs/render-modeline
@@ -59,4 +61,4 @@
 	   (duomacs/build-modeline-right-half)))))
 
 (provide 'duomacs-modeline)
-;; duomacs-modeline.el ends here
+;;; duomacs-modeline.el ends here
