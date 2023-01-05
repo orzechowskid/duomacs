@@ -267,7 +267,7 @@
       '(menu-item "Customize a font-face..." customize-face))
     (define-key-after
       keymap [customize-group]
-      '(menu-item "Custonize a group of options..." customize-group))
+      '(menu-item "Customize a group of options..." customize-group))
     (define-key-after
       keymap [customize-mode]
       '(menu-item "Customize options for current mode..." customize-mode))
@@ -301,6 +301,9 @@
     (define-key-after
       describe-submenu-keymap [describe-mode]
       '(menu-item "Describe current buffer modes..." describe-mode))
+    (define-key-after
+      describe-submenu-keymap [apropos]
+      '(menu-item "Find something else..." apropos))
 
     (define-key-after
       keymap [emacs-tutorial]
@@ -317,7 +320,7 @@
 		  :keys "C-h C-a"))
     (define-key-after
       keymap [about-gnu-project]
-      '(menu-item "About GNU..." about-gnu-project
+      '(menu-item "About GNU..." describe-gnu-project
 		  :keys "C-h g"))
     keymap))
     
