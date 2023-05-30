@@ -41,6 +41,7 @@
       (eq major-mode 'special-mode)
       (eq major-mode 'xref--xref-buffer-mode)
       (eq major-mode 'apropos-mode)
+      (eq major-mode 'magit-stash-mode)
       (eq major-mode 'magit-status-mode)
       (eq major-mode 'Custom-mode)
       (eq major-mode 'debugger-mode)

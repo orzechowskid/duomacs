@@ -7,6 +7,8 @@
 (require 'flymake)
 (require 'treesit)
 
+(setq eglot-events-buffer-size 0)
+
 (defun duomacs/tsx-mode-hook ()
   "Internal function.  Hook to be run upon entering `tsx-mode'."
   (add-hook
@@ -16,7 +18,8 @@
       flymake-eslint-project-root
       (let* ((package-json
               (locate-dominating-file (buffer-file-name (current-buffer)) "package.json")))
-        (file-name-directory (expand-file-name package-json)))
+        (when package-json
+          (file-name-directory (expand-file-name package-json))))
       flymake-eslint-executable-name
       "eslint_d"
       eldoc-documentation-strategy
@@ -32,14 +35,6 @@
 (use-package
   apheleia
   :delight
-  :straight t
-  :config
-  (add-to-list
-   'apheleia-mode-alist
-   '(tsx-ts-mode . prettier-typescript)))
-
-(use-package
-  apheleia
   :straight t
   :config
   (add-to-list

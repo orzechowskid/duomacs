@@ -9,9 +9,11 @@
  'python-ts-mode-hook
  #'eglot-ensure)
 
+(easy-menu-define nil python-ts-mode-map nil (list "Python" :visible nil))
+
 (add-to-list
  'auto-mode-alist
  '("\\.py[iw]?\\'" . python-ts-mode))
 
 (provide 'duomacs-python)
-;; duomacs-python.el ends here
+;;; duomacs-python.el ends here

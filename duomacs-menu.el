@@ -201,6 +201,18 @@
       goto-keymap [end-of-buffer]
       '(menu-item "End of buffer" end-of-buffer
 		  :enable (not (eobp))))
+    (define-key-after
+      goto-keymap [actions-goto-sep-2]
+      '(menu-item "--"))
+    (define-key-after
+      goto-keymap [flymake-goto-next-error]
+      '(menu-item "Next diagnostic" flymake-goto-next-error
+                  :keys "C-c ! n"
+                  :enable (and flymake-mode
+                               t)))
+                               ;; (or (> flymake-mode-line-error-counter 0)
+                               ;;     (> flymake-mode-line-warning-counter 0)
+                               ;;     (> flymake-mode-line-note-counter 0)))))
 
     (define-key-after
       search-keymap [isearch-forward]
