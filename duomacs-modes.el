@@ -8,7 +8,11 @@
   (display-line-numbers-mode t)
   (show-paren-mode t)
   (subword-mode t)
-  (display-fill-column-indicator-mode t))
+  (display-fill-column-indicator-mode t)
+  ;; useful for when we switch source-control branches
+  (add-hook
+   'after-revert-hook
+   'vc-refresh-state))
 
 (add-hook
  'prog-mode-hook
