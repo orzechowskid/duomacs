@@ -24,7 +24,11 @@
   (local-set-key (kbd "C-p") #'project-find-file)
   (flymake-mode t)
   ;; use a flycheck keybinding for flymake
-  (local-set-key (kbd "C-c ! n") #'flymake-goto-next-error))
+  (local-set-key (kbd "C-c ! n") #'flymake-goto-next-error)
+  ;; useful for when we switch source-control branches
+  (add-hook
+   'after-revert-hook
+   'vc-refresh-state))
 
 (add-hook
  'prog-mode-hook
