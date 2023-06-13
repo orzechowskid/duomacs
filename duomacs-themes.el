@@ -6,6 +6,10 @@
 (require 'eglot)
 
 (use-package
+  coverlay
+  :straight t)
+
+(use-package
   vs-dark-theme
   :straight t)
 

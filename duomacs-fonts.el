@@ -15,7 +15,6 @@
 		  "Adobe_Source_Code_Pro/static/SourceCodePro-MediumItalic.ttf"
 		  "Adobe_Source_Code_Pro/static/SourceCodePro-Bold.ttf"
 		  "Adobe_Source_Code_Pro/static/SourceCodePro-BoldItalic.ttf")))
-  (setq use-ttf-default-ttf-font-name "Source Code Pro")
   ;; Source Code Pro glyphs for truncation and wrapping instead of the ugly
   ;; default ones
   ;; (these require `fringe-mode' to be 0 to take effect)
