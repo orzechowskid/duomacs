@@ -45,7 +45,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :extend nil :stipple nil :background "#2E3440" :foreground "#D8DEE9" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :height 120 :width normal :foundry "ADBE" :family "Source Code Pro"))))
  '(fringe ((t (:background unspecified))))
+ '(line-number ((t (:inherit (shadow default) :foreground "#616e88" :weight light))))
  '(markdown-code-face ((t (:inherit nil :extend t :background "burlywood" :foreground "#222222"))))
  '(mode-line ((t (:background "grey75" :foreground "#1e1e1e"))))
  '(mode-line-inactive ((t (:inherit mode-line :background "grey30" :foreground "grey80" :weight light)))))
