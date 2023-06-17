@@ -40,7 +40,7 @@
  '(custom-safe-themes t)
  '(dirtrack-mode nil)
  '(display-line-numbers-grow-only t)
- '(duomacs-theme 'nord)
+ '(duomacs-theme 'duomacs-light)
  '(eldoc-documentation-strategy 'eldoc-documentation-compose)
  '(fill-column 80)
  '(flymake-error-bitmap '(flymake-big-indicator compilation-error))
@@ -75,11 +75,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :extend nil :stipple nil :background "#2E3440" :foreground "#D8DEE9" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :height 120 :width normal :foundry "ADBE" :family "Source Code Pro"))))
- '(fringe ((t (:background unspecified))))
- '(line-number ((t (:inherit (shadow default) :foreground "#616e88" :weight light))))
- '(mode-line ((t (:background "grey75" :foreground "#1e1e1e"))))
- '(mode-line-inactive ((t (:inherit mode-line :background "grey30" :foreground "grey80" :weight light)))))
+ '(default ((t (:foundry "ADBO" :family "Source Code Pro"))))
+ )
 
 (provide 'duomacs-custom)
 ;;; duomacs-custom.el ends here

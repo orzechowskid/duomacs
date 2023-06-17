@@ -33,6 +33,13 @@
 (when (functionp 'json-serialize)
   (setq read-process-output-max (* 1024 1024 8)))
 
+(when load-file-name
+  (add-to-list
+   'custom-theme-load-path
+   (concat
+    duomacs-root
+    "themes")))
+
 (setq
  custom-safe-themes t
  custom-file (concat (if user-init-file
@@ -58,6 +65,7 @@
 ;; first, tell emacs where to find our other packages
 (add-to-list 'load-path duomacs-root)
 (add-to-list 'load-path (concat duomacs-root "language-modes/"))
+(add-to-list 'load-path (concat duomacs-root "themes/"))
 
 ;; now, load them
 (require 'duomacs-pkg-mgmt)

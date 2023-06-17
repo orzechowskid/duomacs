@@ -4,20 +4,27 @@
 ;;; Code:
 
 (defun duomacs/render-modeline (left-content right-content)
-  "Internal function.  Renders modeline from LEFT-CONTENT and RIGHT-CONTENT."
+  "Internal function.
+Renders modeline from LEFT-CONTENT and RIGHT-CONTENT."
   (let* ((left-str (format-mode-line left-content))
+         (minor-mode-str (format-mode-line (list minor-mode-alist)))
 	 (right-str (format-mode-line right-content))
 	 (mid-spacing (- (window-total-width)
-		     (length left-str)
-		     (length right-str)
-		     2))) ; 2 = 1 char padding on each side
-    (format " %s%s%s "
+		         (length left-str)
+                         (length minor-mode-str)
+		         (length right-str)
+		         2))) ; 2 = 1 char padding on each edge of modeline
+    (set-text-properties 0 (length minor-mode-str) nil minor-mode-str)
+    (set-text-properties 0 (length right-str) nil right-str)
+    (format " %s%s%s%s "
 	    left-str
+            minor-mode-str
 	    (format (format "%%%ds" mid-spacing) "")
 	    right-str)))
 
 (defun duomacs/build-modeline-left-half ()
-  "Internal function.  Constructs the left side of the modeline."
+  "Internal function.
+Constructs the left side of the modeline."
   (list
    (cond
     (buffer-read-only
@@ -29,11 +36,11 @@
    " "
    (propertize "%b" 'face 'mode-line-buffer-id)
    " "
-   mode-name
-   minor-mode-alist))
+   mode-name))
 
 (defun duomacs/build-modeline-right-half ()
-  "Internal function.  Constructs the right side of the modeline."
+  "Internal function.
+Constructs the right side of the modeline."
   (list
    (cond
     ((or
@@ -55,11 +62,18 @@
     (t ""))))
 
 
+;; do not allow for clicking on the mode-line
+(global-set-key [mode-line mouse-1] nil)
+(global-set-key [mode-line mouse-2] nil)
+(global-set-key [mode-line mouse-3] nil)
+
+
 (setq-default
  mode-line-format
  '((:eval (duomacs/render-modeline
 	   (duomacs/build-modeline-left-half)
 	   (duomacs/build-modeline-right-half)))))
+
 
 (provide 'duomacs-modeline)
 ;;; duomacs-modeline.el ends here

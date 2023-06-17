@@ -4,26 +4,31 @@
 ;;; Code:
 
 (require 'flymake)
+(require 'help-mode)
 
 ;; hides some menu-bar items which appear and disappear when various modes
 ;; are enabled or disabled
 (easy-menu-define nil minibuffer-mode-map nil (list "Minibuf" :visible nil))
 (easy-menu-define nil flymake-mode-map nil (list "Flymake" :visible nil))
 (easy-menu-define nil lisp-interaction-mode-map nil (list "Lisp-Interaction" :visible nil))
+(easy-menu-define nil help-mode-map nil (list "Help-Mode" :visible nil))
 
 (defun duomacs/universal-argument ()
-  "Internal function.  `universal-argument' with some help text."
+  "Internal function.
+`universal-argument' with some help text."
   (interactive)
   (message "Enter a context value followed by a keystroke or other command...")
   (universal-argument))
 
 (defun duomacs/previous-window ()
-  "Internal function.  `previous-window' as an interactive command."
+  "Internal function.
+`previous-window' as an interactive command."
   (interactive)
   (other-window -1))
 
 (defun duomacs/file-menu ()
-  "Internal function.  Creates the File menu."
+  "Internal function.
+Creates the File menu."
   (let ((keymap (make-sparse-keymap)))
     (define-key-after
       keymap [find-file]
@@ -58,7 +63,8 @@
 
 
 (defun duomacs/edit-menu ()
-  "Internal function.  Creates the Edit menu."
+  "Internal function.
+Creates the Edit menu."
   ;; TODO: figure out why we can't refer to cua- functions inside our menu items
   (let ((keymap (make-sparse-keymap)))
     (define-key-after
@@ -102,7 +108,8 @@
 
 
 (defun duomacs/view-menu ()
-  "Internal function.  Creates the View menu."
+  "Internal function.
+Creates the View menu."
   (let ((keymap (make-sparse-keymap)))
     (define-key-after
       keymap [next-buffer]
@@ -143,7 +150,8 @@
 
 
 (defun duomacs/actions-menu ()
-  "Internal function.  Creates the Actions menu."
+  "Internal function.
+Creates the Actions menu."
   (let ((keymap (make-sparse-keymap))
 	(search-keymap (make-sparse-keymap))
 	(goto-keymap (make-sparse-keymap)))
@@ -267,7 +275,8 @@
 
 
 (defun duomacs/options-menu ()
-  "Internal function.  Creates the Options menu."
+  "Internal function.
+Creates the Options menu."
   ;; TODO
   (let ((keymap (make-sparse-keymap)))
 
@@ -287,7 +296,8 @@
 
 
 (defun duomacs/help-menu ()
-  "Internal function.  Creates the Help menu."
+  "Internal function.
+Creates the Help menu."
   (let ((keymap (make-sparse-keymap "duomacs/help-keymap"))
 	(describe-submenu-keymap (make-sparse-keymap)))
    
@@ -358,7 +368,6 @@
   (define-key-after
     menu-bar-keymap [help]
     (cons "Help" (duomacs/help-menu))))
-
 
 
 (provide 'duomacs-menu)
