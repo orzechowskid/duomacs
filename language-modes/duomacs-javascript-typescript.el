@@ -9,6 +9,10 @@
 
 (setq eglot-events-buffer-size 0)
 
+(use-package
+  flymake-eslint
+  :straight t)
+
 (defun duomacs/tsx-mode-hook ()
   "Internal function.  Hook to be run upon entering `tsx-mode'."
   (add-hook
@@ -72,11 +76,34 @@
 (use-package
   tsx-mode
   :straight '(tsx-mode :type git :host github :repo "orzechowskid/tsx-mode.el" :branch "emacs29")
-  :mode ("\\.[jt]s[x]?\\'" . tsx-mode)
+  :mode (("\\.[jt]s[x]?\\'" . tsx-mode)
+         ("\\.cjs\\'" . tsx-mode))
   :config
   (add-hook
    'tsx-mode-hook
    #'duomacs/tsx-mode-hook))
+
+;; LSP inlay hints
+;; (add-to-list
+;;  'eglot-server-programs
+;;  '((tsx-mode)
+;;    "typescript-language-server" "--stdio"
+;;    :initializationOptions
+;;    (:preferences
+;;     (:includeInlayParameterNameHints
+;;      "all"
+;;      :includeInlayParameterNameHintsWhenArgumentMatchesName
+;;      t
+;;      :includeInlayFunctionParameterTypeHints
+;;      t
+;;      :includeInlayVariableTypeHintsWhenTypeMatchesName
+;;      t
+;;      :includeInlayPropertyDeclarationTypeHints
+;;      t
+;;      :includeInlayFunctionLikeReturnTypeHints
+;;      t
+;;      :includeInlayEnumMemberValueHints
+;;      nil))))
  
 
 (provide 'duomacs-javascript-typescript)

@@ -1,9 +1,11 @@
-;;; duomacs-python.el --- duomacs setup for PYTHON files -*- lexical-binding: t; -*-
+;;; duomacs-python.el --- duomacs setup for Python files -*- lexical-binding: t; -*-
 ;;; Summary:
 ;;; Commentary:
 ;;; Code:
 
 (require 'python)
+
+(easy-menu-define nil python-ts-mode-map nil (list "Python" :visible nil))
 
 (add-hook
  'python-ts-mode-hook
@@ -16,4 +18,5 @@
  '("\\.py[iw]?\\'" . python-ts-mode))
 
 (provide 'duomacs-python)
+
 ;;; duomacs-python.el ends here

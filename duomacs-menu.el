@@ -340,10 +340,6 @@ Creates the Help menu."
       keymap [about-emacs]
       '(menu-item "About Emacs..." about-emacs
 		  :keys "C-h C-a"))
-    (define-key-after
-      keymap [about-gnu-project]
-      '(menu-item "About GNU..." describe-gnu-project
-		  :keys "C-h g"))
     keymap))
     
 (let ((menu-bar-keymap (make-sparse-keymap)))
