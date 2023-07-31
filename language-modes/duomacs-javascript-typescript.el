@@ -77,7 +77,7 @@
   tsx-mode
   :straight '(tsx-mode :type git :host github :repo "orzechowskid/tsx-mode.el" :branch "emacs29")
   :mode (("\\.[jt]s[x]?\\'" . tsx-mode)
-         ("\\.cjs\\'" . tsx-mode))
+         ("\\.[mc]js\\'" . tsx-mode))
   :config
   (add-hook
    'tsx-mode-hook

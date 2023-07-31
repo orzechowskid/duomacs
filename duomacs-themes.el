@@ -21,11 +21,16 @@
 ;;   nord-theme
 ;;   :straight t)
 
+(require 'duomacs-light-theme)
+(require 'duomacs-dark-theme)
+
 (defcustom duomacs-theme
   'duomacs-light
   "Selected theme."
   :group 'duomacs
-  :type '(choice (const :tag "Duomacs Light" duomacs-light))
+  :type '(choice
+          (const :tag "Duomacs Light" duomacs-light)
+          (const :tag "Duomacs Dark" duomacs-dark))
   :set (lambda (sym val)
 	 (if (boundp sym)
 	     ;; changing value

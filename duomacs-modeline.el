@@ -44,15 +44,9 @@ Constructs the right side of the modeline."
   (list
    (cond
     ((or
-      (eq major-mode 'help-mode)
-      (eq major-mode 'special-mode)
-      (eq major-mode 'xref--xref-buffer-mode)
-      (eq major-mode 'apropos-mode)
-      (eq major-mode 'magit-stash-mode)
-      (eq major-mode 'magit-status-mode)
-      (eq major-mode 'Custom-mode)
-      (eq major-mode 'debugger-mode)
-      (eq (buffer-name) "*About GNU Emacs*"))
+      (derived-mode-p
+       'tabulated-list-mode 'help-mode 'special-mode)
+      (string= (buffer-name) "*About GNU Emacs*"))
      "Type 'q' to dismiss this window")
     ((stringp vc-mode)
      (format "%s"

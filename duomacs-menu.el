@@ -3,6 +3,7 @@
 ;;; Commentary:
 ;;; Code:
 
+(require 'eww)
 (require 'flymake)
 (require 'help-mode)
 
@@ -12,6 +13,7 @@
 (easy-menu-define nil flymake-mode-map nil (list "Flymake" :visible nil))
 (easy-menu-define nil lisp-interaction-mode-map nil (list "Lisp-Interaction" :visible nil))
 (easy-menu-define nil help-mode-map nil (list "Help-Mode" :visible nil))
+(easy-menu-define nil eww-mode-map nil (list "Eww" :visible nil))
 
 (defun duomacs/universal-argument ()
   "Internal function.
