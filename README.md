@@ -1,6 +1,6 @@
 # emacs 29 users
 
-[click here](https://github.com/orzechowskid/duomacs/tree/emacs-29)
+[click here](https://github.com/orzechowskid/duomacs/tree/main)
 
 # duomacs
 dan's usability-oriented Emacs config files
