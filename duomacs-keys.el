@@ -50,6 +50,11 @@ If a numerical ARG is given, do it that many times."
 (global-set-key
  (kbd "C-x C-z")
  nil)
+;; remove keybinding for kill-region since cua-mode C-x is preferred when a
+;; region is active, and  kills to point-min if no region is active (!)
+(global-set-key
+ (kbd "C-w")
+ nil)
 
 (provide 'duomacs-keys)
 ;;; duomacs-keys.el ends here
