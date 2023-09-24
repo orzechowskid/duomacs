@@ -10,6 +10,7 @@
  ;; If there is more than one, they won't work right.
  '(auto-compression-mode nil)
  '(auto-encryption-mode nil)
+ '(auto-save-file-name-transforms ((".*" "~/.emacs.d/backup/" t)))
  '(backup-directory-alist (list (cons ".*" (expand-file-name "~/.emacs.d/backup/"))))
  '(blink-cursor-mode nil)
  '(consult-buffer-sources '(consult--source-hidden-buffer consult--source-buffer))

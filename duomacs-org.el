@@ -12,3 +12,4 @@
   (setq org-journal-date-format "%A, %d %B %Y"))
 
 (provide 'duomacs-org)
+;;; duomacs-org.el ends here
