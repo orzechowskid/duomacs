@@ -9,4 +9,4 @@
   :mode ("\\.prisma\\'" . prisma-mode))
 
 (provide 'duomacs-prisma)
-;; duomacs-prisma.el ends here
+;;; duomacs-prisma.el ends here
