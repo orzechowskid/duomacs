@@ -11,4 +11,5 @@
   (setq org-journal-dir "~/org/journal")
   (setq org-journal-date-format "%A, %d %B %Y"))
 
+;;; duomacs-org.el ends here
 (provide 'duomacs-org)

@@ -46,6 +46,7 @@
  `(compilation-warning ((t (:foreground ,duomacs-color-warning))))
  `(cursor ((t (:background ,duomacs-color-foreground))))
  `(default ((t (:foreground ,duomacs-color-foreground :background ,duomacs-color-background))))
+ `(eglot-diagnostic-tag-unnecessary-face ((t (:underline (:color ,duomacs-color-info :style wave)))))
  `(error ((t (:foreground ,duomacs-color-error))))
  `(fill-column-indicator ((t (:foreground ,duomacs-color-background-highlight-permanent))))
  `(fringe ((t (:background ,duomacs-color-background))))
