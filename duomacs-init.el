@@ -47,9 +47,9 @@
 	               "~/")
 	             "duomacs-custom.el"))
 
-(add-to-list
- 'treesit-extra-load-path
- "/usr/local/lib/tree-sitter/")
+;; (add-to-list
+;;  'treesit-extra-load-path
+;;  "/usr/local/lib/tree-sitter/")
 
 ;; try real hard to use UTF-8 everywhere all the time
 ;; (some of this might be unnecessary and/or deprecated)
@@ -76,8 +76,10 @@
 (require 'duomacs-modes)
 (require 'duomacs-fonts)
 (require 'duomacs-modeline)
+(require 'duomacs-term)
 
 (require 'duomacs-dockerfile)
+(require 'duomacs-dotenv)
 (require 'duomacs-elisp)
 (require 'duomacs-javascript-typescript)
 (require 'duomacs-markdown)

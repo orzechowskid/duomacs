@@ -3,6 +3,7 @@
 ;;; Commentary:
 ;;; Code:
 
+(require 'eglot)
 (require 'flymake)
 (require 'savehist)
 
@@ -12,6 +13,7 @@
 (require 'magit)
 
 (savehist-mode t)
+(fset #'jsonrpc--log-event #'ignore)
 
 (easy-menu-define nil magit-mode-map nil (list "Magit" :visible nil))
 

@@ -4,7 +4,7 @@
 ;;; Code:
 
 (setq straight-check-for-modifications '(check-on-save find-when-checking))
-(setq straight-vc-git-default-protocol 'ssh)
+;(setq straight-vc-git-default-protocol 'ssh)
 (setq straight-vc-git-force-protocol t)
 (setq straight-vc-git-default-clone-depth 1)
 (defvar bootstrap-version)

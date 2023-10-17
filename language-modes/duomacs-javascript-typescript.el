@@ -7,8 +7,6 @@
 (require 'flymake)
 (require 'treesit)
 
-(setq eglot-events-buffer-size 0)
-
 (use-package
   flymake-eslint
   :straight t)

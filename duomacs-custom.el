@@ -42,6 +42,7 @@
  '(dirtrack-mode nil)
  '(display-line-numbers-grow-only t)
  '(duomacs-theme 'duomacs-light)
+ '(eglot-events-buffer-size 0)
  '(eldoc-documentation-strategy 'eldoc-documentation-compose)
  '(fill-column 80)
  '(flymake-error-bitmap '(flymake-big-indicator compilation-error))
