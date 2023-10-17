@@ -1,4 +1,4 @@
-;;; duomacs-base.el --- duomacs theme colors -*- lexical-binding: t; -*-
+;;; duomacs-theme-base.el --- duomacs theme colors -*- lexical-binding: t; -*-
 ;;; Summary:
 ;;; Commentary:
 ;;; Code:
@@ -82,5 +82,33 @@
 (defconst duomacs--color-bluegray-900 "#cfd8dc")
 (defconst duomacs--color-bluegray-1000 "#eceff1")
 
-(provide 'duomacs-base)
-;;; duomacs-base.el ends here
+;; semantic variables, set by various themes and userland code
+
+(defvar duomacs-color-background duomacs--color-gray-900
+  "Preferred default background color.")
+(defvar duomacs-color-background-highlight-permanent duomacs--color-gray-700
+  "Preferred background color for long-lived background elements.")
+(defvar duomacs-color-background-highlight-transient duomacs--color-bluegray-900
+  "Preferred background color for temporary elements created via user-action.")
+(defvar duomacs-color-background-secondary duomacs--color-bluegray-600)
+(defvar duomacs-color-background-tertiary duomacs--color-bluegray-800)
+(defvar duomacs-color-comment duomacs--color-green-200)
+(defvar duomacs-color-constant duomacs--color-bluegray-300)
+(defvar duomacs-color-foreground duomacs--color-gray-200)
+(defvar duomacs-color-foreground-secondary duomacs--color-gray-600)
+(defvar duomacs-color-foreground-tertiary duomacs--color-gray-500)
+(defvar duomacs-color-function-call duomacs--color-bluegray-300)
+(defvar duomacs-color-error duomacs--color-red-300)
+(defvar duomacs-color-info duomacs--color-bluegray-300)
+(defvar duomacs-color-keyword duomacs--color-bluegray-500)
+(defvar duomacs-color-typedef duomacs--color-bluegray-300)
+(defvar duomacs-color-string duomacs--color-red-100)
+(defvar duomacs-color-warning duomacs--color-orange-200)
+
+;; single-purpose variables
+
+(defvar duomacs-color-foreground-mode-line duomacs--color-gray-900)
+(defvar duomacs-color-background-mode-line duomacs--color-bluegray-400)
+
+(provide 'duomacs-theme-base)
+;;; duomacs-theme-base.el ends here
