@@ -5,7 +5,7 @@
 # duomacs
 dan's usability-oriented Emacs config files
 
-![image](https://user-images.githubusercontent.com/2667110/210151620-fcea8933-6ad4-481b-89ac-bc88d079b475.png)
+![image](https://repository-images.githubusercontent.com/505004456/eec4ea76-ac91-4ead-a795-d51d4c8750b0)
 
 ## What is it
 
