@@ -19,6 +19,11 @@ If a numerical ARG is given, do it that many times."
   (interactive "p")
   (duomacs/delete-word (- arg)))
 
+(defun duomacs/open-new-terminal ()
+  "Open a new terminal buffer."
+  (interactive)
+  (eat nil t))
+
 ;; Ctrl-PgDn -> next window
 (global-set-key
  (kbd "C-<next>")
@@ -45,6 +50,10 @@ If a numerical ARG is given, do it that many times."
 (global-set-key
  (kbd "C-<delete>")
  'duomacs/delete-word)
+;; Ctrl-~ -> open terminal, a la vscode
+(global-set-key
+ (kbd "C-~")
+ #'duomacs/open-new-terminal)
 
 ;; remove keybinding for suspend-frame since it's too easy to fat-finger
 (global-set-key

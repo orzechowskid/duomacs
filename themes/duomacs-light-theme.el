@@ -108,6 +108,11 @@
    (60 . ,(format "%s" duomacs--color-green-1000))
    (180 . ,(format "%s" duomacs--color-bluegray-1000))))
 
+(when (featurep 'coverlay)
+  (setq
+   coverlay:tested-line-background-color duomacs--color-green-1000
+   coverlay:untested-line-background-color duomacs--color-red-1000))
+
 (provide-theme 'duomacs-light)
 
 (provide 'duomacs-light-theme)

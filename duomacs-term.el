@@ -17,7 +17,10 @@
    :background duomacs-color-foreground))
 
 (use-package eat
-  :straight (:type git :host codeberg :repo "akib/emacs-eat" :files (:defaults "terminfo")))
+  :straight (:type git :host codeberg :repo "akib/emacs-eat" :files (:defaults "terminfo"))
+  ;; add some key commands which mimic real vterms
+  :bind (("S-<prior>" . cua-scroll-down)
+         ("S-<next>" . cua-scroll-up)))
 
 (add-hook
  'eat-mode-hook
