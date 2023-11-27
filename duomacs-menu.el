@@ -6,6 +6,7 @@
 (require 'eww)
 (require 'flymake)
 (require 'help-mode)
+(require 'image-mode)
 
 ;; hides some menu-bar items which appear and disappear when various modes
 ;; are enabled or disabled
@@ -15,6 +16,7 @@
 (easy-menu-define nil help-mode-map nil (list "Help-Mode" :visible nil))
 (easy-menu-define nil eww-mode-map nil (list "Eww" :visible nil))
 (easy-menu-define nil text-mode-map nil (list "Text" :visible nil))
+(easy-menu-define nil image-mode-map nil (list "Image" :visible nil))
 
 (defun duomacs/universal-argument ()
   "Internal function.

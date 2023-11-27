@@ -45,7 +45,7 @@ Constructs the right side of the modeline."
    (cond
     ((or
       (derived-mode-p
-       'tabulated-list-mode 'help-mode 'special-mode)
+       'tabulated-list-mode 'help-mode 'special-mode 'image-mode)
       (string= (buffer-name) "*About GNU Emacs*"))
      "Type 'q' to dismiss this window")
     ((stringp vc-mode)
