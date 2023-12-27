@@ -33,9 +33,9 @@ Constructs the left side of the modeline."
 	  (buffer-file-name))
      "●")
     (t " "))
-   " "
+   (propertize " " 'display '(raise 0.2)) ; apply some padding to modeline
    (propertize "%b" 'face 'mode-line-buffer-id)
-   " "
+   (propertize " " 'display '(raise -0.2)) ; apply some more padding to modeline
    mode-name))
 
 (defun duomacs/build-modeline-right-half ()

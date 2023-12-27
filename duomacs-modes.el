@@ -9,9 +9,13 @@
 
 (use-package magit
   :straight t)
+(use-package vertico-posframe
+  :straight t)
 
 (require 'magit)
+(require 'vertico-posframe)
 
+(vertico-posframe-mode t)
 (savehist-mode t)
 (fset #'jsonrpc--log-event #'ignore)
 
