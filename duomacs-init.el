@@ -70,6 +70,7 @@
 ;; now, load them
 (require 'duomacs-pkg-mgmt)
 
+(require 'duomacs-dashboard)
 (require 'duomacs-keys)
 (require 'duomacs-menu)
 (require 'duomacs-themes)
