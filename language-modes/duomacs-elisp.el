@@ -11,6 +11,7 @@
   (flymake-mode t))
 
 
+(easy-menu-define nil lisp-interaction-mode-map nil (list "Lisp-Interaction" :visible nil))
 (easy-menu-define nil emacs-lisp-mode-map nil (list "Emacs-Lisp" :visible nil))
 
 (add-hook

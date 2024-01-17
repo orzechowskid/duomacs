@@ -16,7 +16,8 @@ it's emacs for people new to emacs.  an opinionated set of config files which ai
 it's emacs, but with:
 - use-package and straight.el for package management
 - cua-mode for keybindings which make sense to the rest of the world
-- consult, vertico, orderless, corfu, and marginalia to enhance emacs' built-in completing-read, incremental narrowing, list sorting, etc
+- consult, vertico, orderless, corfu, and marginalia for enhancing emacs' built-in completing-read, incremental narrowing, list sorting, etc
+- embark for keyboard-controlled context-menu functionality
 - a custom menu bar, disabled tool-bar, and heavily delight'd modeline for getting rarely-used junk out of the user's face
 - a nord theme and vscode-like light and dark themes for a look and feel that doesn't party like it's 1989
 

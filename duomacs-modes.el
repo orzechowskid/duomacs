@@ -9,16 +9,13 @@
 
 (use-package magit
   :straight t)
-(use-package vertico-posframe
-  :straight t)
 
 (require 'magit)
-(require 'vertico-posframe)
 
-(vertico-posframe-mode t)
 (savehist-mode t)
 (fset #'jsonrpc--log-event #'ignore)
 
+(easy-menu-define nil flymake-mode-map nil (list "Flymake" :visible nil))
 (easy-menu-define nil magit-mode-map nil (list "Magit" :visible nil))
 
 (define-fringe-bitmap

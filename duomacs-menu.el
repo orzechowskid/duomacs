@@ -11,8 +11,6 @@
 ;; hides some menu-bar items which appear and disappear when various modes
 ;; are enabled or disabled
 (easy-menu-define nil minibuffer-mode-map nil (list "Minibuf" :visible nil))
-(easy-menu-define nil flymake-mode-map nil (list "Flymake" :visible nil))
-(easy-menu-define nil lisp-interaction-mode-map nil (list "Lisp-Interaction" :visible nil))
 (easy-menu-define nil help-mode-map nil (list "Help-Mode" :visible nil))
 (easy-menu-define nil eww-mode-map nil (list "Eww" :visible nil))
 (easy-menu-define nil text-mode-map nil (list "Text" :visible nil))
@@ -43,8 +41,7 @@ Creates the File menu."
       '(menu-item "Visit existing/new directory..." dired))
     (define-key-after
       keymap [consult-recent-file]
-      '(menu-item "Open recent file..." consult-recent-file
-		  :keys "C-x b"))
+      '(menu-item "Open recent file..." consult-recent-file))
     (define-key-after
       keymap [file-sep-1]
       '(menu-item "--"))

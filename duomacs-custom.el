@@ -3,6 +3,13 @@
 ;;; Commentary:
 ;;; Code:
 
+;; '(display-buffer-alist
+;;    '(("\\*eat\\*" (display-buffer-reuse-window
+;;      (".*"
+;;       (display-buffer-reuse-window display-buffer-same-window)
+;;       (reusable-frames . t))))
+
+
 ;; use flycheck's fringe bitmap for flymake, which looks nicer on hidpi screens
 (define-fringe-bitmap
   'flymake-big-indicator
@@ -54,6 +61,7 @@
  '(indent-tabs-mode nil)
  '(inhibit-startup-echo-area-message (user-login-name))
  '(inhibit-startup-screen t)
+ '(isearch-allow-scroll t)
  '(kind-icon-blend-background nil)
  '(kind-icon-default-face 'corfu-default)
  '(marginalia-mode t)
@@ -61,16 +69,17 @@
  '(markdown-header-scaling-values '(1.7 1.5 1.3 1.1 1.0 1.0))
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount '(2 ((shift) . hscroll) ((meta)) ((control) . text-scale)))
- '(projectile-show-menu nil)
  '(recentf-menu-path nil)
  '(recentf-menu-title nil)
  '(recentf-mode t)
  '(scroll-bar-mode nil)
  '(scroll-conservatively 101)
+ '(scroll-margin 1)
  '(show-paren-mode t)
  '(tool-bar-mode nil)
  '(tooltip-mode nil)
- '(use-dialog-box nil))
+ '(use-dialog-box nil)
+ '(vertico-posframe-poshandler 'posframe-poshandler-frame-center))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

@@ -74,10 +74,11 @@
   (exec-path-from-shell-initialize))
 
 ;; icons for corfu's popup-info menu
-(use-package kind-icon
-  :after corfu
+(use-package all-the-icons-completion
+  :after (:all all-the-icons corfu marginalia)
   :config
-  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+  (add-hook 'marginalia-mode-hook #'all-the-icons-completion-marginalia-setup)
+  (all-the-icons-completion-mode))
 
 ;; git source-control client
 (use-package magit
@@ -116,6 +117,32 @@
   :straight t
   :config
   (vertico-mode t))
+;; use a posframe, rather than a completion buffer, to select completion
+;; candidates.  this prevents emacs from resizing our work buffers
+(use-package vertico-posframe
+  :after (vertico)
+  :straight t
+  '(vertico-posframe :type git :host github :repo "tumashu/vertico-posframe" :branch "main")
+  :config
+  (vertico-posframe-mode t))
+
+;; use a posframe for transient buffers like the ones magit uses
+(use-package transient-posframe
+  :straight t
+  :config
+  (transient-posframe-mode))
+
+;; context-dependent actions
+(use-package embark
+  :straight t
+  :ensure t
+  :bind
+  (("s-<tab>" . embark-act)))
+(use-package embark-consult
+  :straight t
+  :ensure t
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
 
 (provide 'duomacs-pkg-mgmt)
 ;;; duomacs-pkg-mgmt.el ends here
