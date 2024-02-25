@@ -73,6 +73,7 @@
  `(font-lock-constant-face ((t (:foreground ,duomacs-color-constant))))
  `(font-lock-doc-face ((t (:foreground ,duomacs-color-comment))))
  `(font-lock-function-call-face ((t (:foreground ,duomacs-color-function-call))))
+ `(font-lock-function-name-face ((t (:foreground ,duomacs-color-function-call))))
  `(font-lock-keyword-face ((t (:foreground ,duomacs-color-keyword))))
  `(font-lock-string-face ((t (:foreground ,duomacs-color-string))))
  `(font-lock-type-face ((t (:foreground ,duomacs-color-typedef))))
@@ -92,6 +93,8 @@
  `(magit-section-highlight ((t (:foreground ,duomacs-color-foreground :background ,duomacs-color-background-highlight-transient))))
  
  `(marginalia-documentation ((t (:foreground ,duomacs-color-foreground-tertiary :underline nil))))
+
+ `(markdown-header-face ((t (:foreground ,duomacs-color-foreground))))
 
  `(orderless-match-face-0 ((t (:weight bold))))
  `(orderless-match-face-1 ((t (:weight bold))))

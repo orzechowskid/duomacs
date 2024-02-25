@@ -3,20 +3,24 @@
 ;;; Commentary:
 ;;; Code:
 
-(require 'eglot)
 (require 'flymake)
-(require 'savehist)
+(require 'jsonrpc)
 
+(use-package editorconfig
+  :straight t
+  :delight)
 (use-package magit
   :straight t)
 
+(require 'editorconfig)
 (require 'magit)
 
 (savehist-mode t)
-(fset #'jsonrpc--log-event #'ignore)
 
 (easy-menu-define nil flymake-mode-map nil (list "Flymake" :visible nil))
 (easy-menu-define nil magit-mode-map nil (list "Magit" :visible nil))
+
+(fset #'jsonrpc--log-event #'ignore)
 
 (define-fringe-bitmap
   'duomacs-line-wrap
@@ -42,6 +46,7 @@
   "Internal function.  Configure some things common to all programming modes."
   (display-line-numbers-mode t)
   (show-paren-mode t)
+  (editorconfig-mode t)
   (subword-mode t)
   (display-fill-column-indicator-mode t)
   (local-set-key (kbd "C-p") #'project-find-file)

@@ -6,6 +6,7 @@
 (use-package
   prisma-mode
   :straight (:type git :protocol ssh :host github :repo "davidarenas/prisma-mode")
+  :defer
   :mode ("\\.prisma\\'" . prisma-mode))
 
 (provide 'duomacs-prisma)

@@ -5,8 +5,10 @@
 
 (use-package
   markdown-mode
-  :delight
   :straight t
+  :defer
+  :hook
+  (markdown-mode . variable-pitch-mode)
   :init
   (require 'markdown-mode)
   (easy-menu-define nil markdown-mode-map nil (list "Markdown" :visible nil)))

@@ -11,6 +11,7 @@
 ;; hides some menu-bar items which appear and disappear when various modes
 ;; are enabled or disabled
 (easy-menu-define nil minibuffer-mode-map nil (list "Minibuf" :visible nil))
+(easy-menu-define nil isearch-mode-map nil (list "Isearch" :visible nil))
 (easy-menu-define nil help-mode-map nil (list "Help-Mode" :visible nil))
 (easy-menu-define nil eww-mode-map nil (list "Eww" :visible nil))
 (easy-menu-define nil text-mode-map nil (list "Text" :visible nil))
@@ -294,6 +295,12 @@ Creates the Options menu."
     (define-key-after
       keymap [customize-mode]
       '(menu-item "Customize options for current mode..." customize-mode))
+    (define-key-after
+      keymap [options-sep-1]
+      '(menu-item "--"))
+    (define-key-after
+      keymap [duomacs/use-package-interactive]
+      '(menu-item "Install package from archive or repo..." straight-use-package))
     keymap))
 
 

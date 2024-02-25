@@ -6,6 +6,7 @@
 (use-package
   yaml-mode
   :straight t
+  :defer
   :delight)
 
 (provide 'duomacs-yaml)

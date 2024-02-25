@@ -6,7 +6,7 @@
 ;;;
 ;;; Code:
 
-;; disable the built-in package manager
+;; disable the built-in package manager; we use use-package plus straight.el
 (setq package-enable-at-startup nil)
 
 ;; set some default parameters for frames
