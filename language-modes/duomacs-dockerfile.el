@@ -6,7 +6,7 @@
 (use-package
   dockerfile-mode
   :straight t
-  :defer
+  :defer t
   :delight)
 
 (provide 'duomacs-dockerfile)

@@ -3,6 +3,7 @@
 ;;; Commentary:
 ;;; Code:
 
+(require 'conf-mode)
 (require 'eww)
 (require 'flymake)
 (require 'help-mode)
@@ -16,6 +17,7 @@
 (easy-menu-define nil eww-mode-map nil (list "Eww" :visible nil))
 (easy-menu-define nil text-mode-map nil (list "Text" :visible nil))
 (easy-menu-define nil image-mode-map nil (list "Image" :visible nil))
+(easy-menu-define nil conf-mode-map nil (list "Conf" :visible nil))
 
 (defun duomacs/universal-argument ()
   "Internal function.

@@ -6,7 +6,7 @@
 (use-package
   markdown-mode
   :straight t
-  :defer
+  :defer t
   :hook
   (markdown-mode . variable-pitch-mode)
   :init

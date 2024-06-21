@@ -6,7 +6,7 @@
 (use-package
   dotenv-mode
   :straight t
-  :defer
+  :defer t
   :mode ("\\.env[\\.*]?\\'" . dotenv-mode))
 
 (provide 'duomacs-dotenv)
