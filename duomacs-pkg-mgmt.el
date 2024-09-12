@@ -154,7 +154,7 @@
   :straight t
   :ensure t
   :bind
-  (("s-<tab>" . embark-act)))
+  (("C-c a" . embark-act)))
 (use-package embark-consult
   :straight t
   :ensure t

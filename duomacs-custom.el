@@ -70,6 +70,7 @@
  '(markdown-list-item-bullets '("•" "◦"))
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount '(2 ((shift) . hscroll) ((meta)) ((control) . text-scale)))
+ '(origami-fold-replacement "{[+++]}")
  '(recentf-menu-path nil)
  '(recentf-menu-title nil)
  '(recentf-mode t)
@@ -89,7 +90,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:foundry "ADBO" :family "Source Code Pro")))))
+ '(default ((t (:inherit nil :extend nil :stipple nil :background "#fafafa" :foreground "#424242" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "ADBO" :family "Source Code Pro"))))
+ '(org-block ((t (:extend t :family "Cantarell"))))
+ '(org-default ((t (:family "Cantarell"))))
+ '(org-level-1 ((t (:weight semi-bold :height 1.5 :family "Cantarell"))))
+ '(org-level-2 ((t (:weight semi-bold :height 1.2 :family "Cantarell"))))
+ '(origami-fold-replacement-face ((t (:inherit 'font-lock-comment-face)))))
 
 (provide 'duomacs-custom)
 ;;; duomacs-custom.el ends here
