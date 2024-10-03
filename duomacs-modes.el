@@ -10,7 +10,10 @@
   :straight t
   :delight)
 (use-package magit
-  :straight t)
+  :straight t
+  :delight
+  :hook
+  ((after-save-hook . magit-after-save-refresh-buffers)))
 
 (require 'editorconfig)
 (require 'magit)
