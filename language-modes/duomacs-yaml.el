@@ -7,7 +7,9 @@
   yaml-mode
   :straight t
   :defer t
-  :delight)
+  :delight
+  :hook
+  '(yaml-mode . display-line-numbers-mode))
 
 (provide 'duomacs-yaml)
 ;; duomacs-yaml.el ends here
