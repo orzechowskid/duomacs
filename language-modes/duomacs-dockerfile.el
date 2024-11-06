@@ -7,6 +7,9 @@
 (require 'dockerfile-ts-mode)
 
 (add-to-list
+ 'auto-mode-alist
+ '("Dockerfile\\'" . dockerfile-ts-mode))
+(add-to-list
  'treesit-language-source-alist
  '(dockerfile . ("https://github.com/camdencheek/tree-sitter-dockerfile" "v0.2.0" "src")))
 (treesit-install-language-grammar 'dockerfile)
