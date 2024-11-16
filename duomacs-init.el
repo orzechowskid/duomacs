@@ -79,7 +79,7 @@
 (require 'duomacs-modeline)
 (require 'duomacs-term)
 
-(require 'duomacs-dockerfile)
+(require 'duomacs-docker)
 (require 'duomacs-dotenv)
 (require 'duomacs-elisp)
 (require 'duomacs-javascript-typescript)

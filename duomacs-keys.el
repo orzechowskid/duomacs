@@ -3,6 +3,8 @@
 ;;; Commentary:
 ;;; Code:
 
+(require 'cua-base)
+
 (defun duomacs/delete-word (arg)
   "Delete a word (instead of placing it on the kill ring).
 If a numerical ARG is given, do it that many times."
@@ -64,6 +66,12 @@ If a numerical ARG is given, do it that many times."
 (global-set-key
  (kbd "C-w")
  nil)
+
+;; remove keybinding for rectangle-mark since there's no reason it should be in
+;; the CUA keymap in the first place
+(keymap-unset
+ cua-global-keymap
+ "C-<return>")
 
 (provide 'duomacs-keys)
 ;;; duomacs-keys.el ends here
