@@ -40,6 +40,9 @@
 	   (t "??"))))
     (marginalia--documentation text)))
 
+;; disable the built-in package manager
+(setq  package-enable-at-startup nil)
+
 (use-package straight)
 
 (advice-add
@@ -49,123 +52,139 @@
    (when (called-interactively-p 'interactive)
      (message "To use this package in future Emacs sessions, be sure to add it to your init file: `(use-package <package name>)`."))))
 
-;; install dependencies unrelated to any particular major mode
+;; install packages unrelated to any particular major mode
 
-;; mode-line cleaner upper
-(use-package delight
-  :straight t
-  :config
-  (delight
-   '((auto-revert-mode nil "autorevert")
-     (eldoc-mode nil "eldoc")
-     (subword-mode nil "subword"))))
+;; better versions of some built-in commands
+(use-package consult
+  :bind
+  (("C-x b" . consult-buffer)
+   ("C-x G" . consult-git-grep)
+   ("M-g g" . consult-goto-line)
+   ("M-g M-g" . consult-goto-line)
+   ("C-s" . consult-line)))
 
 ;; a better frontend for in-buffer code-completion
 (use-package corfu
-  :straight t
-  :delight
-  :load-path "straight/build/corfu/extensions"
-  :init
-  (require 'corfu-popupinfo)
+  :custom
+  (corfu-auto t)
+  (corfu-popup-delay 0.3)
+  :delight t
   :hook
   ((prog-mode . corfu-mode)
    (corfu-mode . corfu-popupinfo-mode))
+  :init
+  (require 'corfu-popupinfo) ; a corfu extension, not a package
+  :load-path "straight/build/corfu/extensions")
+
+;; a more useful splash screen
+(use-package dashboard
+	:after (nerd-icons)
+	:config
+	(dashboard-setup-startup-hook)
   :custom
-  (corfu-auto t)
-  (corfu-popupinfo-delay 0.2))
+  (dashboard-display-icons-p t)
+  (dashboard-footer-messages '("Editing a file inside a git repository?  Access magit with `C-x g`."
+															 "Want to add a new package?  Try `M-:` then `(use-package <package name>)`."))
+  (dashboard-set-file-icons t)
+  (dashboard-set-heading-icons t)
+  (dashboard-icon-types 'nerd-icons))
 
-;; some helpful enhancements to built-in emacs commands
-(use-package consult
-  :straight t
+;; modeline cleaner-upper
+(use-package delight
+  :config
+  (delight
+   '((eldoc-mode nil "eldoc")
+		 (auto-revert-mode nil "autorevert")
+     (subword-mode nil "subword")))
+  :defer nil)
+
+;; LSP client
+(use-package eglot
+  :after (corfu)
+  :delight t
+  :defer t)
+
+;; extra context-specific actions.  it's like a right-click menu for emacs!
+(use-package embark
   :bind
-  ("C-x b" . consult-buffer))
+  (("C-c a" . embark-act)))
+(use-package embark-consult
+  :hook
+  ((embark-collect-mode . consult-preview-at-point-mode)))
 
-;; synchronize emacs' `exec-path' with your shell's
-(use-package exec-path-from-shell
-  :straight t
-  :config
-  (exec-path-from-shell-initialize))
+;; syncs emacs' `exec-path` with your shell's.  use this if you have variables
+;; which don't get set by your login shell (e.g. ~/.profile)
+;; (use-package exec-path-from-shell
+;;   :config
+;;   (exec-path-from-shell-initialize)
+;;   :custom
+;;   (exec-path-from-shell-arguments '("-l"))
+;;   )
 
-;; icons for corfu's popup-info menu
-(use-package all-the-icons-completion
-  :after (:all all-the-icons corfu marginalia)
-  :config
-  (add-hook 'marginalia-mode-hook #'all-the-icons-completion-marginalia-setup)
-  (all-the-icons-completion-mode))
-
-;; git source-control client
+;; the world's best git client
 (use-package magit
-  :straight t
   :config
-  (easy-menu-define nil magit-mode-map nil (list "Magit" :visible nil))
   ;; poke vc-mode whenever certain git things happen
-  (advice-add
+    (advice-add
    'magit-checkout :after
    (lambda (&rest _ignored)
      (vc-refresh-state)))
   (advice-add
    'magit-branch-and-checkout :after
    (lambda (&rest _ignored)
-     (vc-refresh-state))))
+     (vc-refresh-state)))
+  :defer t)
 
-;; helpful annotations on minibuffer completion candidates
+;; eglot will use markdown-mode to render docstrings if it's present
+(use-package markdown-mode)
+
+;; helpful annotations on many minibuffer completion canditates
 (use-package marginalia
-  :straight t
   :config
-  (add-to-list
-   'marginalia-prompt-categories
-   '("\\<Which recipe?\\>" . straight-recipe))
-  (add-to-list
-   'marginalia-annotator-registry
-   '(straight-recipe duomacs/annotate-get-package-recipe none)))
+  ;; (add-to-list
+  ;;  'marginalia-prompt-categories
+  ;;  '("\\<Which recipe?\\>" . straight-recipe))
+  ;; (add-to-list
+  ;;  'marginalia-annotator-registry
+  ;;  '(straight-recipe duomacs/annotate-get-package-recipe none))
+  (marginalia-mode t)
+  :defer nil)
 
-;; a more flexible backend for selecting minibuffer completion candidates
+(use-package nerd-icons
+	:custom
+	(nerd-icons-font-family "SauceCodePro Nerd Font")
+	:defer nil)
+
+;; a more flexible backend for matching a minibuffer completion candidate
 (use-package orderless
-  :straight t
   :custom
-  (completion-styles '(orderless basic)))
+  (completion-styles '(orderless basic))
+  :defer nil)
 
-;; source-code project management
-(use-package projectile
-  :straight t
-  :delight)
+(use-package posframe)
 
-;; a better frontend for selecting minibuffer completion candidates
-(use-package vertico
-  :straight t
+;; support for using a posframe for transient buffers like the ones magit uses
+(use-package transient-posframe
+  :after (posframe)
   :config
-  (vertico-mode t))
-;; use a posframe, rather than a completion buffer, to select completion
-;; candidates.  this prevents emacs from resizing our work buffers
+  (transient-posframe-mode)
+  :custom
+  (transient-posframe-poshandler #'posframe-poshandler-frame-bottom-center)
+  :defer nil)
+
+;; vertical completion mode
+(use-package vertico
+  :config
+  (vertico-mode t)
+  :defer nil)
 (use-package vertico-posframe
   :after (vertico)
-  :straight '(vertico-posframe :type git :host github :repo "tumashu/vertico-posframe" :branch "main")
   :config
-  (vertico-posframe-mode t))
-
-;; use a posframe for transient buffers like the ones magit uses
-(use-package transient-posframe
-  :straight t
-  :config
-  (transient-posframe-mode))
-
-;; context-dependent actions
-(use-package embark
-  :straight t
-  :ensure t
-  :bind
-  (("C-c a" . embark-act)))
-(use-package embark-consult
-  :straight t
-  :ensure t
-  :hook
-  (embark-collect-mode . consult-preview-at-point-mode))
-
-(use-package vertico-posframe
-  :straight t
-  :after vertico
-  :config
-  (vertico-posframe-mode 1))
+  (vertico-posframe-mode t)
+  :custom
+  (vertico-posframe-poshandler #'posframe-poshandler-frame-bottom-center)
+  :defer nil
+  :straight '(vertico-posframe :type git :host github :repo "tumashu/vertico-posframe" :branch "main"))
 
 (provide 'duomacs-pkg-mgmt)
 ;;; duomacs-pkg-mgmt.el ends here

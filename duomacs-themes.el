@@ -3,57 +3,68 @@
 ;;; Commentary:
 ;;; Code:
 
-(require 'duomacs-light-theme)
-(require 'duomacs-dark-theme)
+(deftheme duomacs-nord "A Duomacs derivative of the Nord theme family")
 
-(defcustom duomacs-theme
-  'duomacs-light
-  "Selected theme."
-  :group 'duomacs
-  :type '(choice
-          (const :tag "Duomacs Light" duomacs-light)
-          (const :tag "Duomacs Dark" duomacs-dark))
-  :set (lambda (sym val)
-	 (if (boundp sym)
-	     ;; changing value
-	     (let ((old-val duomacs-theme))
-	       (set-default-toplevel-value sym val)
-	       (when (not (equal old-val val))
-                 (if (functionp val)
-		     (funcall val)
-                   (load-theme val))))
-	   ;; setting initial value when emacs starts
-	   (progn
-	     (set-default-toplevel-value sym val)
-	     (if (functionp val)
-                 (funcall val)
-               (load-theme val))))))
+(defgroup duomacs-nord nil
+  "Duomacs-nord theme customizations.
+   The theme has to be reloaded after changing anything in this group."
+  :group 'faces)
 
-(defvar duomacs--themes-hooks nil
-  "A theme -> hook mapping.")
-
-(defun duomacs--themes-add-hook (theme hook-fn)
-  "Add HOOK-FN for theme THEME."
-  (add-to-list 'duomacs--themes-hook (cons theme hook-fn)))
-
-(defun duomacs--themes-disable-all ()
-  "Disable all currently-enabled themes."
-  (interactive)
-  (mapc #'disable-theme custom-enabled-themes))
-
-(defun duomacs--themes-enable-theme-advice (f theme)
-  "Around advice for `enable-theme` (F).  THEME is the current theme."
-  (if (eq theme 'user)
-      (apply f theme nil)
-    (duomacs--themes-disable-all)
-    (prog1
-        (apply f theme nil) ;; prog1: return this value but do the following side-effects
-      (pcase (assq theme duomacs--themes-hooks)
-        (`((,_ . ,f) (funcall f))))))
-
-  (advice-add 'enable-theme
-              :around
-              #'duomacs--themes-enable-theme-advice))
+(progn
+  (let (
+      ;; polar night
+      (nord0 "#2e3440")
+      (nord1 "#3b4252")
+      (nord2 "#434c5e")
+      (nord3 "#4c566a")
+      ;; snow storm
+      (nord4 "#d8dee9")
+      (nord5 "#e5e9f0")
+      (nord6 "#eceff4")
+      ;; frost
+      (nord7 "#8fbcbb")
+      (nord8 "#88c0d0")
+      (nord9 "#81a1c1")
+      (nord10 "#5e81ac")
+      ;; aurora
+      (nord11 "#bf616a")
+      (nord12 "#d08770")
+      (nord13 "#ebcb8b")
+      (nord14 "#a3be8c")
+      (nord15 "#b48ead"))
+  (custom-theme-set-faces
+   'duomacs-nord
+   `(default ((t (:foreground ,nord6 :background ,nord0))))
+   `(error ((t (:foreground ,nord11))))
+   `(font-lock-bracket-face ((t (:foreground ,nord6))))
+   `(font-lock-builtin-face ((t (:foreground ,nord7))))
+   `(font-lock-comment-face ((t (:foreground ,nord14))))
+   `(font-lock-comment-delimiter-face ((t (:foreground ,nord14))))
+   `(font-lock-constant-face ((t (:foreground ,nord4))))
+   `(font-lock-doc-face ((t (:foreground ,nord14))))
+   `(font-lock-escape-face ((t (:foreground ,nord13))))
+   `(font-lock-keyword-face ((t (:foreground ,nord9))))
+   `(font-lock-number-face ((t (:foreground ,nord15))))
+   `(font-lock-property-name-face ((t (:foreground ,nord7))))
+   `(font-lock-regexp-face ((t (:foreground ,nord13))))
+   `(font-lock-string-face ((t (:foreground ,nord14))))
+   `(font-lock-type-face ((t (:foreground ,nord7))))
+   `(font-lock-warning-face ((t (:foreground ,nord13))))
+   `(fringe ((t (:background ,nord0))))
+   `(header-line ((t (:background ,nord0 :underline t :box (:line-width (1 . 8) :color ,nord0 :style flat-button)))))
+   `(header-line-active ((t (:background ,nord2 :underline (:position -4) :overline t :box (:line-width (1 . 8) :color ,nord2 :style flat-button)))))
+   `(header-line-inactive ((t (:background ,nord0 :underline (:position -4) :overline t :box (:line-width (1 . 8) :color ,nord0 :style flat-button)))))
+   `(highlight ((t (:background ,nord2))))
+   `(region ((t (:background ,nord2))))
+   `(show-paren-match ((t (:background ,nord3))))
+   `(success ((t (:foreground ,nord14))))
+   `(tooltip ((t (:background ,nord1))))
+   `(window-divider ((t (:foreground ,nord0))))
+   `(window-divider-first-pixel ((t (:foreground ,nord0))))
+   `(window-divider-last-pixel ((t (:foreground ,nord0))))
+   ))
+  (enable-theme 'duomacs-nord)
+  )
 
 (provide 'duomacs-themes)
 ;;; duomacs-themes.el ends here
