@@ -1,4 +1,4 @@
-;;; duomacs-dockerfile.el --- duomacs setup for Dockerfiles -*- lexical-binding: t; -*-
+;;; duomacs-docker.el --- duomacs setup for Dockerfiles -*- lexical-binding: t; -*-
 ;;; Summary:
 ;;; Commentary:
 ;;; Code:
@@ -24,8 +24,8 @@
   :bind
   ("C-c r d" . docker)
   :config
-  (setq ((docker-command "docker")
-	 (docker-compose-command "docker-compose"))))
+  (setq docker-command "docker")
+  (setq docker-compose-command "docker-compose"))
 
-(provide 'duomacs-dockerfile)
-;;; duomacs-dockerfile.el ends here
+(provide 'duomacs-docker)
+;;; duomacs-docker.el ends here
