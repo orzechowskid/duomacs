@@ -36,7 +36,8 @@
  locale-coding-system 'utf-8
  default-process-coding-system '(utf-8-unix . utf-8-unix))
 
-;; load user preferences if they exist, or fall back to our own defaults when they don't
+;; load user preferences if they exist, or fall back to our own defaults when
+;; they don't
 (setq
  custom-file (concat (if user-init-file
 												 (file-name-directory user-init-file)
