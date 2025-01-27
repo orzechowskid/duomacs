@@ -117,6 +117,13 @@
 	:hook
 	((prog-mode-hook . display-fill-column-indicator-mode)))
 
+;; LSP client
+(use-package eglot
+  :after (corfu)
+  :delight t
+  :defer t)
+
+;; interface to linters and other code-checkers
 (use-package flymake
 	:custom
 	(flymake-error-bitmap '(flycheck-big-indicator compilation-error))
@@ -192,12 +199,6 @@
 							 :background "#222222")))
 	:custom
 	(eat-term-name "xterm-256color"))
-
-;; LSP client
-(use-package eglot
-  :after (corfu)
-  :delight t
-  :defer t)
 
 ;; extra context-specific actions.  it's like a right-click menu for emacs!
 (use-package embark
