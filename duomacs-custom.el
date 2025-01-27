@@ -1,28 +1,7 @@
-;;; duomacs-custom.el --- duomacs feature customization setup -*- lexical-binding: t; -*-
+;;; duomacs-custom.el --- duomacs feature customization defaults -*- lexical-binding: t; -*-
 ;;; Summary:
 ;;; Commentary:
 ;;; Code:
-
-;; use flycheck's fringe bitmap for flymake, which looks nicer on hidpi screens
-(define-fringe-bitmap
-  'flymake-big-indicator
-  (vector #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0111000111000000
-          #b0011100011100000
-          #b0001110001110000
-          #b0000111000111000
-          #b0000011100011100
-          #b0000011100011100
-          #b0000111000111000
-          #b0001110001110000
-          #b0011100011100000
-          #b0111000111000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000)
-  16 16 'center)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -52,6 +31,7 @@
  '(scroll-conservatively 101)
  '(scroll-margin 1)
  '(show-paren-mode t)
+ '(subword-mode t)
  '(tab-width 2)
  '(tool-bar-mode nil)
  '(tooltip-mode nil)

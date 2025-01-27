@@ -6,6 +6,27 @@
 (require 'use-package)
 (require 'use-package-ensure)
 
+;; use flycheck's fringe bitmap for flymake, which looks nicer on hidpi screens
+(define-fringe-bitmap
+  'flymake-big-indicator
+  (vector #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0111000111000000
+          #b0011100011100000
+          #b0001110001110000
+          #b0000111000111000
+          #b0000011100011100
+          #b0000011100011100
+          #b0000111000111000
+          #b0001110001110000
+          #b0011100011100000
+          #b0111000111000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000)
+  16 16 'center)
+
 (defvar straight-check-for-modifications '(check-on-save find-when-checking))
 (defvar straight-vc-git-default-clone-depth 1)
 (defvar straight-use-package-by-default t)
@@ -57,7 +78,8 @@
 ;; better versions of some built-in commands
 (use-package consult
   :bind
-  (("C-x b" . consult-buffer)
+  (("C-c !" . consult-flymake)
+	 ("C-x b" . consult-buffer)
    ("C-x G" . consult-git-grep)
    ("M-g g" . consult-goto-line)
    ("M-g M-g" . consult-goto-line)
@@ -98,6 +120,22 @@
      (subword-mode nil "subword")))
   :defer nil)
 
+;; terminal client
+(use-package eat
+	:bind (("S-<prior>" . cua-scroll-down)
+				 ("S-<next>" . cua-scroll-up))
+	:config
+	(add-hook 'eat-mode-hook
+						(lambda ()
+							(face-remap-add-relative
+							 'fringe
+							 :background "#222222")
+							(face-remap-add-relative
+							 'default
+							 :background "#222222")))
+	:custom
+	(eat-term-name "xterm-256color"))
+
 ;; LSP client
 (use-package eglot
   :after (corfu)
@@ -112,14 +150,18 @@
   :hook
   ((embark-collect-mode . consult-preview-at-point-mode)))
 
-;; syncs emacs' `exec-path` with your shell's.  use this if you have variables
-;; which don't get set by your login shell (e.g. ~/.profile)
-;; (use-package exec-path-from-shell
-;;   :config
-;;   (exec-path-from-shell-initialize)
-;;   :custom
-;;   (exec-path-from-shell-arguments '("-l"))
-;;   )
+(when (eq system-type 'darwin)
+	;; syncs emacs' `exec-path` with your shell's.  use this if you have variables
+	;; which don't get set by your login shell
+	(use-package exec-path-from-shell
+		:config
+		(exec-path-from-shell-initialize)))
+
+(use-package flymake
+	:custom
+	(flymake-error-bitmap '(flycheck-big-indicator compilation-error))
+	(flymake-mode-line-format '(" ✔" flymake-mode-line-counters))
+	(flymake-warning-bitmap '(flycheck-big-indicator compilation-warning)))
 
 ;; the world's best git client
 (use-package magit

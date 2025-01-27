@@ -62,6 +62,8 @@
    `(window-divider ((t (:foreground ,nord0))))
    `(window-divider-first-pixel ((t (:foreground ,nord0))))
    `(window-divider-last-pixel ((t (:foreground ,nord0))))
+
+	 '(magit-section-highlight ((t (:background nil))))
    ))
   (enable-theme 'duomacs-nord)
   )

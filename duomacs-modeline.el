@@ -54,8 +54,13 @@
 										 (format-mode-line '(vc-mode vc-mode) t))))
     (t
      ""))
-	 (unless (derived-mode-p '(special-mode))
-		 " %l:%c")))
+	 (cond
+		((eq major-mode 'eat-mode)
+		 "Terminal")
+		((derived-mode-p '(special-mode))
+		 "")
+		(t
+		 " %l:%c"))))
 
 (setq-default
  header-line-format '((:eval
