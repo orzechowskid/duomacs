@@ -45,6 +45,13 @@
           #b0000000000000000)
   16 16 'center)
 
+(defun duomacs/after-save-hook ()
+	"Internal function.  Do some things after a buffer has been saved to file."
+	(when (derived-mode-p '(prog-mode))
+		(vc-refresh-state)
+		(when (vc-git-registered (buffer-file-name))
+			(magit-refresh)
+
 (defun duomacs/prog-mode-hook ()
   "Internal function.  Configure some things common to all programming modes."
   (display-line-numbers-mode t)
@@ -66,7 +73,7 @@
   ;; useful for when we switch source-control branches
   (add-hook
    'after-revert-hook
-   'vc-refresh-state))
+   #'vc-refresh-state))
 
 (add-hook
  'prog-mode-hook

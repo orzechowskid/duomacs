@@ -83,7 +83,23 @@
 ;;; use-package infrastructure and functionality (or just keep consistency with
 ;;; the rest of your configuration)
 
+(defun duomacs/prog-mode-hook ()
+	"Internal function.  Hook run when a buffer uses a major mode derived from
+   `prog-mode'."
+	(let ((is-git (and (buffer-file-name)
+										 (vc-git-registered (buffer-file-name)))))
+		(when is-git
+			(setq-local magit-inhibit-refresh-save t) ; not a global variable, booooo
+			(add-hook 'after-save-hook
+								(lambda ()
+									(when (boundp 'magit-refresh)
+										(magit-refresh)))))
+		(display-fill-column-indicator-mode t)))
+
 (use-package emacs
+	:config
+	(add-hook 'prog-mode-hook
+						#'duomacs/prog-mode-hook)
 	:custom
 	(auto-compression-mode t)
 	(auto-encryption-mode nil)
@@ -113,9 +129,7 @@
 	(tooltip-mode nil)
 	(undo-limit (* 1024 1024 256))
 	(use-dialog-box nil)
-	(use-package-always-ensure t)
-	:hook
-	((prog-mode-hook . display-fill-column-indicator-mode)))
+	(use-package-always-ensure t))
 
 ;; LSP client
 (use-package eglot
@@ -288,10 +302,12 @@
 ;;; warning: pretty opinionated!
 
 (use-package tsx-mode
+	:config
+	(require 'typescript-ts-mode)
+	(add-to-list 'auto-mode-alist
+							 '("\\.[jt]s[x]?\\'" . tsx-mode))
 	:custom
 	(tsx-mode-enable-css-in-js-font-lock 'when-in-range)
-	:mode
-	"\\.[jt]s[x]?\\'"
 	:straight '(tsx-mode :type git :host github :repo "orzechowskid/tsx-mode.el" :branch "emacs30"))
 
 
