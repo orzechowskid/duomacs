@@ -81,12 +81,6 @@
 
 ;; ;; now, load them
 
-;; (require 'duomacs-dashboard)
-;; (require 'duomacs-themes)
-;; (require 'duomacs-modes)
-;; (require 'duomacs-fonts)
-;; (require 'duomacs-term)
-
 ;; (require 'duomacs-docker)
 ;; (require 'duomacs-dotenv)
 ;; (require 'duomacs-elisp)

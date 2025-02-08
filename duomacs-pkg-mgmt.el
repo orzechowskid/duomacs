@@ -31,6 +31,26 @@
           #b0000000000000000
           #b0000000000000000)
   16 16 'center)
+;; use an empty bitmap for line-wrap purposes
+(define-fringe-bitmap
+  'duomacs-line-wrap
+  (vector #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000)
+	16 16 'center)
 
 (defvar straight-check-for-modifications '(check-on-save find-when-checking))
 (defvar straight-vc-git-default-clone-depth 1)
@@ -65,8 +85,10 @@
 					 (t "??"))))
     (marginalia--documentation text)))
 
-;; disable the built-in package manager
-(setq  package-enable-at-startup nil)
+;; configure our package managers
+(setq
+ package-enable-at-startup nil
+ use-package-always-defer t)
 
 (use-package straight)
 
@@ -186,7 +208,8 @@
 															 "Don't know what you don't know?  `M-x apropos` is your friend."))
   (dashboard-set-file-icons t)
   (dashboard-set-heading-icons t)
-  (dashboard-icon-types 'nerd-icons))
+  (dashboard-icon-types 'nerd-icons)
+	:defer nil)
 
 ;; mode-line cleaner-upper
 (use-package delight
@@ -303,9 +326,14 @@
 
 (use-package tsx-mode
 	:config
+	;; the typescript treesit modes automatically register themselves with
+	;; `auto-mode-alist' so we have to work around that if we want our major mode
+	;; to take precedence
 	(require 'typescript-ts-mode)
 	(add-to-list 'auto-mode-alist
 							 '("\\.[jt]s[x]?\\'" . tsx-mode))
+	(add-to-list 'auto-mode-alist
+							 '("\\.[mc]?js\\'" . tsx-mode))
 	:custom
 	(tsx-mode-enable-css-in-js-font-lock 'when-in-range)
 	:straight '(tsx-mode :type git :host github :repo "orzechowskid/tsx-mode.el" :branch "emacs30"))

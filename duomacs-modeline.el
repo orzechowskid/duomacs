@@ -44,8 +44,11 @@
   "Internal function.  Creates the formatter for the right side of the modeline."
   (list
    (cond
-    ((or (derived-mode-p '(special-mode 'tabulated-list-mode))
-				 (string= (buffer-name) "*About GNU Emacs*"))
+    ((or (derived-mode-p '(special-mode
+													 tabulated-list-mode
+													 magit-stash-mode))
+				 (string= (buffer-name)
+									"*About GNU Emacs*"))
      "Type 'q' to dismiss this buffer")
     ((stringp vc-mode)
      (format "%s"
