@@ -36,6 +36,18 @@
  locale-coding-system 'utf-8
  default-process-coding-system '(utf-8-unix . utf-8-unix))
 
+(when load-file-name
+  (add-to-list
+   'custom-theme-load-path
+   (concat
+    duomacs-root
+    "themes")))
+
+;; tell emacs where to find our themes
+(setq
+ custom-safe-themes t)
+(add-to-list 'custom-theme-load-path (concat duomacs-root "themes/"))
+
 ;; load user preferences if they exist, or fall back to our own defaults when
 ;; they don't
 (setq
@@ -47,47 +59,9 @@
     (load-file custom-file)
   (require 'duomacs-custom))
 
-;; tell emacs where to find our other packages
-;; (add-to-list 'load-path (concat duomacs-root "language-modes/"))
-;; (add-to-list 'load-path (concat duomacs-root "themes/"))
-
 (require 'duomacs-pkg-mgmt)
-(require 'duomacs-themes)
 (require 'duomacs-modeline)
 (require 'duomacs-keys)
-
-;; (when load-file-name
-;;   (add-to-list
-;;    'custom-theme-load-path
-;;    (concat
-;;     duomacs-root
-;;     "themes")))
-
-;; (setq
-;;  custom-safe-themes t
-;;  custom-file (concat (if user-init-file
-;; 	                 (file-name-directory user-init-file)
-;; 	               "~/")
-;; 	             "duomacs-custom.el"))
-
-;; (add-to-list
-;;  'treesit-extra-load-path
-;;  "/usr/local/lib/tree-sitter/")
-
-;; ;; first, tell emacs where to find our other packages
-;; (add-to-list 'load-path duomacs-root)
-;; (add-to-list 'load-path (concat duomacs-root "language-modes/"))
-;; (add-to-list 'load-path (concat duomacs-root "themes/"))
-
-;; ;; now, load them
-
-;; (require 'duomacs-docker)
-;; (require 'duomacs-dotenv)
-;; (require 'duomacs-elisp)
-;; (require 'duomacs-javascript-typescript)
-;; (require 'duomacs-markdown)
-;; (require 'duomacs-python)
-;; (require 'duomacs-yaml)
 
 (provide 'duomacs-init)
 ;;; duomacs-init.el ends here
