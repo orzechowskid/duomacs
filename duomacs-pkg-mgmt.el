@@ -122,6 +122,19 @@
 	:config
 	(add-hook 'prog-mode-hook
 						#'duomacs/prog-mode-hook)
+	(setq treesit-language-source-alist
+				'((yaml . ("https://github.com/tree-sitter-grammars/tree-sitter-yaml"
+									 nil nil nil nil))
+					(typescript . ("https://github.com/tree-sitter/tree-sitter-typescript"
+												 nil "typescript/src" nil nil))
+					(tsx . ("https://github.com/tree-sitter/tree-sitter-typescript"
+									nil "tsx/src" nil nil))
+					(python . ("https://github.com/tree-sitter/tree-sitter-python"
+										 nil nil nil nil))))
+	(add-to-list 'auto-mode-alist
+							 '("\\.y[a]?ml\\'" . yaml-ts-mode))
+	(add-to-list 'auto-mode-alist
+							 '("\\.py\\'" . python-ts-mode))
 	:custom
 	(auto-compression-mode t)
 	(auto-encryption-mode nil)
