@@ -247,8 +247,13 @@
 							(face-remap-add-relative
 							 'default
 							 :background "#222222")))
-	:custom
-	(eat-term-name "xterm-256color"))
+	:straight
+	'(eat :type git :host codeberg :repo "akib/emacs-eat"
+				files ("*.el" ("term" "term/*.el") "*.texi"
+               "*.ti" ("terminfo/e" "terminfo/e/*")
+               ("terminfo/65" "terminfo/65/*")
+               ("integration" "integration/*")
+               (:exclude ".dir-locals.el" "*-tests.el"))))
 
 ;; extra context-specific actions.  it's like a right-click menu for emacs!
 (use-package embark
