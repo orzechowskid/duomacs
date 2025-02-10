@@ -79,8 +79,5 @@
  'prog-mode-hook
  #'duomacs/prog-mode-hook)
 
-(add-to-list 'auto-mode-alist
-						 '("\\.py\\'" . python-ts-mode))
-
 (provide 'duomacs-modes)
 ;;; duomacs-modes.el ends here
