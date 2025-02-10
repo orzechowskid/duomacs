@@ -1,3 +1,7 @@
+# emacs 30+ users
+
+[click here](https://github.com/orzechowskid/duomacs/tree/next)
+
 # emacs 28 users
 
 [click here](https://github.com/orzechowskid/duomacs/tree/emacs-28)
