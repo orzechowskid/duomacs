@@ -237,7 +237,8 @@
 ;; terminal client
 (use-package eat
 	:bind (("S-<prior>" . cua-scroll-down)
-				 ("S-<next>" . cua-scroll-up))
+				 ("S-<next>" . cua-scroll-up)
+				 ("C-c C-k" . nil))
 	:config
 	(add-hook 'eat-mode-hook
 						(lambda ()
