@@ -36,17 +36,14 @@
  locale-coding-system 'utf-8
  default-process-coding-system '(utf-8-unix . utf-8-unix))
 
+;; configure some things related to themes
 (when load-file-name
   (add-to-list
    'custom-theme-load-path
-   (concat
-    duomacs-root
-    "themes")))
+	 duomacs-root))
 
-;; tell emacs where to find our themes
 (setq
  custom-safe-themes t)
-(add-to-list 'custom-theme-load-path (concat duomacs-root "themes/"))
 
 ;; load user preferences if they exist, or fall back to our own defaults when
 ;; they don't
@@ -62,6 +59,7 @@
 (require 'duomacs-pkg-mgmt)
 (require 'duomacs-modeline)
 (require 'duomacs-keys)
+(require 'duomacs-themes)
 
 (provide 'duomacs-init)
 ;;; duomacs-init.el ends here
