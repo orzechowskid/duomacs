@@ -26,6 +26,11 @@ If a numerical ARG is given, do it that many times."
   (interactive)
   (eat nil t))
 
+(defun duomacs/prev-window ()
+	"Like `next-window' but backwards."
+	(interactive)
+	(other-window -1))
+
 ;; Ctrl-PgDn -> next window
 (global-set-key
  (kbd "C-<next>")
@@ -37,9 +42,11 @@ If a numerical ARG is given, do it that many times."
 ;; Ctrl-PgUp -> previous window
 (global-set-key
  (kbd "C-<prior>")
- (lambda ()
-   (interactive)
-   (other-window -1)))
+ #'duomacs/prev-window)
+;; C-x O -> previous window
+(global-set-key
+ (kbd "C-x O")
+ #'duomacs/prev-window)
 ;; Ctrl-a -> select all
 (global-set-key
  (kbd "C-a")
