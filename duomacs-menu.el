@@ -25,6 +25,8 @@
 (easy-menu-define nil conf-mode-map nil (list "Conf" :visible nil))
 (easy-menu-define nil emacs-lisp-mode-map nil (list "Emacs-Lisp" :visible nil))
 (easy-menu-define nil lisp-interaction-mode-map nil (list "Lisp-Interaction" :visible nil))
+(easy-menu-define nil git-commit-mode-map nil (list "Commit" :visible nil))
+(easy-menu-define nil magit-mode-map nil (list "Magit" :visible nil))
 (recentf-hide-menu)
 
 (defun duomacs/universal-argument ()
