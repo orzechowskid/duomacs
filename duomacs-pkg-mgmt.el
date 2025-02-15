@@ -138,7 +138,7 @@
 	(add-to-list 'auto-mode-alist
 							 '("\\.py\\'" . python-ts-mode))
 	(add-to-list 'auto-mode-alist
-							 '("\\.Dockerfile\\'" . dockerfile-ts-mode))
+							 '("\\.?Dockerfile\\'" . dockerfile-ts-mode))
 	:custom
 	(auto-compression-mode t)
 	(auto-encryption-mode nil)
@@ -173,8 +173,7 @@
 ;; LSP client
 (use-package eglot
   :after (corfu)
-  :delight t
-  :defer t)
+  :delight t)
 
 ;; interface to linters and other code-checkers
 (use-package flymake
@@ -213,6 +212,9 @@
   (require 'corfu-popupinfo) ; a corfu extension, not a package
   :load-path "straight/build/corfu/extensions")
 
+(use-package cov
+	:delight t)
+
 ;; a more useful splash screen
 (use-package dashboard
 	:after (nerd-icons)
@@ -235,7 +237,8 @@
    '((eldoc-mode nil "eldoc")
 		 (auto-revert-mode nil "autorevert")
      (subword-mode nil "subword")
-		 (treesit-fold-mode nil "Treesit-Fold")))
+		 (treesit-fold-mode nil "Treesit-Fold")
+		 (cov-mode nil "cov")))
   :defer nil)
 
 ;; terminal client
@@ -286,8 +289,7 @@
   (advice-add
    'magit-branch-and-checkout :after
    (lambda (&rest _ignored)
-     (vc-refresh-state)))
-  :defer t)
+     (vc-refresh-state))))
 
 ;; eglot will use markdown-mode to render docstrings if it's present
 (use-package markdown-mode)
@@ -348,7 +350,9 @@
 ;;; warning: pretty opinionated!
 
 (use-package tsx-mode
-	:config
+	:custom
+	(tsx-mode-enable-css-in-js-font-lock 'when-in-range)
+	:init
 	;; the typescript treesit modes automatically register themselves with
 	;; `auto-mode-alist' so we have to work around that if we want our major mode
 	;; to take precedence
@@ -357,8 +361,6 @@
 							 '("\\.[jt]s[x]?\\'" . tsx-mode))
 	(add-to-list 'auto-mode-alist
 							 '("\\.[mc]?js\\'" . tsx-mode))
-	:custom
-	(tsx-mode-enable-css-in-js-font-lock 'when-in-range)
 	:straight '(tsx-mode :type git :host github :repo "orzechowskid/tsx-mode.el" :branch "emacs30"))
 
 
