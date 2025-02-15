@@ -21,8 +21,6 @@
 		       (scroll-bar-width . 0)
 		       (tool-bar-lines . 0)
 		       (menu-bar-lines . 0)
-		       (left-fringe . 1)
-		       (right-fringe . 1)
 		       (vertical-scroll-bars . nil))
  fringe-mode '(24 . 0)
  ;; Vertical window divider
