@@ -3,14 +3,19 @@
 ;;; Commentary:
 ;;; Code:
 
+
 (require 'conf-mode)
 (require 'eww)
 (require 'flymake)
 (require 'help-mode)
 (require 'image-mode)
+(require 'recentf)
+
 
 ;; hides some menu-bar items which appear and disappear when various modes
 ;; are enabled or disabled
+;; todo: investigate advising the menu-creation functions to allowlist the stuff
+;; we want instead of blocklisting the entire universe here
 (easy-menu-define nil minibuffer-mode-map nil (list "Minibuf" :visible nil))
 (easy-menu-define nil isearch-mode-map nil (list "Isearch" :visible nil))
 (easy-menu-define nil help-mode-map nil (list "Help-Mode" :visible nil))
@@ -18,6 +23,9 @@
 (easy-menu-define nil text-mode-map nil (list "Text" :visible nil))
 (easy-menu-define nil image-mode-map nil (list "Image" :visible nil))
 (easy-menu-define nil conf-mode-map nil (list "Conf" :visible nil))
+(easy-menu-define nil emacs-lisp-mode-map nil (list "Emacs-Lisp" :visible nil))
+(easy-menu-define nil lisp-interaction-mode-map nil (list "Lisp-Interaction" :visible nil))
+(recentf-hide-menu)
 
 (defun duomacs/universal-argument ()
   "Internal function.
@@ -66,7 +74,6 @@ Creates the File menu."
       '(menu-item "Quit" save-buffers-kill-terminal))
     keymap))
 
-
 (defun duomacs/edit-menu ()
   "Internal function.
 Creates the Edit menu."
@@ -111,7 +118,6 @@ Creates the Edit menu."
                   :enable (> (- (point-max) (point-min) 0))))
     keymap))
 
-
 (defun duomacs/view-menu ()
   "Internal function.
 Creates the View menu."
@@ -152,7 +158,6 @@ Creates the View menu."
       '(menu-item "Delete other windows" delete-other-windows
 		  :enable (> (length (window-list)) 1)))
     keymap))
-
 
 (defun duomacs/actions-menu ()
   "Internal function.
@@ -278,7 +283,6 @@ Creates the Actions menu."
                   :keys "C-g"))
     keymap))
 
-
 (defun duomacs/options-menu ()
   "Internal function.
 Creates the Options menu."
@@ -304,7 +308,6 @@ Creates the Options menu."
       keymap [duomacs/use-package-interactive]
       '(menu-item "Install package from archive or repo..." straight-use-package))
     keymap))
-
 
 (defun duomacs/help-menu ()
   "Internal function.

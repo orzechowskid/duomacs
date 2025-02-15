@@ -6,6 +6,7 @@
 ;;;
 ;;; Code:
 
+
 (defgroup duomacs nil
   "Group containing options to customize duomacs directly."
   :group 'personalization
@@ -17,6 +18,11 @@
    (or load-file-name
        (buffer-file-name))))
  "Absolute path to the root duomacs directory.")
+
+(defcustom duomacs-show-menu-bar
+	t
+	"Whether or not to show the emacs menu bar.")
+
 
 (add-to-list 'load-path duomacs-root)
 
@@ -40,8 +46,9 @@
 (when load-file-name
   (add-to-list
    'custom-theme-load-path
-	 duomacs-root))
-
+	 (concat duomacs-root
+					 "themes")))
+(add-to-list 'load-path (concat duomacs-root "themes/"))
 (setq
  custom-safe-themes t)
 
@@ -56,10 +63,15 @@
     (load-file custom-file)
   (require 'duomacs-custom))
 
+;; show menu bar if user requests it
+(when duomacs-show-menu-bar
+	(require 'duomacs-menu))
+
+(require 'duomacs-themes)
 (require 'duomacs-pkg-mgmt)
 (require 'duomacs-modeline)
 (require 'duomacs-keys)
-(require 'duomacs-themes)
+
 
 (provide 'duomacs-init)
 ;;; duomacs-init.el ends here
