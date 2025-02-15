@@ -22,7 +22,7 @@ it's emacs, but with:
 - a menu bar (optional) containing stuff you actually need and not containing stuff you (probably) don't
 - Nord-like light and dark themes (optionally configured to follow your OS' light/dark settings) for a look and feel that doesn't party like it's 1989
 
-if you know what all of that stuff means, then this package is probably not for you since you probably already know how to configure emacs to your liking.
+if you know what all of that stuff means then this package is probably not for you out-of-the-box since you likely already know how to configure emacs to meet your needs.
 
 ## Installation
 
@@ -55,3 +55,7 @@ all other features are controlled by, and configured via, the packages which pro
 - [vertico](https://github.com/minad/vertico)
 
 you can configure these packages (as well as any other built-in or third-party emacs feature) by selecting an item in the Options menu, or by entering `M-x customize-` and choosing one of the items in the resulting list.
+
+## License
+
+GPLv3.  see LICENSE in the top level of this repository.
