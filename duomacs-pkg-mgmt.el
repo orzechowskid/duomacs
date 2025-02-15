@@ -187,6 +187,17 @@
 ;;; certain features apply to emacs as a whole, or otherwise aren't applicable to
 ;;; any specific major mode.  install those here
 
+;; gets emacs to follow the OS' light/dark theme
+(use-package auto-dark
+	:custom
+	(auto-dark-themes '((duomacs-nord) (duomacs-nord-light)))
+	:defer nil
+	:init
+	(message "?? %s" (boundp 'duomacs-use-system-theme))
+	(when (and (boundp 'duomacs-use-system-theme)
+						 duomacs-use-system-theme)
+		(auto-dark-mode t)))
+
 ;; better versions of some built-in commands
 (use-package consult
   :bind
@@ -223,8 +234,11 @@
   :custom
   (dashboard-display-icons-p t)
   (dashboard-footer-messages '("Editing a file inside a git repository?  Access magit with `C-x g`."
+															 "Working in a git repository?  call `git grep` with `C-x G`."
 															 "Want to add a new package?  Try `M-:` then `(use-package <package name>)`."
-															 "Don't know what you don't know?  `M-x apropos` is your friend."))
+															 "Don't know what you don't know?  `M-x apropos` is your friend."
+															 "Need to run some Lisp in the current buffer?  Use `M-:`."
+															 "Need to run a shell command in the current buffer's directory?  Use `M-!`."))
   (dashboard-set-file-icons t)
   (dashboard-set-heading-icons t)
   (dashboard-icon-types 'nerd-icons)
@@ -237,6 +251,7 @@
    '((eldoc-mode nil "eldoc")
 		 (auto-revert-mode nil "autorevert")
      (subword-mode nil "subword")
+		 (auto-dark-mode nil "auto-dark")
 		 (treesit-fold-mode nil "Treesit-Fold")
 		 (cov-mode nil "cov")))
   :defer nil)
@@ -251,10 +266,14 @@
 						(lambda ()
 							(face-remap-add-relative
 							 'fringe
-							 :background "#222222")
+							 :background (if (boundp 'duomacs/terminal-background-color)
+															 duomacs/terminal-background-color
+														 "#222222"))
 							(face-remap-add-relative
 							 'default
-							 :background "#222222")))
+							 :background (if (boundp 'duomacs/terminal-background-color)
+															 duomacs/terminal-background-color
+														 "#222222"))))
 	:straight
 	'(eat :type git :host codeberg :repo "akib/emacs-eat"
 				files ("*.el" ("term" "term/*.el") "*.texi"
