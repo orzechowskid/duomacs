@@ -19,7 +19,7 @@ it's emacs, but with:
 - consult, vertico, orderless, corfu, and marginalia for enhancing emacs' built-in completing-read, incremental narrowing, list sorting, etc
 - embark for keyboard-controlled context-menu functionality
 - disabled tool-bar and heavily delight'd modeline for getting rarely-used junk out of the user's face
-- 
+- a menu bar (optional) containing stuff you actually need and not containing stuff you (probably) don't
 - Nord-like light and dark themes (optionally configured to follow your OS' light/dark settings) for a look and feel that doesn't party like it's 1989
 
 if you know what all of that stuff means, then this package is probably not for you since you probably already know how to configure emacs to your liking.
