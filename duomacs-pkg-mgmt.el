@@ -82,7 +82,7 @@
 					 ;; ensure any symbols are turned into strings
 					 (flavor-index (format "%s" (nth (1+ flavor-index) recipe)))
 					 (repo-index (format "%s" (nth (1+ repo-index) recipe)))
-					 (t "??"))))
+					 (t ""))))
     (marginalia--documentation text)))
 
 ;; configure our package managers
@@ -193,7 +193,6 @@
 	(auto-dark-themes '((duomacs-nord) (duomacs-nord-light)))
 	:defer nil
 	:init
-	(message "?? %s" (boundp 'duomacs-use-system-theme))
 	(when (and (boundp 'duomacs-use-system-theme)
 						 duomacs-use-system-theme)
 		(auto-dark-mode t)))

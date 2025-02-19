@@ -63,14 +63,14 @@
     (load-file custom-file)
   (require 'duomacs-custom))
 
-;; show menu bar if user requests it
-(when duomacs-show-menu-bar
-	(require 'duomacs-menu))
-
 (require 'duomacs-themes)
 (require 'duomacs-pkg-mgmt)
 (require 'duomacs-modeline)
 (require 'duomacs-keys)
+
+;; show menu bar if user requests it
+(when duomacs-show-menu-bar
+	(require 'duomacs-menu))
 
 
 (provide 'duomacs-init)
