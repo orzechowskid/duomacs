@@ -55,7 +55,7 @@
 	 ;; third-party package faces
 	 `(cov-coverage-run-face ((t (:foreground ,nord14))))
 	 `(cov-coverage-not-run-face ((t (:foreground ,nord11))))
-	 '(magit-section-highlight ((t (:background nil))))
+	 '(magit-section-highlight ((t (:background unspecified))))
 	 )
 	;; some things need to be variables, not faces
 	(setq
