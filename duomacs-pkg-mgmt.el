@@ -349,10 +349,15 @@
   (marginalia-mode t)
   :defer nil)
 
+;; icons for dashboards, code-completion popups, etc.
 (use-package nerd-icons
 	:custom
 	(nerd-icons-font-family "SauceCodePro Nerd Font")
 	:defer nil)
+(use-package nerd-icons-corfu
+	:after nerd-icons
+	:config
+	(add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
 ;; a more flexible backend for matching a minibuffer completion candidate
 (use-package orderless
