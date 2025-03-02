@@ -5,7 +5,7 @@
 
 (require 'vc-annotate)
 
-(require 'duomacs-base)
+(require 'duomacs-theme-base)
 
 (deftheme duomacs-dark "A dark theme for Duomacs, based on the Materialize palette.")
 
@@ -83,12 +83,16 @@
 
  `(corfu-current ((t (:foreground ,duomacs-color-foreground :background ,duomacs-color-background-highlight-transient))))
 
+ `(magit-section-highlight ((t (:background ,duomacs-color-background-highlight-transient))))
+ 
  `(marginalia-documentation ((t (:foreground ,duomacs-color-foreground-tertiary :underline nil))))
 
  `(orderless-match-face-0 ((t (:weight bold))))
  `(orderless-match-face-1 ((t (:weight bold))))
  `(orderless-match-face-2 ((t (:weight bold))))
  `(orderless-match-face-3 ((t (:weight bold))))
+
+ `(vertico-current ((t (:foreground ,duomacs-color-foreground :background ,duomacs-color-background-highlight-transient))))
  )
 
 (setq

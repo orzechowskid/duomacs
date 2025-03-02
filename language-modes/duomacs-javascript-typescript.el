@@ -7,11 +7,11 @@
 (require 'flymake)
 (require 'treesit)
 
-(setq eglot-events-buffer-size 0)
-
+;; linter adapter which doesn't use LSP
 (use-package
   flymake-eslint
-  :straight t)
+  :straight t
+  :defer)
 
 (defun duomacs/tsx-mode-hook ()
   "Internal function.  Hook to be run upon entering `tsx-mode'."
@@ -38,8 +38,9 @@
 ;; format on save
 (use-package
   apheleia
-  :delight
   :straight t
+  :defer
+  :delight
   :config
   (add-to-list
    'apheleia-mode-alist
@@ -48,20 +49,18 @@
 ;; code-coverage overlays
 (use-package
   coverlay
-  :delight coverlay-minor-mode
-  :straight t)
+  :straight t
+  :defer
+  :delight coverlay-minor-mode)
 
 ;; CSS-in-JS support for tsx-mode
 (use-package
   css-in-js-mode
-  :delight
   :straight
-  '(css-in-js-mode :type git :host github :repo "orzechowskid/tree-sitter-css-in-js" :branch "main" :post-build ((require 'css-in-js-mode) (css-in-js-mode-fetch-shared-library))))
-
-;; linter adapter which doesn't use LSP
-(use-package
-  flymake-eslint
-  :straight t)
+  '(css-in-js-mode :type git :host github :repo "orzechowskid/tree-sitter-css-in-js" :branch "bugfix/29" :post-build ((require 'css-in-js-mode) (css-in-js-mode-fetch-shared-library)))
+  :defer
+  :delight
+)
 
 ;; code-folding
 ;; origami depends on some now-deprecated cl functions and there's not much we
@@ -69,19 +68,34 @@
 (let ((byte-compile-warnings '((not cl-functions))))
   (use-package
     origami
-    :delight
-    :straight t))
+    :straight t
+    :defer
+    :delight))
 
+;; ;; emacs bug #66646
+;; (setq treesit-language-source-alist nil)
+;; (add-to-list
+;;  'treesit-language-source-alist
+;;  '(tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.2" "tsx/src")))
+;; (add-to-list
+;;  'treesit-language-source-alist
+;;  '(typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.2" "typescript/src")))
+;; (treesit-install-language-grammar 'typescript)
+;; (treesit-install-language-grammar 'tsx)
+ 
 ;; major-mode for JS/TS/JSX/TSX
 (use-package
   tsx-mode
-  :straight '(tsx-mode :type git :host github :repo "orzechowskid/tsx-mode.el" :branch "emacs29")
+  :straight '(tsx-mode :type git :host github :repo "orzechowskid/tsx-mode.el" :branch "main")
+  :defer
   :mode (("\\.[jt]s[x]?\\'" . tsx-mode)
          ("\\.[mc]js\\'" . tsx-mode))
-  :config
-  (add-hook
-   'tsx-mode-hook
-   #'duomacs/tsx-mode-hook))
+  :hook ((tsx-mode . duomacs/tsx-mode-hook))
+  :init
+  ;; this mode inherits from `typescript-ts-mode', but loading the latter will
+  ;; automatically update `auto-mode-alist' (clobbering any updates we might
+  ;; have made to it in the use-package :config block).
+  (require 'typescript-ts-mode))
 
 ;; LSP inlay hints
 ;; (add-to-list

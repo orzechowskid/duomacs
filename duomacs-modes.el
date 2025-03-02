@@ -4,27 +4,65 @@
 ;;; Code:
 
 (require 'flymake)
-(require 'savehist)
+(require 'jsonrpc)
 
+(use-package editorconfig
+  :straight t
+  :delight)
 (use-package magit
-  :straight t)
+  :straight t
+  :delight
+  :hook
+  ((after-save-hook . magit-after-save-refresh-buffers)))
 
+(require 'editorconfig)
 (require 'magit)
 
 (savehist-mode t)
 
+(easy-menu-define nil flymake-mode-map nil (list "Flymake" :visible nil))
 (easy-menu-define nil magit-mode-map nil (list "Magit" :visible nil))
+
+(fset #'jsonrpc--log-event #'ignore)
+
+(define-fringe-bitmap
+  'duomacs-line-wrap
+  (vector #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000
+          #b0000000000000000)
+  16 16 'center)
 
 (defun duomacs/prog-mode-hook ()
   "Internal function.  Configure some things common to all programming modes."
   (display-line-numbers-mode t)
   (show-paren-mode t)
+  (editorconfig-mode t)
   (subword-mode t)
   (display-fill-column-indicator-mode t)
   (local-set-key (kbd "C-p") #'project-find-file)
   (flymake-mode t)
   ;; use a flycheck keybinding for flymake
   (local-set-key (kbd "C-c ! n") #'flymake-goto-next-error)
+  ;; disable the line-wrap indicator in the west fringe with an empty bitmap; the
+  ;; missing line number is a good-enough indicator.  (the line-wrap indicator in
+  ;; the east fringe will still be visible, and will be rendered using the user's
+  ;; preferred font, due to calling `set-display-table-slot' in duomacs-fonts.el)
+  (push
+   '(continuation duomacs-line-wrap duomacs-line-wrap)
+   fringe-indicator-alist)
   ;; useful for when we switch source-control branches
   (add-hook
    'after-revert-hook

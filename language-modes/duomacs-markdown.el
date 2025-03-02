@@ -5,8 +5,13 @@
 
 (use-package
   markdown-mode
-  :delight
-  :straight t)
+  :straight t
+  :defer t
+  :hook
+  (markdown-mode . variable-pitch-mode)
+  :init
+  (require 'markdown-mode)
+  (easy-menu-define nil markdown-mode-map nil (list "Markdown" :visible nil)))
 
 (provide 'duomacs-markdown)
 ;;; duomacs-markdown.el ends here

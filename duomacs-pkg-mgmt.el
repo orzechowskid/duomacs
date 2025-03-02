@@ -3,25 +3,32 @@
 ;;; Commentary:
 ;;; Code:
 
-(setq straight-check-for-modifications '(check-on-save find-when-checking))
-(setq straight-vc-git-default-protocol 'ssh)
-(setq straight-vc-git-force-protocol t)
-(setq straight-vc-git-default-clone-depth 1)
+(require 'use-package)
+(require 'use-package-ensure)
+
+(defvar straight-check-for-modifications '(check-on-save find-when-checking))
+(defvar straight-vc-git-default-clone-depth 1)
+(defvar straight-use-package-by-default t)
+
+;; as required by straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
+       (expand-file-name
+        "straight/repos/straight.el/bootstrap.el"
+        (or (bound-and-true-p straight-base-dir)
+            user-emacs-directory)))
+      (bootstrap-version 7))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
         (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
          'silent 'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
 (defun duomacs/annotate-get-package-recipe (candidate)
-  "Annotate straight.el completing-read candidates with some package-registry info."
+  "Annotate a straight.el completion CANDIDATE with some package-registry info."
   (let* ((recipe (straight-recipes-retrieve (intern candidate)))
          (repo-index (cl-position :repo recipe))
          (flavor-index (cl-position :flavor recipe))
@@ -33,14 +40,20 @@
 	   (t "??"))))
     (marginalia--documentation text)))
 
-(straight-use-package 'use-package)
-(use-package straight
-  :custom (straight-use-package-by-default t))
+(use-package straight)
+
+(advice-add
+ #'straight-use-package
+ :after
+ (lambda (&rest _ignored)
+   (when (called-interactively-p 'interactive)
+     (message "To use this package in future Emacs sessions, be sure to add it to your init file: `(use-package <package name>)`."))))
 
 ;; install dependencies unrelated to any particular major mode
 
 ;; mode-line cleaner upper
 (use-package delight
+  :straight t
   :config
   (delight
    '((auto-revert-mode nil "autorevert")
@@ -49,8 +62,8 @@
 
 ;; a better frontend for in-buffer code-completion
 (use-package corfu
-  :delight
   :straight t
+  :delight
   :load-path "straight/build/corfu/extensions"
   :init
   (require 'corfu-popupinfo)
@@ -74,31 +87,37 @@
   (exec-path-from-shell-initialize))
 
 ;; icons for corfu's popup-info menu
-(use-package kind-icon
-  :after corfu
+(use-package all-the-icons-completion
+  :after (:all all-the-icons corfu marginalia)
   :config
-  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+  (add-hook 'marginalia-mode-hook #'all-the-icons-completion-marginalia-setup)
+  (all-the-icons-completion-mode))
 
 ;; git source-control client
 (use-package magit
   :straight t
   :config
-  ;; poke vc-mode after we do some magit things
-  (advice-add 'magit-checkout :after
-              (lambda (&rest ignored)
-                (vc-refresh-state)))
-  (advice-add 'magit-branch-and-checkout :after
-              (lambda (&rest ignored)
-                (vc-refresh-state))))
+  (easy-menu-define nil magit-mode-map nil (list "Magit" :visible nil))
+  ;; poke vc-mode whenever certain git things happen
+  (advice-add
+   'magit-checkout :after
+   (lambda (&rest _ignored)
+     (vc-refresh-state)))
+  (advice-add
+   'magit-branch-and-checkout :after
+   (lambda (&rest _ignored)
+     (vc-refresh-state))))
 
 ;; helpful annotations on minibuffer completion candidates
 (use-package marginalia
   :straight t
   :config
-  (add-to-list 'marginalia-prompt-categories
-	       '("\\<Which recipe?\\>" . straight-recipe))
-  (add-to-list 'marginalia-annotator-registry
-	       '(straight-recipe duomacs/annotate-get-package-recipe none)))
+  (add-to-list
+   'marginalia-prompt-categories
+   '("\\<Which recipe?\\>" . straight-recipe))
+  (add-to-list
+   'marginalia-annotator-registry
+   '(straight-recipe duomacs/annotate-get-package-recipe none)))
 
 ;; a more flexible backend for selecting minibuffer completion candidates
 (use-package orderless
@@ -108,14 +127,45 @@
 
 ;; source-code project management
 (use-package projectile
-  :delight
-  :straight t)
+  :straight t
+  :delight)
 
 ;; a better frontend for selecting minibuffer completion candidates
 (use-package vertico
   :straight t
   :config
   (vertico-mode t))
+;; use a posframe, rather than a completion buffer, to select completion
+;; candidates.  this prevents emacs from resizing our work buffers
+(use-package vertico-posframe
+  :after (vertico)
+  :straight '(vertico-posframe :type git :host github :repo "tumashu/vertico-posframe" :branch "main")
+  :config
+  (vertico-posframe-mode t))
+
+;; use a posframe for transient buffers like the ones magit uses
+(use-package transient-posframe
+  :straight t
+  :config
+  (transient-posframe-mode))
+
+;; context-dependent actions
+(use-package embark
+  :straight t
+  :ensure t
+  :bind
+  (("C-c a" . embark-act)))
+(use-package embark-consult
+  :straight t
+  :ensure t
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
+
+(use-package vertico-posframe
+  :straight t
+  :after vertico
+  :config
+  (vertico-posframe-mode 1))
 
 (provide 'duomacs-pkg-mgmt)
 ;;; duomacs-pkg-mgmt.el ends here

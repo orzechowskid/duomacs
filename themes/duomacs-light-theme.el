@@ -5,32 +5,30 @@
 
 (require 'vc-annotate)
 
-(require 'duomacs-base)
+(require 'duomacs-theme-base)
 
 (deftheme duomacs-light "A light theme for Duomacs, based on the Materialize palette.")
 
 ;; semantic variables
 
-(defconst duomacs-color-background duomacs--color-gray-900
-  "Preferred default background color.")
-(defconst duomacs-color-background-highlight-permanent duomacs--color-gray-700
-  "Preferred background color for long-lived background elements.")
-(defconst duomacs-color-background-highlight-transient duomacs--color-bluegray-900
-  "Preferred background color for temporary elements created via user-action.")
-(defconst duomacs-color-background-secondary duomacs--color-bluegray-600)
-(defconst duomacs-color-background-tertiary duomacs--color-bluegray-800)
-(defconst duomacs-color-comment duomacs--color-green-200)
-(defconst duomacs-color-constant duomacs--color-bluegray-300)
-(defconst duomacs-color-foreground duomacs--color-gray-200)
-(defconst duomacs-color-foreground-secondary duomacs--color-gray-600)
-(defconst duomacs-color-foreground-tertiary duomacs--color-gray-500)
-(defconst duomacs-color-function-call duomacs--color-bluegray-300)
-(defconst duomacs-color-error duomacs--color-red-300)
-(defconst duomacs-color-info duomacs--color-bluegray-300)
-(defconst duomacs-color-keyword duomacs--color-bluegray-500)
-(defconst duomacs-color-typedef duomacs--color-bluegray-300)
-(defconst duomacs-color-string duomacs--color-red-100)
-(defconst duomacs-color-warning duomacs--color-orange-200)
+(setq
+ duomacs-color-background duomacs--color-gray-900
+ duomacs-color-background-highlight-permanent duomacs--color-gray-700
+ duomacs-color-background-highlight-transient duomacs--color-bluegray-900
+ duomacs-color-background-secondary duomacs--color-bluegray-600
+ duomacs-color-background-tertiary duomacs--color-bluegray-800
+ duomacs-color-comment duomacs--color-green-200
+ duomacs-color-constant duomacs--color-bluegray-300
+ duomacs-color-foreground duomacs--color-gray-200
+ duomacs-color-foreground-secondary duomacs--color-gray-600
+ duomacs-color-foreground-tertiary duomacs--color-gray-500
+ duomacs-color-function-call duomacs--color-bluegray-300
+ duomacs-color-error duomacs--color-red-300
+ duomacs-color-info duomacs--color-bluegray-300
+ duomacs-color-keyword duomacs--color-bluegray-500
+ duomacs-color-typedef duomacs--color-bluegray-300
+ duomacs-color-string duomacs--color-red-100
+ duomacs-color-warning duomacs--color-orange-200)
 
 ;; single-purpose variables
 
@@ -46,6 +44,7 @@
  `(compilation-warning ((t (:foreground ,duomacs-color-warning))))
  `(cursor ((t (:background ,duomacs-color-foreground))))
  `(default ((t (:foreground ,duomacs-color-foreground :background ,duomacs-color-background))))
+ `(eglot-diagnostic-tag-unnecessary-face ((t (:underline (:color ,duomacs-color-info :style wave)))))
  `(error ((t (:foreground ,duomacs-color-error))))
  `(fill-column-indicator ((t (:foreground ,duomacs-color-background-highlight-permanent))))
  `(fringe ((t (:background ,duomacs-color-background))))
@@ -61,6 +60,11 @@
 
  `(cua-rectangle ((t (:background ,duomacs-color-background-highlight-transient))))
 
+ `(eat-term-color-1 ((t (:foreground "#ff4040"))))
+ `(eat-term-color-4 ((t (:foreground "#6495ed"))))
+ `(eat-term-color-10 ((t (:foreground "#32a032"))))
+ `(eat-term-color-12 ((t (:foreground "#6495ed"))))
+
  `(flymake-error ((t (:underline (:color ,duomacs-color-error :style wave)))))
  `(flymake-note ((t (:underline (:color ,duomacs-color-info :style wave)))))
  `(flymake-warning ((t (:underline (:color ,duomacs-color-warning :style wave)))))
@@ -69,6 +73,7 @@
  `(font-lock-constant-face ((t (:foreground ,duomacs-color-constant))))
  `(font-lock-doc-face ((t (:foreground ,duomacs-color-comment))))
  `(font-lock-function-call-face ((t (:foreground ,duomacs-color-function-call))))
+ `(font-lock-function-name-face ((t (:foreground ,duomacs-color-function-call))))
  `(font-lock-keyword-face ((t (:foreground ,duomacs-color-keyword))))
  `(font-lock-string-face ((t (:foreground ,duomacs-color-string))))
  `(font-lock-type-face ((t (:foreground ,duomacs-color-typedef))))
@@ -85,7 +90,11 @@
 
  `(corfu-current ((t (:foreground ,duomacs-color-foreground :background ,duomacs-color-background-highlight-transient))))
 
+ `(magit-section-highlight ((t (:foreground ,duomacs-color-foreground :background ,duomacs-color-background-highlight-transient))))
+ 
  `(marginalia-documentation ((t (:foreground ,duomacs-color-foreground-tertiary :underline nil))))
+
+ `(markdown-header-face ((t (:foreground ,duomacs-color-foreground))))
 
  `(orderless-match-face-0 ((t (:weight bold))))
  `(orderless-match-face-1 ((t (:weight bold))))
@@ -101,6 +110,11 @@
    (30 . ,(format "%s" duomacs--color-yellow-1000))
    (60 . ,(format "%s" duomacs--color-green-1000))
    (180 . ,(format "%s" duomacs--color-bluegray-1000))))
+
+(when (featurep 'coverlay)
+  (setq
+   coverlay:tested-line-background-color duomacs--color-green-1000
+   coverlay:untested-line-background-color duomacs--color-red-1000))
 
 (provide-theme 'duomacs-light)
 

@@ -33,9 +33,9 @@ Constructs the left side of the modeline."
 	  (buffer-file-name))
      "●")
     (t " "))
-   " "
+   (propertize " " 'display '(raise 0.2)) ; apply some padding to modeline
    (propertize "%b" 'face 'mode-line-buffer-id)
-   " "
+   (propertize " " 'display '(raise -0.2)) ; apply some more padding to modeline
    mode-name))
 
 (defun duomacs/build-modeline-right-half ()
@@ -45,7 +45,7 @@ Constructs the right side of the modeline."
    (cond
     ((or
       (derived-mode-p
-       'tabulated-list-mode 'help-mode 'special-mode)
+       'tabulated-list-mode 'help-mode 'special-mode 'image-mode)
       (string= (buffer-name) "*About GNU Emacs*"))
      "Type 'q' to dismiss this window")
     ((stringp vc-mode)

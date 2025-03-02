@@ -6,14 +6,14 @@
 ;;;
 ;;; Code:
 
-;; disable the built-in package manager
+;; disable the built-in package manager; we use use-package plus straight.el
 (setq package-enable-at-startup nil)
 
 ;; set some default parameters for frames
 (setq
  default-frame-alist
  '((horizontal-scroll-bars . nil)
-   (internal-border-width . 24)
+   (internal-border-width . 8)
    (scroll-bar-width . 0)
    (tool-bar-lines . 0)
    (vertical-scroll-bars . nil)))

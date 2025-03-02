@@ -3,6 +3,8 @@
 ;;; Commentary:
 ;;; Code:
 
+(require 'cua-base)
+
 (defun duomacs/delete-word (arg)
   "Delete a word (instead of placing it on the kill ring).
 If a numerical ARG is given, do it that many times."
@@ -18,6 +20,11 @@ If a numerical ARG is given, do it that many times."
 If a numerical ARG is given, do it that many times."
   (interactive "p")
   (duomacs/delete-word (- arg)))
+
+(defun duomacs/open-new-terminal ()
+  "Open a new terminal buffer."
+  (interactive)
+  (eat nil t))
 
 ;; Ctrl-PgDn -> next window
 (global-set-key
@@ -45,11 +52,26 @@ If a numerical ARG is given, do it that many times."
 (global-set-key
  (kbd "C-<delete>")
  'duomacs/delete-word)
+;; Ctrl-~ -> open terminal, a la vscode
+(global-set-key
+ (kbd "C-~")
+ #'duomacs/open-new-terminal)
 
 ;; remove keybinding for suspend-frame since it's too easy to fat-finger
 (global-set-key
  (kbd "C-x C-z")
  nil)
+;; remove keybinding for kill-region since cua-mode C-x is preferred when a
+;; region is active, and  kills to point-min if no region is active (!)
+(global-set-key
+ (kbd "C-w")
+ nil)
+
+;; remove keybinding for rectangle-mark since there's no reason it should be in
+;; the CUA keymap in the first place
+(keymap-unset
+ cua-global-keymap
+ "C-<return>")
 
 (provide 'duomacs-keys)
 ;;; duomacs-keys.el ends here

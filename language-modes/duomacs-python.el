@@ -5,8 +5,6 @@
 
 (require 'python)
 
-(easy-menu-define nil python-ts-mode-map nil (list "Python" :visible nil))
-
 (add-hook
  'python-ts-mode-hook
  #'eglot-ensure)
