@@ -5,6 +5,7 @@
 
 
 (require 'conf-mode)
+(require 'magit)
 (require 'eww)
 (require 'flymake)
 (require 'help-mode)

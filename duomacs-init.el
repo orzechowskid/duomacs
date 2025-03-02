@@ -64,6 +64,7 @@
   (require 'duomacs-custom))
 
 (require 'duomacs-themes)
+
 (require 'duomacs-pkg-mgmt)
 (require 'duomacs-modeline)
 (require 'duomacs-keys)

@@ -3,6 +3,7 @@
 ;;; Commentary:
 ;;; Code:
 
+
 ;;; -*- lexical-binding: t -*-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -19,6 +20,7 @@
  '(default ((t (:inherit nil :extend nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight regular :height 128 :width normal :foundry "ADBO" :family "SauceCodePro Nerd Font")))))
 
 (enable-theme 'duomacs-nord)
+
 
 (provide 'duomacs-custom)
 ;;; duomacs-custom.el ends here
