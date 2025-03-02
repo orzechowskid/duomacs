@@ -3,7 +3,6 @@
 ;;; Commentary:
 ;;; Code:
 
-
 ;;; package infrastructure
 ;;; we use emacs' own `use-package' functionality to load and configure packages,
 ;;; and straight.el to fetch packages from MELPA/github/etc.
@@ -105,6 +104,20 @@
 ;;; use-package infrastructure and functionality (or just keep consistency with
 ;;; the rest of your configuration)
 
+(defun duomacs/fci-mode-hook ()
+	"Internal function.  Hook run when a buffer enables `display-fill-column-
+   indicator' mode."
+	(setq-default display-fill-column-indicator-column (1- fill-column)
+		      display-fill-column-indicator-character ?\ )
+	(set-face-attribute 'fill-column-indicator
+											nil
+											:background nil
+											:foreground (if (boundp 'duomacs/fci-color)
+																			duomacs/fci-color
+																		"white")
+											:stipple '(7 1 " ")))
+
+
 (defun duomacs/prog-mode-hook ()
 	"Internal function.  Hook run when a buffer uses a major mode derived from
    `prog-mode'."
@@ -122,6 +135,8 @@
 	:config
 	(add-hook 'prog-mode-hook
 						#'duomacs/prog-mode-hook)
+	(add-hook 'display-fill-column-indicator-mode-hook
+						#'duomacs/fci-mode-hook)
 	(setq treesit-language-source-alist
 				'((dockerfile . ("https://github.com/camdencheek/tree-sitter-dockerfile"
 												 nil nil nil nil))
@@ -139,6 +154,7 @@
 							 '("\\.py\\'" . python-ts-mode))
 	(add-to-list 'auto-mode-alist
 							 '("\\.?Dockerfile\\'" . dockerfile-ts-mode))
+
 	:custom
 	(auto-compression-mode t)
 	(auto-encryption-mode nil)
@@ -148,6 +164,7 @@
 	(create-lockfiles nil)
 	(cua-mode t)
 	(dirtrack-mode nil)
+	;;(display-fill-column-indicator-character ?\ )
 	(display-line-numbers-grow-only t)
 	(editorconfig-mode t)
 	(eglot-events-buffer-size 0)
@@ -169,6 +186,9 @@
 	(undo-limit (* 1024 1024 256))
 	(use-dialog-box nil)
 	(use-package-always-ensure t))
+
+;;; configure some packages included with emacs
+;;; it can do a lot out-of-the-box!
 
 ;; LSP client
 (use-package eglot
@@ -263,16 +283,21 @@
 	:config
 	(add-hook 'eat-mode-hook
 						(lambda ()
-							(face-remap-add-relative
-							 'fringe
-							 :background (if (boundp 'duomacs/terminal-background-color)
-															 duomacs/terminal-background-color
-														 "#222222"))
-							(face-remap-add-relative
-							 'default
-							 :background (if (boundp 'duomacs/terminal-background-color)
-															 duomacs/terminal-background-color
-														 "#222222"))))
+							(display-fill-column-indicator-mode 0)
+							(let ((bg (if (boundp 'duomacs/terminal-background-color)
+														duomacs/terminal-background-color
+													"#222222"))
+										(fg (if (boundp 'duomacs/terminal-foreground-color)
+														duomacs/terminal-foreground-color
+													"#eceff4")))
+								(face-remap-add-relative
+								 'fringe
+								 :background bg
+								 :foreground fg)
+								(face-remap-add-relative
+								 'default
+								 :background bg
+								 :foreground fg))))
 	:straight
 	'(eat :type git :host codeberg :repo "akib/emacs-eat"
 				files ("*.el" ("term" "term/*.el") "*.texi"

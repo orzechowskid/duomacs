@@ -59,6 +59,9 @@
 	 )
 	;; some things need to be variables, not faces
 	(setq
+	 duomacs/fci-color nord2
+	 ;; TODO: terminal fg/bg colors should be configurable, not just always
+	 ;; white-on-black
 	 duomacs/terminal-background-color nord0
 	 duomacs/terminal-foreground-color nord6)
 	;; register it

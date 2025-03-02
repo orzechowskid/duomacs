@@ -41,7 +41,7 @@
    `(header-line-inactive ((t (:background ,nord6 :underline (:position -4) :overline t :box (:line-width (1 . 8) :color ,nord6 :style flat-button)))))
    `(highlight ((t (:background ,nord4))))
    `(region ((t (:background ,nord4))))
-   `(show-paren-match ((t (:background ,nord3))))
+   `(show-paren-match ((t (:background ,nord4))))
    `(success ((t (:foreground ,nord14))))
    `(tooltip ((t (:background ,nord5))))
    `(window-divider ((t (:foreground ,nord6))))
@@ -53,6 +53,7 @@
 	 '(magit-section-highlight ((t (:background nil))))
    )
 	(setq
+	 duomacs/fci-color nord4
 	 ;; TODO: terminal fg/bg colors should be configurable, not just always
 	 ;; white-on-black
 	 duomacs/terminal-background-color nord0
