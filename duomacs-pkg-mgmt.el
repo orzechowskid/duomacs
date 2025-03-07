@@ -297,7 +297,10 @@
 								(face-remap-add-relative
 								 'default
 								 :background bg
-								 :foreground fg))))
+								 :foreground fg)
+								(face-remap-add-relative
+								 'cursor
+								 :background fg))))
 	:straight
 	'(eat :type git :host codeberg :repo "akib/emacs-eat"
 				files ("*.el" ("term" "term/*.el") "*.texi"
@@ -319,7 +322,8 @@
 	;; which don't get set by your login shell
 	(use-package exec-path-from-shell
 		:config
-		(exec-path-from-shell-initialize)))
+		(exec-path-from-shell-initialize)
+		:defer nil))
 
 ;; the world's best git client
 (use-package magit
