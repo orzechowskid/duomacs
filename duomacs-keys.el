@@ -60,9 +60,11 @@ If a numerical ARG is given, do it that many times."
 	(kbd "M-<backspace>")
 	#'duomacs/delete-word-backward)
 ;; Ctrl-<Delete> -> forward-delete a word instead of killing it
-(global-set-key
- (kbd "C-<delete>")
- #'duomacs/delete-word)
+(global-set-key (kbd "C-<delete>")
+								#'duomacs/delete-word)
+;; Meta-D -> forward-delete a word instead of killing it
+(global-set-key (kbd "M-d")
+								#'duomacs/delete-word)
 ;; Ctrl-~ -> open terminal, a la vscode
 (global-set-key
  (kbd "C-~")
