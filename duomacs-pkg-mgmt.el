@@ -10,47 +10,6 @@
 (require 'use-package)
 (require 'use-package-ensure)
 
-;; use flycheck's fringe bitmap for flymake, which looks nicer on hidpi screens
-(define-fringe-bitmap
-  'flymake-big-indicator
-  (vector #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0111000111000000
-          #b0011100011100000
-          #b0001110001110000
-          #b0000111000111000
-          #b0000011100011100
-          #b0000011100011100
-          #b0000111000111000
-          #b0001110001110000
-          #b0011100011100000
-          #b0111000111000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000)
-  16 16 'center)
-;; use an empty bitmap for line-wrap purposes
-(define-fringe-bitmap
-  'duomacs-line-wrap
-  (vector #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000)
-	16 16 'center)
-
 (defvar straight-check-for-modifications '(check-on-save find-when-checking))
 (defvar straight-vc-git-default-clone-depth 1)
 (defvar straight-use-package-by-default t)
@@ -164,7 +123,6 @@
 	(create-lockfiles nil)
 	(cua-mode t)
 	(dirtrack-mode nil)
-	;;(display-fill-column-indicator-character ?\ )
 	(display-line-numbers-grow-only t)
 	(editorconfig-mode t)
 	(eglot-events-buffer-size 0)
@@ -198,9 +156,7 @@
 ;; interface to linters and other code-checkers
 (use-package flymake
 	:custom
-	(flymake-error-bitmap '(flycheck-big-indicator compilation-error))
-	(flymake-mode-line-format '(" ✔" flymake-mode-line-counters))
-	(flymake-warning-bitmap '(flycheck-big-indicator compilation-warning)))
+	(flymake-mode-line-format '(" ✔" flymake-mode-line-counters)))
 
 
 ;;; install some third-party features
