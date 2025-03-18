@@ -79,7 +79,6 @@ If a numerical ARG is given, do it that many times."
 (global-set-key
  (kbd "C-w")
  nil)
-
 ;; remove keybinding for rectangle-mark since there's no reason it should be in
 ;; the CUA keymap in the first place
 (keymap-unset
