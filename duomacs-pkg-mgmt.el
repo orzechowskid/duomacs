@@ -213,7 +213,8 @@
 															 "Want to add a new package?  Try `M-:` then `(use-package <package name>)`."
 															 "Don't know what you don't know?  `M-x apropos` is your friend."
 															 "Need to run some Lisp in the current buffer?  Use `M-:`."
-															 "Need to run a shell command in the current buffer's directory?  Use `M-!`."))
+															 "Need to run a shell command in the current buffer's directory?  Use `M-!`."
+															 "Looking for a file in your current git repository?  Find it with `C-x p f`."))
   (dashboard-set-file-icons t)
   (dashboard-set-heading-icons t)
   (dashboard-icon-types 'nerd-icons)
