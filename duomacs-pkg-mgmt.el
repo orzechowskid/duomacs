@@ -125,6 +125,7 @@
 	(dirtrack-mode nil)
 	(display-line-numbers-grow-only t)
 	(editorconfig-mode t)
+	(eglot-code-action-indications '())
 	(eglot-events-buffer-size 0)
 	(eldoc-documentation-strategy 'eldoc-documentation-compose-eagerly)
 	(fill-column 80)
@@ -198,8 +199,13 @@
   (require 'corfu-popupinfo) ; a corfu extension, not a package
   :load-path "straight/build/corfu/extensions")
 
+;; code-coverage indicators
 (use-package cov
-	:delight t)
+	:custom
+	(cov-fringe-symbol 'right-triangle)
+	(cov-show-covered-lines nil)
+	:delight t
+	:straight '(cov :type git :host github :repo "orzechowskid/cov" :branch "master"))
 
 ;; a more useful splash screen
 (use-package dashboard
@@ -225,7 +231,10 @@
   :config
   (delight
    '((eldoc-mode nil "eldoc")
+		 (auto-dark-mode nil "AD")
 		 (auto-revert-mode nil "autorevert")
+		 (auto-revert-mode nil "ARev")
+		 (eldoc-mode nil "ELDoc")
      (subword-mode nil "subword")
 		 (auto-dark-mode nil "auto-dark")
 		 (treesit-fold-mode nil "Treesit-Fold")
@@ -282,6 +291,11 @@
 		(exec-path-from-shell-initialize)
 		:defer nil))
 
+;; ESLint adapter for flymake
+(use-package flymake-jsts
+  :straight '(flymake-jsts :type git :host github :repo "orzechowskid/flymake-jsts" :branch "main"))
+;;(use-package flymake-eslint)
+
 ;; the world's best git client
 (use-package magit
   :config
@@ -328,6 +342,9 @@
 
 (use-package posframe)
 
+;; support for activation of python virtualenvs
+(use-package pyvenv)
+
 ;; support for using a posframe for transient buffers like the ones magit uses
 (use-package transient-posframe
   :after (posframe)
@@ -355,12 +372,37 @@
   :straight '(vertico-posframe :type git :host github :repo "tumashu/vertico-posframe" :branch "main"))
 
 
+;;; configure built-in major modes
+
+(defun duomacs/my-python-mode-hook ()
+	(let ((project-root
+				 (locate-dominating-file (buffer-file-name (current-buffer)) "venv/")))
+		(when project-root
+			(pyvenv-activate (concat (expand-file-name project-root)
+															 "venv/")))
+		(eglot-ensure)))
+
+(add-hook
+ 'python-ts-mode-hook
+ #'duomacs/my-python-mode-hook)
+
+;(easy-menu-define nil python-ts-mode-map nil (list "Python" :visible nil))
+
+(add-to-list
+ 'auto-mode-alist
+ '("\\.py[iw]?\\'" . python-ts-mode))
+
+
 ;;; install third-party major modes
 ;;; warning: pretty opinionated!
 
 (use-package tsx-mode
 	:custom
 	(tsx-mode-enable-css-in-js-font-lock 'when-in-range)
+	(tsx-mode-enable-js-linting t)
+	(tsx-mode-enable-code-coverage t)
+	:hook
+	((tsx-mode . subword-mode))
 	:init
 	;; the typescript treesit modes automatically register themselves with
 	;; `auto-mode-alist' so we have to work around that if we want our major mode
