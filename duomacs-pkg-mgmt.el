@@ -136,7 +136,6 @@
 	(recentf-mode t)
 	(savehist-mode t)
 	(scroll-bar-mode nil)
-	(scroll-conservatively 101)
 	(scroll-margin 1)
 	(show-paren-mode t)
 	(tab-width 2)
@@ -356,6 +355,15 @@
 
 (use-package treesit-fold
 	:delight t)
+
+(use-package ultra-scroll
+  :config
+  (ultra-scroll-mode)
+  :custom
+  (scroll-conservatively 3)
+  (scroll-margin 1)
+  :defer nil
+  :straight '(ultra-scroll :type git :host github :repo "jdtsmith/ultra-scroll" :branch "main"))
 
 ;; vertical completion mode
 (use-package vertico

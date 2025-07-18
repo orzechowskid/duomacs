@@ -84,6 +84,9 @@ If a numerical ARG is given, do it that many times."
 (keymap-unset
  cua-global-keymap
  "C-<return>")
+;; remove keybinding for open-line because who even uses that
+(global-set-key (kbd "C-o")
+                nil)
 
 (provide 'duomacs-keys)
 ;;; duomacs-keys.el ends here
