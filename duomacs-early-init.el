@@ -26,6 +26,10 @@
  window-divider-default-right-width 24
  window-divider-default-places 'right-only)
 
+(setq-default
+ left-margin-width 1
+ right-margin-width 1)
+
 ;; can be Customized, but we want it to apply immediately so do it manually here
 (window-divider-mode 1)
 

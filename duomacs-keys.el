@@ -79,12 +79,14 @@ If a numerical ARG is given, do it that many times."
 (global-set-key
  (kbd "C-w")
  nil)
-
 ;; remove keybinding for rectangle-mark since there's no reason it should be in
 ;; the CUA keymap in the first place
 (keymap-unset
  cua-global-keymap
  "C-<return>")
+;; remove keybinding for open-line because who even uses that
+(global-set-key (kbd "C-o")
+                nil)
 
 (provide 'duomacs-keys)
 ;;; duomacs-keys.el ends here

@@ -10,47 +10,6 @@
 (require 'use-package)
 (require 'use-package-ensure)
 
-;; use flycheck's fringe bitmap for flymake, which looks nicer on hidpi screens
-(define-fringe-bitmap
-  'flymake-big-indicator
-  (vector #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0111000111000000
-          #b0011100011100000
-          #b0001110001110000
-          #b0000111000111000
-          #b0000011100011100
-          #b0000011100011100
-          #b0000111000111000
-          #b0001110001110000
-          #b0011100011100000
-          #b0111000111000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000)
-  16 16 'center)
-;; use an empty bitmap for line-wrap purposes
-(define-fringe-bitmap
-  'duomacs-line-wrap
-  (vector #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000
-          #b0000000000000000)
-	16 16 'center)
-
 (defvar straight-check-for-modifications '(check-on-save find-when-checking))
 (defvar straight-vc-git-default-clone-depth 1)
 (defvar straight-use-package-by-default t)
@@ -164,9 +123,9 @@
 	(create-lockfiles nil)
 	(cua-mode t)
 	(dirtrack-mode nil)
-	;;(display-fill-column-indicator-character ?\ )
 	(display-line-numbers-grow-only t)
 	(editorconfig-mode t)
+	(eglot-code-action-indications '())
 	(eglot-events-buffer-size 0)
 	(eldoc-documentation-strategy 'eldoc-documentation-compose-eagerly)
 	(fill-column 80)
@@ -177,7 +136,6 @@
 	(recentf-mode t)
 	(savehist-mode t)
 	(scroll-bar-mode nil)
-	(scroll-conservatively 101)
 	(scroll-margin 1)
 	(show-paren-mode t)
 	(tab-width 2)
@@ -198,9 +156,7 @@
 ;; interface to linters and other code-checkers
 (use-package flymake
 	:custom
-	(flymake-error-bitmap '(flycheck-big-indicator compilation-error))
-	(flymake-mode-line-format '(" ✔" flymake-mode-line-counters))
-	(flymake-warning-bitmap '(flycheck-big-indicator compilation-warning)))
+	(flymake-mode-line-format '(" ✔" flymake-mode-line-counters)))
 
 
 ;;; install some third-party features
@@ -242,8 +198,13 @@
   (require 'corfu-popupinfo) ; a corfu extension, not a package
   :load-path "straight/build/corfu/extensions")
 
+;; code-coverage indicators
 (use-package cov
-	:delight t)
+	:custom
+	(cov-fringe-symbol 'right-triangle)
+	(cov-show-covered-lines nil)
+	:delight t
+	:straight '(cov :type git :host github :repo "orzechowskid/cov" :branch "master"))
 
 ;; a more useful splash screen
 (use-package dashboard
@@ -257,7 +218,8 @@
 															 "Want to add a new package?  Try `M-:` then `(use-package <package name>)`."
 															 "Don't know what you don't know?  `M-x apropos` is your friend."
 															 "Need to run some Lisp in the current buffer?  Use `M-:`."
-															 "Need to run a shell command in the current buffer's directory?  Use `M-!`."))
+															 "Need to run a shell command in the current buffer's directory?  Use `M-!`."
+															 "Looking for a file in your current git repository?  Find it with `C-x p f`."))
   (dashboard-set-file-icons t)
   (dashboard-set-heading-icons t)
   (dashboard-icon-types 'nerd-icons)
@@ -268,7 +230,10 @@
   :config
   (delight
    '((eldoc-mode nil "eldoc")
+		 (auto-dark-mode nil "AD")
 		 (auto-revert-mode nil "autorevert")
+		 (auto-revert-mode nil "ARev")
+		 (eldoc-mode nil "ELDoc")
      (subword-mode nil "subword")
 		 (auto-dark-mode nil "auto-dark")
 		 (treesit-fold-mode nil "Treesit-Fold")
@@ -297,7 +262,10 @@
 								(face-remap-add-relative
 								 'default
 								 :background bg
-								 :foreground fg))))
+								 :foreground fg)
+								(face-remap-add-relative
+								 'cursor
+								 :background fg))))
 	:straight
 	'(eat :type git :host codeberg :repo "akib/emacs-eat"
 				files ("*.el" ("term" "term/*.el") "*.texi"
@@ -319,7 +287,13 @@
 	;; which don't get set by your login shell
 	(use-package exec-path-from-shell
 		:config
-		(exec-path-from-shell-initialize)))
+		(exec-path-from-shell-initialize)
+		:defer nil))
+
+;; ESLint adapter for flymake
+(use-package flymake-jsts
+  :straight '(flymake-jsts :type git :host github :repo "orzechowskid/flymake-jsts" :branch "main"))
+;;(use-package flymake-eslint)
 
 ;; the world's best git client
 (use-package magit
@@ -367,6 +341,9 @@
 
 (use-package posframe)
 
+;; support for activation of python virtualenvs
+(use-package pyvenv)
+
 ;; support for using a posframe for transient buffers like the ones magit uses
 (use-package transient-posframe
   :after (posframe)
@@ -378,6 +355,15 @@
 
 (use-package treesit-fold
 	:delight t)
+
+(use-package ultra-scroll
+  :config
+  (ultra-scroll-mode)
+  :custom
+  (scroll-conservatively 3)
+  (scroll-margin 1)
+  :defer nil
+  :straight '(ultra-scroll :type git :host github :repo "jdtsmith/ultra-scroll" :branch "main"))
 
 ;; vertical completion mode
 (use-package vertico
@@ -394,12 +380,37 @@
   :straight '(vertico-posframe :type git :host github :repo "tumashu/vertico-posframe" :branch "main"))
 
 
+;;; configure built-in major modes
+
+(defun duomacs/my-python-mode-hook ()
+	(let ((project-root
+				 (locate-dominating-file (buffer-file-name (current-buffer)) "venv/")))
+		(when project-root
+			(pyvenv-activate (concat (expand-file-name project-root)
+															 "venv/")))
+		(eglot-ensure)))
+
+(add-hook
+ 'python-ts-mode-hook
+ #'duomacs/my-python-mode-hook)
+
+;(easy-menu-define nil python-ts-mode-map nil (list "Python" :visible nil))
+
+(add-to-list
+ 'auto-mode-alist
+ '("\\.py[iw]?\\'" . python-ts-mode))
+
+
 ;;; install third-party major modes
 ;;; warning: pretty opinionated!
 
 (use-package tsx-mode
 	:custom
 	(tsx-mode-enable-css-in-js-font-lock 'when-in-range)
+	(tsx-mode-enable-js-linting t)
+	(tsx-mode-enable-code-coverage t)
+	:hook
+	((tsx-mode . subword-mode))
 	:init
 	;; the typescript treesit modes automatically register themselves with
 	;; `auto-mode-alist' so we have to work around that if we want our major mode
