@@ -63,18 +63,18 @@
 ;;; use-package infrastructure and functionality (or just keep consistency with
 ;;; the rest of your configuration)
 
-(defun duomacs/fci-mode-hook ()
-	"Internal function.  Hook run when a buffer enables `display-fill-column-
-   indicator' mode."
-	(setq-default display-fill-column-indicator-column (1- fill-column)
-		      display-fill-column-indicator-character ?\ )
-	(set-face-attribute 'fill-column-indicator
-											nil
-											:background nil
-											:foreground (if (boundp 'duomacs/fci-color)
-																			duomacs/fci-color
-																		"white")
-											:stipple '(7 1 " ")))
+;; (defun duomacs/fci-mode-hook ()
+;; 	"Internal function.  Hook run when a buffer enables `display-fill-column-
+;;    indicator' mode."
+;; 	(setq-default display-fill-column-indicator-column (1- fill-column)
+;; 		      display-fill-column-indicator-character ?\ )
+;; 	(set-face-attribute 'fill-column-indicator
+;; 											nil
+;; 											:background nil
+;; 											:foreground (if (boundp 'duomacs/fci-color)
+;; 																			duomacs/fci-color
+;; 																		"white")
+;; 											:stipple '(7 1 " ")))
 
 
 (defun duomacs/prog-mode-hook ()
@@ -94,8 +94,8 @@
 	:config
 	(add-hook 'prog-mode-hook
 						#'duomacs/prog-mode-hook)
-	(add-hook 'display-fill-column-indicator-mode-hook
-						#'duomacs/fci-mode-hook)
+	;; (add-hook 'display-fill-column-indicator-mode-hook
+	;; 					#'duomacs/fci-mode-hook)
 	(setq treesit-language-source-alist
 				'((dockerfile . ("https://github.com/camdencheek/tree-sitter-dockerfile"
 												 nil nil nil nil))
@@ -172,6 +172,17 @@
 	(when (and (boundp 'duomacs-use-system-theme)
 						 duomacs-use-system-theme)
 		(auto-dark-mode t)))
+
+;; better navigation through structured code
+(use-package combobulate
+	:config
+	(push 'tsx-mode
+				(nth 1
+						 (assoc 'tsx
+										combobulate-registered-languages-alist)))
+	:custom
+	(combobulate-flash-node nil)
+	:delight t)
 
 ;; better versions of some built-in commands
 (use-package consult
@@ -290,11 +301,6 @@
 		(exec-path-from-shell-initialize)
 		:defer nil))
 
-;; ESLint adapter for flymake
-(use-package flymake-jsts
-  :straight '(flymake-jsts :type git :host github :repo "orzechowskid/flymake-jsts" :branch "main"))
-;;(use-package flymake-eslint)
-
 ;; the world's best git client
 (use-package magit
   :config
@@ -311,7 +317,7 @@
 ;; eglot will use markdown-mode to render docstrings if it's present
 (use-package markdown-mode)
 
-;; helpful annotations on many minibuffer completion canditates
+;; helpful annotations on many minibuffer completion candidates
 (use-package marginalia
   :config
   (add-to-list
@@ -404,9 +410,20 @@
 ;;; install third-party major modes
 ;;; warning: pretty opinionated!
 
+;; JS/TS/JSX/TSX
+;; you'll need to `npm install` the LSP servers yourself, as well as eslint and
+;; stylelint
+;; ESLint adapter for flymake
+(use-package flymake-jsts
+  :straight '(flymake-jsts :type git :host github :repo "orzechowskid/flymake-jsts" :branch "main"))
+(use-package flymake-stylelint
+	:straight '(flymake-stylelint :type git :host github :repo "orzechowskid/flymake-stylelint" :branch "master"))
 (use-package tsx-mode
+	:config
+	(setq-default combobulate-tsx-major-modes '(tsx-mode))
 	:custom
 	(tsx-mode-enable-css-in-js-font-lock 'when-in-range)
+	(tsx-mode-enable-css-in-js-linting t)
 	(tsx-mode-enable-js-linting t)
 	(tsx-mode-enable-code-coverage t)
 	:hook

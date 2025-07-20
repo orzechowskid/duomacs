@@ -40,11 +40,11 @@ copy whatever you want from the various source files into your own init file.  g
 
 ## Configuration
 
-| Variable                   | Purpose                           |
-| --                         | --                                |
-| `duomacs-show-menu-bar`    | show/hide menu bar                |
-| `duomacs-theme`            | use a specific duomacs theme      |
-| `duomacs-use-system-theme` | use OS' preferred light/dark mode |
+| Variable                   | Purpose                             |
+| --                         | --                                  |
+| `duomacs-show-menu-bar`    | apply custom menu bar functionality |
+| `duomacs-theme`            | use a specific duomacs theme        |
+| `duomacs-use-system-theme` | use OS' preferred light/dark mode   |
 
 all other features are controlled by, and configured via, the packages which provide them.  no layers, no duomacs-specific macros, just plain vanilla emacs.  an exhaustive list of the packages which power duomacs can be found by running `git grep "(use-package "` in your favorite shell, but here are some of the important ones:
 
