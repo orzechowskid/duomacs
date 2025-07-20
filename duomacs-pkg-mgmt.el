@@ -136,7 +136,7 @@
 	(recentf-mode t)
 	(savehist-mode t)
 	(scroll-bar-mode nil)
-	(scroll-margin 1)
+	(scroll-margin 0)
 	(show-paren-mode t)
 	(tab-width 2)
 	(tool-bar-mode nil)
