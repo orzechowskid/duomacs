@@ -259,6 +259,7 @@
 	:config
 	(add-hook 'eat-mode-hook
 						(lambda ()
+              (setq-local scroll-margin 1)
 							(display-fill-column-indicator-mode 0)
 							(let ((bg (if (boundp 'duomacs/terminal-background-color)
 														duomacs/terminal-background-color
