@@ -220,6 +220,28 @@
 ;; a better buffer-search experience
 ;; TODO: figure out how to replace prompt
 (use-package ctrlf
+  :custom
+  (ctrlf-style-alist '((literal :prompt ""
+                                :translator regexp-quote
+                                :case-fold ctrlf-no-uppercase-literal-p
+                                :fallback (isearch-forward . isearch-backward))
+                       (regexp :prompt "regexp"
+                               :translator identity
+                               :case-fold ctrlf-no-uppercase-regexp-p
+                               :fallback (isearch-forward-regexp . isearch-backward-regexp))
+                       (fuzzy :prompt "fuzzy"
+                              :translator ctrlf-translate-fuzzy-literal
+                              :case-fold ctrlf-no-uppercase-literal-p)
+                       (fuzzy-regexp :prompt "fuzzy regexp"
+                                     :translator ctrlf-translate-fuzzy-regexp
+                                     :case-fold ctrlf-no-uppercase-regexp-p)
+                       (symbol :prompt "symbol"
+                               :translator ctrlf-translate-symbol
+                               :case-fold ctrlf-no-uppercase-literal-p
+                               :fallback (isearch-forward-symbol))
+                       (word :prompt "word"
+                             :translator ctrlf-translate-word
+                             :case-fold ctrlf-no-uppercase-literal-p)))
   :init
   (with-eval-after-load 'ctrlf
     (ctrlf-mode +1)
