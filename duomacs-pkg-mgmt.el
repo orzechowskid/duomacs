@@ -217,6 +217,19 @@
 	:delight t
 	:straight '(cov :type git :host github :repo "orzechowskid/cov" :branch "master"))
 
+;; a better buffer-search experience
+;; TODO: figure out how to replace prompt
+(use-package ctrlf
+  :init
+  (with-eval-after-load 'ctrlf
+    (ctrlf-mode +1)
+    (keymap-set ctrlf-minibuffer-mode-map
+                "C-n"
+                #'ctrlf-next-match)
+    (keymap-set ctrlf-minibuffer-mode-map
+                "C-p"
+                #'ctrlf-previous-match)))
+
 ;; a more useful splash screen
 (use-package dashboard
 	:after (nerd-icons)
