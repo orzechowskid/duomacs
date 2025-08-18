@@ -54,9 +54,10 @@
    )
 	(setq
 	 duomacs/fci-color nord4
-	 ;; TODO: terminal fg/bg colors should be configurable, not just always
 	 ;; white-on-black
-	 duomacs/terminal-background-color nord0
+   ;; n.b.: if background color is anything but black then cursor reverse-video
+   ;; will not work correctly
+	 duomacs/terminal-background-color "black"
 	 duomacs/terminal-foreground-color nord6)
 	;; register it
 	(provide-theme 'duomacs-nord-light))

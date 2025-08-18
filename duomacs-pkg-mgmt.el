@@ -174,15 +174,15 @@
 		(auto-dark-mode t)))
 
 ;; better navigation through structured code
-(use-package combobulate
-	:config
-	(push 'tsx-mode
-				(nth 1
-						 (assoc 'tsx
-										combobulate-registered-languages-alist)))
-	:custom
-	(combobulate-flash-node nil)
-	:delight t)
+;; (use-package combobulate
+;; 	:config
+;; 	(push 'tsx-mode
+;; 				(nth 1
+;; 						 (assoc 'tsx
+;; 										combobulate-registered-languages-alist)))
+;; 	:custom
+;; 	(combobulate-flash-node nil)
+;; 	:delight t)
 
 ;; better versions of some built-in commands
 (use-package consult
@@ -192,8 +192,7 @@
    ("C-x G" . consult-git-grep)
    ("M-g g" . consult-goto-line)
    ("M-g M-g" . consult-goto-line)
-	 ("M-g i" . consult-imenu)
-   ("C-s" . consult-line))
+	 ("M-g i" . consult-imenu))
 	:defer nil)
 
 ;; a better frontend for in-buffer code-completion
@@ -242,6 +241,7 @@
                        (word :prompt "word"
                              :translator ctrlf-translate-word
                              :case-fold ctrlf-no-uppercase-literal-p)))
+  :defer nil
   :init
   (with-eval-after-load 'ctrlf
     (ctrlf-mode +1)
@@ -298,21 +298,16 @@
 							(display-fill-column-indicator-mode 0)
 							(let ((bg (if (boundp 'duomacs/terminal-background-color)
 														duomacs/terminal-background-color
-													"#222222"))
+													"black"))
 										(fg (if (boundp 'duomacs/terminal-foreground-color)
 														duomacs/terminal-foreground-color
 													"#eceff4")))
-								(face-remap-add-relative
-								 'fringe
-								 :background bg
-								 :foreground fg)
-								(face-remap-add-relative
-								 'default
-								 :background bg
-								 :foreground fg)
-								(face-remap-add-relative
-								 'cursor
-								 :background fg))))
+                (face-remap-add-relative 'default
+                                         :foreground "#eceff4"
+                                         :background "#000000")
+                (face-remap-add-relative 'fringe
+                                         :foreground "#eceff4"
+                                         :background "#000001"))))
 	:straight
 	'(eat :type git :host codeberg :repo "akib/emacs-eat"
 				files ("*.el" ("term" "term/*.el") "*.texi"
