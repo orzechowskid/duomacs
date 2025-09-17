@@ -137,6 +137,8 @@
 	(savehist-mode t)
 	(scroll-bar-mode nil)
 	(scroll-margin 0)
+  (sql-mysql-login-params (append sql-mysql-login-params '(port :default 3306)))
+  (sql-postgres-login-params (append sql-postgres-login-params '(port :default 5432)))
 	(show-paren-mode t)
 	(tab-width 2)
 	(tool-bar-mode nil)
@@ -162,6 +164,10 @@
 ;;; install some third-party features
 ;;; certain features apply to emacs as a whole, or otherwise aren't applicable to
 ;;; any specific major mode.  install those here
+
+;; allows format-on-save for supported major modes
+(use-package apheleia
+  :delight (apheleia-mode))
 
 ;; gets emacs to follow the OS' light/dark theme
 (use-package auto-dark
@@ -454,9 +460,10 @@
 	(setq-default combobulate-tsx-major-modes '(tsx-mode))
 	:custom
 	(tsx-mode-enable-css-in-js-font-lock 'when-in-range)
-	(tsx-mode-enable-css-in-js-linting t)
-	(tsx-mode-enable-js-linting t)
+	(tsx-mode-enable-css-in-js-linting nil)
+	(tsx-mode-enable-js-linting nil)
 	(tsx-mode-enable-code-coverage t)
+  (tsx-mode-enable-format-on-save t)
 	:hook
 	((tsx-mode . subword-mode))
 	:init
@@ -466,6 +473,8 @@
 	(require 'typescript-ts-mode)
 	(add-to-list 'auto-mode-alist
 							 '("\\.[jt]s[x]?\\'" . tsx-mode))
+  (add-to-list 'auto-mode-alist
+               '("\\.mts\\'" . tsx-mode))
 	(add-to-list 'auto-mode-alist
 							 '("\\.[mc]?js\\'" . tsx-mode))
 	:straight '(tsx-mode :type git :host github :repo "orzechowskid/tsx-mode.el" :branch "emacs30"))
