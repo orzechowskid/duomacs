@@ -361,7 +361,7 @@
    'marginalia-prompt-categories
    '("\\<Which recipe?\\>" . straight-recipe))
   (add-to-list
-   'marginalia-annotator-registry
+   'marginalia-annotators
    '(straight-recipe duomacs/annotate-get-package-recipe none))
   (marginalia-mode t)
   :defer nil)
