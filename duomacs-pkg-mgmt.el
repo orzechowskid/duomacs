@@ -298,6 +298,7 @@
 				 ("S-<next>" . cua-scroll-up)
 				 ("C-c C-k" . nil))
 	:config
+	(setq eat--shell-integration-path "$HOME/.emacs.d/straight/repos/emacs-eat/integration")
 	(add-hook 'eat-mode-hook
 						(lambda ()
               (setq-local scroll-margin 1)

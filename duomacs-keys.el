@@ -47,6 +47,10 @@ If a numerical ARG is given, do it that many times."
 (global-set-key
  (kbd "C-x O")
  #'duomacs/prev-window)
+;; Ctrl-w -> beginning of line (like how Ctrl-e moves to end of line)
+(global-set-key
+ (kbd "C-w")
+ #'move-beginning-of-line)
 ;; Ctrl-a -> select all
 (global-set-key
  (kbd "C-a")
